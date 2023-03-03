@@ -1,30 +1,37 @@
 package com.example.Semicolon;
 
 import com.example.Semicolon.Back.Movie;
+import com.example.Semicolon.Back.MovieCard;
 import javafx.animation.TranslateTransition;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.ScrollPane;
+import javafx.collections.*;
+import javafx.fxml.*;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class HomeController implements Initializable {
     @FXML
     GridPane HomeGrid, menu;
     @FXML
-    Button Test;
+    Button Test, searchButton;
+    @FXML
+    ChoiceBox genresChoice, sortingChoice;
+    @FXML
+    TextField searchField;
     @FXML
     ListView movieDisplay;
 
     private boolean menuActive = false;
-    private List<Movie> movieList;
+    private ObservableList<Movie> movieList = FXCollections.observableArrayList();
+    private ObservableList<String> genres = FXCollections.observableList(Arrays.asList("---All GENRES---", "ACTION", "ADVENTURE", "ANIMATION", "BIOGRAPHY", "COMEDY",
+            "CRIME", "DRAMA", "DOCUMENTARY", "FAMILY", "FANTASY", "HISTORY", "HORROR",
+            "MUSICAL", "MYSTERY", "ROMANCE", "SCIENCE_FICTION", "SPORT", "THRILLER", "WAR",
+            "WESTERN"));
+    private ObservableList<String> sortingKeywords = FXCollections.observableList(Arrays.asList("---NO SORTING---", "A-Z", "Z-A"));
 
     @FXML
     private void activateMenu(){
@@ -47,17 +54,17 @@ public class HomeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        genresChoice.setItems(genres);
+        genresChoice.setValue("---All GENRES---");
+        sortingChoice.setItems(sortingKeywords);
+        sortingChoice.setValue("---NO SORTING---");
         Movie m = new Movie();
         try {
-            movieList = m.initializeMovies();
-            for(int count = 0; count < movieList.size(); count++){
-
-            }
+            movieList.addAll(m.initializeMovies());
+            movieDisplay.setItems(movieList);
+            movieDisplay.setCellFactory(movieDisplay -> new MovieCard());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-    private void generateMovieCard(){
-
     }
 }
