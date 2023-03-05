@@ -29,6 +29,7 @@ public class HomeController implements Initializable {
     ListView movieDisplay;
 
     private boolean menuActive = false;
+    private ObservableList<Movie> originalMovieList;
     private ObservableList<Movie> movieList = FXCollections.observableArrayList();
     private ObservableList<String> genres = FXCollections.observableList(Arrays.asList("---All GENRES---", "ACTION", "ADVENTURE", "ANIMATION", "BIOGRAPHY", "COMEDY",
             "CRIME", "DRAMA", "DOCUMENTARY", "FAMILY", "FANTASY", "HISTORY", "HORROR",
@@ -64,6 +65,7 @@ public class HomeController implements Initializable {
         Movie m = new Movie();
         try {
             movieList.addAll(m.initializeMovies());
+            originalMovieList.addAll(m.initializeMovies());
             movieDisplay.setItems(movieList);
             movieDisplay.setCellFactory(movieDisplay -> new MovieCard());
         } catch (IOException e) {
