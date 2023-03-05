@@ -4,6 +4,7 @@ import com.example.Semicolon.Back.Movie;
 import com.example.Semicolon.Back.MovieCard;
 import javafx.animation.TranslateTransition;
 import javafx.collections.*;
+import javafx.event.Event;
 import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
@@ -19,7 +20,9 @@ public class HomeController implements Initializable {
     @FXML
     Button Test, searchButton;
     @FXML
-    ChoiceBox genresChoice, sortingChoice;
+    ChoiceBox<String> genresChoice;
+    @FXML
+    ChoiceBox<String> sortingChoice;
     @FXML
     TextField searchField;
     @FXML
@@ -33,7 +36,7 @@ public class HomeController implements Initializable {
             "WESTERN"));
     private ObservableList<String> sortingKeywords = FXCollections.observableList(Arrays.asList("---NO SORTING---", "A-Z", "Z-A"));
 
-    @FXML
+   @FXML
     private void activateMenu(){
         TranslateTransition tt = new TranslateTransition();
         tt.setNode(menu);
@@ -66,5 +69,27 @@ public class HomeController implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        sortingChoice.setOnAction(this::sortMovieTitle);
     }
+
+    private void sortMovieTitle(Event event) {
+        if (sortingChoice.getValue().equals("A-Z")) {
+        Collections.sort(movieList, new Comparator<Movie>() {
+            @Override
+            public int compare(Movie o1, Movie o2) {
+                return o1.title.compareTo(o2.title);
+            }
+        });
+        }
+        else if (sortingChoice.getValue().equals("A-Z")) {
+            Collections.sort(movieList, new Comparator<Movie>() {
+                @Override
+                public int compare(Movie o1, Movie o2) {
+                    return o1.title.compareTo(o2.title);
+                }
+            });
+            Collections.sort(movieList, Collections.reverseOrder());
+        }
+    }
+
 }
