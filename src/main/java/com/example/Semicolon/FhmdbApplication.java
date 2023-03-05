@@ -1,6 +1,5 @@
 package com.example.Semicolon;
 
-import com.example.Semicolon.Back.Movie;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

@@ -11,18 +11,18 @@
 }
 
 .background-black {
-    -fx-background-color: #000000;
+    -fx-background-color: #181717;
 }
 
 .background-light-black {
     -fx-background-color: #454545;
 }
 
-.text-yellow {
-    -fx-text-fill: #f5c518;
+.title-text-color {
+    -fx-text-fill: #c9a71b;
 }
 
-.text-white {
+.description-text-color {
     -fx-text-fill: #ffffff;
 }
 
@@ -51,6 +51,7 @@
 .cell-border{
     -fx-border-color: #181717;
     -fx-border-width: 3;
+    -fx-border-insets: -3;
     -fx-border-radius: 10;
     -fx-background-color: #454545;
 }
