@@ -69,10 +69,10 @@ public class HomeController implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        sortingChoice.setOnAction(this::sortMovieTitle);
+        sortingChoice.setOnAction(this::sortMovieTitleAZ);
     }
 
-    private void sortMovieTitle(Event event) {
+    private ObservableList<Movie> sortMovieTitleAZ(Event event) {
         if (sortingChoice.getValue().equals("A-Z")) {
         Collections.sort(movieList, new Comparator<Movie>() {
             @Override
@@ -81,15 +81,18 @@ public class HomeController implements Initializable {
             }
         });
         }
-        else if (sortingChoice.getValue().equals("A-Z")) {
+        else if (sortingChoice.getValue().equals("Z-A")) {
             Collections.sort(movieList, new Comparator<Movie>() {
-                @Override
-                public int compare(Movie o1, Movie o2) {
-                    return o1.title.compareTo(o2.title);
-                }
-            });
-            Collections.sort(movieList, Collections.reverseOrder());
-        }
-    }
+            @Override
+            public int compare(Movie o1, Movie o2) {
+                return o2.title.compareTo(o1.title);
+            }
+        });
 
+        }
+        else if(sortingChoice.getValue().equals("---NO SORTING---")) {
+            return movieList;
+        }
+        return null;
+    }
 }
