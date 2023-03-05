@@ -9,17 +9,17 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Movie {
-    public String id, title, description, imgURL, legnth;
+    public String id, title, description, imgUrl, legnth;
     public String[] genres, directors, writers, cast;
     public double rating, releaseYear;
 
-    public Movie(String id, String title, String[] genres, double releaseYear, String description, String imgURL, String legnth, String[] directors, String[] writers, String[] cast, double rating){
+    public Movie(String id, String title, String[] genres, double releaseYear, String description, String imgUrl, String legnth, String[] directors, String[] writers, String[] cast, double rating){
         this.id = id;
         this.title = title;
         this.genres = genres;
         this.releaseYear = releaseYear;
         this.description = description;
-        this.imgURL = imgURL;
+        this.imgUrl = imgUrl;
         this.legnth = legnth;
         this.directors = directors;
         this.writers = writers;

@@ -4,9 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="632c3f87-378d-459f-993b-b51a9090f282" name="Changes" comment="Anna - Sorting A-Z works">
+    <list default="true" id="632c3f87-378d-459f-993b-b51a9090f282" name="Changes" comment="Moritz - renameing and updating">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Movie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Movie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/MovieCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/MovieCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/FhmdbApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/FhmdbApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/HomeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/Semicolon/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/Semicolon/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/Semicolon/test.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/Semicolon/test.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +69,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;corretto-17&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.23242188&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.37834394&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
@@ -163,14 +168,7 @@
       <option name="project" value="LOCAL" />
       <updated>1677872083019</updated>
     </task>
-    <task id="LOCAL-00003" summary="Anna - Sorting A-Z works">
-      <created>1678012291499</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1678012291499</updated>
-    </task>
-    <option name="localTasksCounter" value="4" />
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -228,7 +226,6 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Moritz - rough draft of main page, added Movie Objects" />
     <MESSAGE value="Moritz - added MovieCards" />
-    <MESSAGE value="Anna - Sorting A-Z works" />
-    <option name="LAST_COMMIT_MESSAGE" value="Anna - Sorting A-Z works" />
+    <option name="LAST_COMMIT_MESSAGE" value="Moritz - added MovieCards" />
   </component>
 </project>

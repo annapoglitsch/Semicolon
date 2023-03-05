@@ -69,10 +69,10 @@ public class HomeController implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        sortingChoice.setOnAction(this::sortMovieTitleAZ);
+        sortingChoice.setOnAction(this::sortMoviesByTitle);
     }
 
-    private ObservableList<Movie> sortMovieTitleAZ(Event event) {
+    private ObservableList<Movie> sortMoviesByTitle(Event event) {
         if (sortingChoice.getValue().equals("A-Z")) {
         Collections.sort(movieList, new Comparator<Movie>() {
             @Override
