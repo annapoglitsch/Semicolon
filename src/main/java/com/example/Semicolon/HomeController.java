@@ -98,6 +98,13 @@ public class HomeController implements Initializable {
         return null;
     }
     private ObservableList<Movie> sortMovieGenres(ActionEvent event) {
-
+        for (Movie movie : movieList) {
+            for (int i = 0; i < movie.genres.length; i++) {
+                if (movie.genres[i] != genresChoice.getValue()) {
+                    movieList.remove(movie);
+                }
+            }
+        }
+        return movieList;
     }
     }
