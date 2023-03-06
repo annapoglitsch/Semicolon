@@ -72,7 +72,7 @@ public class HomeController implements Initializable {
         }
         sortingChoice.setOnAction(this::sortMovieTitleAZ);
         genresChoice.setOnAction(this::sortMovieGenres);
-        searchButton.setOnAction(this::searchMovie);
+        //searchButton.setOnAction(this::searchMovie);
    }
 
     private ObservableList<Movie> sortMovieTitleAZ(Event event) {
@@ -108,11 +108,16 @@ public class HomeController implements Initializable {
         }
         return movieList;
     }
+    @FXML
     private ObservableList<Movie> searchMovie(ActionEvent event) {
-       for (Movie movie : movieList) {
-           if(movie.description != searchField.getText()) {
-               movieList.remove(movie);
+       try {
+           for (Movie movie : movieList) {
+               if (movie.description != searchField.getText()) {
+                   movieList.remove(movie);
+               }
            }
+       } catch (Exception e){
+           searchField.setText("error");
        }
        return movieList;
     }

@@ -48,7 +48,7 @@
             <Insets left="20.0" right="10.0" />
          </GridPane.margin>
       </TextField>
-      <Button fx:id="searchButton" mnemonicParsing="false" text="Search" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" />
+      <Button fx:id="searchButton" mnemonicParsing="false" onAction="#searchMovie" text="Search" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" />
       <Button fx:id="Test" mnemonicParsing="false" onAction="#activateMenu" text="Advanced Options" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       <ChoiceBox fx:id="sortingChoice" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
    </children>
