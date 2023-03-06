@@ -29,6 +29,8 @@ public class HomeController implements Initializable {
     @FXML
     ListView movieDisplay;
 
+    private Movie movie = new Movie();
+    private List<Movie> originalMovieList = movie.initializeMovies();
     private boolean menuActive = false;
     private ObservableList<Movie> movieList = FXCollections.observableArrayList();
     private ObservableList<String> genres = FXCollections.observableList(Arrays.asList("---All GENRES---", "ACTION", "ADVENTURE", "ANIMATION", "BIOGRAPHY", "COMEDY",
@@ -37,7 +39,7 @@ public class HomeController implements Initializable {
             "WESTERN"));
     private ObservableList<String> sortingKeywords = FXCollections.observableList(Arrays.asList("---NO SORTING---", "A-Z", "Z-A"));
 
-   @FXML
+    @FXML
     private void activateMenu(){
         TranslateTransition tt = new TranslateTransition();
         tt.setNode(menu);
@@ -62,20 +64,17 @@ public class HomeController implements Initializable {
         genresChoice.setValue("---All GENRES---");
         sortingChoice.setItems(sortingKeywords);
         sortingChoice.setValue("---NO SORTING---");
-        Movie m = new Movie();
-        try {
-            movieList.addAll(m.initializeMovies());
+        if(originalMovieList != null) {
+            movieList.addAll(originalMovieList);
             movieDisplay.setItems(movieList);
             movieDisplay.setCellFactory(movieDisplay -> new MovieCard());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
-        sortingChoice.setOnAction(this::sortMovieTitleAZ);
+        sortingChoice.setOnAction(this::sortMoviesByTitle);
         genresChoice.setOnAction(this::sortMovieGenres);
         //searchButton.setOnAction(this::searchMovie);
    }
 
-    private ObservableList<Movie> sortMovieTitleAZ(Event event) {
+    private ObservableList<Movie> sortMoviesByTitle(Event event) {
         if (sortingChoice.getValue().equals("A-Z")) {
         Collections.sort(movieList, new Comparator<Movie>() {
             @Override
@@ -94,6 +93,8 @@ public class HomeController implements Initializable {
 
         }
         else if(sortingChoice.getValue().equals("---NO SORTING---")) {
+            movieList.clear();
+            movieList.addAll(originalMovieList);
             return movieList;
         }
         return null;
