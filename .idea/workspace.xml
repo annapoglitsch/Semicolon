@@ -4,11 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="632c3f87-378d-459f-993b-b51a9090f282" name="Changes" comment="Moritz - can come back to original list">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="632c3f87-378d-459f-993b-b51a9090f282" name="Changes" comment="Moritz - renameing and updating">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Movie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Movie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/MovieCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/MovieCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/FhmdbApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/FhmdbApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/HomeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/Semicolon/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/Semicolon/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/Semicolon/test.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/Semicolon/test.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,7 +153,6 @@
       <workItem from="1677789928233" duration="354000" />
       <workItem from="1677790285601" duration="9080000" />
       <workItem from="1677865967266" duration="5361000" />
-      <workItem from="1678100724247" duration="438000" />
     </task>
     <task id="LOCAL-00001" summary="Moritz - rough draft of main page, added Movie Objects">
       <created>1677798635847</created>
@@ -166,35 +168,7 @@
       <option name="project" value="LOCAL" />
       <updated>1677872083019</updated>
     </task>
-    <task id="LOCAL-00003" summary="Moritz - small GUI update, (get image by url(works but really really really slowly))">
-      <created>1678015548621</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1678015548621</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Moritz - small GUI update, (get image by url(works but really really really slowly))">
-      <created>1678015559131</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1678015559131</updated>
-    </task>
-    <task id="LOCAL-00005" summary="Moritz - added original movielist">
-      <created>1678015855584</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1678015855584</updated>
-    </task>
-    <task id="LOCAL-00006" summary="Moritz - can come back to original list">
-      <created>1678016508509</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1678016508509</updated>
-    </task>
-    <option name="localTasksCounter" value="7" />
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -252,9 +226,6 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Moritz - rough draft of main page, added Movie Objects" />
     <MESSAGE value="Moritz - added MovieCards" />
-    <MESSAGE value="Moritz - small GUI update, (get image by url(works but really really really slowly))" />
-    <MESSAGE value="Moritz - added original movielist" />
-    <MESSAGE value="Moritz - can come back to original list" />
-    <option name="LAST_COMMIT_MESSAGE" value="Moritz - can come back to original list" />
+    <option name="LAST_COMMIT_MESSAGE" value="Moritz - added MovieCards" />
   </component>
 </project>

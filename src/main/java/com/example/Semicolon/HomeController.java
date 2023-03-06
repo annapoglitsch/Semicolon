@@ -34,7 +34,7 @@ public class HomeController implements Initializable {
     private ObservableList<Movie> movieList = FXCollections.observableArrayList();
     private ObservableList<String> genres = FXCollections.observableList(Arrays.asList("---All GENRES---", "ACTION", "ADVENTURE", "ANIMATION", "BIOGRAPHY", "COMEDY",
             "CRIME", "DRAMA", "DOCUMENTARY", "FAMILY", "FANTASY", "HISTORY", "HORROR",
-            "MUSICAL", "MYSTERY", "ROMANCE", "SCIENCE-FICTION", "SPORT", "THRILLER", "WAR",
+            "MUSICAL", "MYSTERY", "ROMANCE", "SCIENCE_FICTION", "SPORT", "THRILLER", "WAR",
             "WESTERN"));
     private ObservableList<String> sortingKeywords = FXCollections.observableList(Arrays.asList("---NO SORTING---", "A-Z", "Z-A"));
 
@@ -63,12 +63,14 @@ public class HomeController implements Initializable {
         genresChoice.setValue("---All GENRES---");
         sortingChoice.setItems(sortingKeywords);
         sortingChoice.setValue("---NO SORTING---");
+
         if(originalMovieList != null) {
             movieList.addAll(originalMovieList);
             movieDisplay.setItems(movieList);
             movieDisplay.setCellFactory(movieDisplay -> new MovieCard());
         }
         sortingChoice.setOnAction(this::sortMoviesByTitle);
+        genresChoice.setOnAction(this::sortMovieGenres);
     }
 
     private ObservableList<Movie> sortMoviesByTitle(Event event) {
@@ -96,4 +98,14 @@ public class HomeController implements Initializable {
         }
         return null;
     }
-}
+    private ObservableList<Movie> sortMovieGenres(Event event) {
+        for (Movie movie : movieList) {
+            for (int i = 0; i < movie.genres.length; i++) {
+                if (movie.genres[i] != genresChoice.getValue()) {
+                    movieList.remove(movie);
+                }
+            }
+        }
+        return movieList;
+    }
+    }
