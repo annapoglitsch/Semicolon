@@ -29,23 +29,16 @@ public class HomeController implements Initializable {
     ListView movieDisplay;
 
     private Movie movie = new Movie();
-    private List<Movie> originalMovieList = setMovieList();
+    private List<Movie> originalMovieList = movie.initializeMovies();
     private boolean menuActive = false;
     private ObservableList<Movie> movieList = FXCollections.observableArrayList();
     private ObservableList<String> genres = FXCollections.observableList(Arrays.asList("---All GENRES---", "ACTION", "ADVENTURE", "ANIMATION", "BIOGRAPHY", "COMEDY",
             "CRIME", "DRAMA", "DOCUMENTARY", "FAMILY", "FANTASY", "HISTORY", "HORROR",
-            "MUSICAL", "MYSTERY", "ROMANCE", "SCIENCE_FICTION", "SPORT", "THRILLER", "WAR",
+            "MUSICAL", "MYSTERY", "ROMANCE", "SCIENCE-FICTION", "SPORT", "THRILLER", "WAR",
             "WESTERN"));
     private ObservableList<String> sortingKeywords = FXCollections.observableList(Arrays.asList("---NO SORTING---", "A-Z", "Z-A"));
-    private List<Movie> setMovieList(){
-        try {
-            return movie.initializeMovies();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
-   @FXML
+    @FXML
     private void activateMenu(){
         TranslateTransition tt = new TranslateTransition();
         tt.setNode(menu);
@@ -70,9 +63,11 @@ public class HomeController implements Initializable {
         genresChoice.setValue("---All GENRES---");
         sortingChoice.setItems(sortingKeywords);
         sortingChoice.setValue("---NO SORTING---");
-        movieList.addAll(originalMovieList);
-        movieDisplay.setItems(movieList);
-        movieDisplay.setCellFactory(movieDisplay -> new MovieCard());
+        if(originalMovieList != null) {
+            movieList.addAll(originalMovieList);
+            movieDisplay.setItems(movieList);
+            movieDisplay.setCellFactory(movieDisplay -> new MovieCard());
+        }
         sortingChoice.setOnAction(this::sortMoviesByTitle);
     }
 

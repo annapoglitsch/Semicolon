@@ -1,10 +1,14 @@
 package com.example.Semicolon.Back;
 
+import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -27,14 +31,26 @@ public class Movie {
         this.rating = rating;
     }
     public Movie(){}
-    public List<Movie> initializeMovies() throws IOException {
-        URL url =  new URL("https://prog2.fh-campuswien.ac.at/movies");
-        Scanner scanner = new Scanner(url.openStream());
-        String temp = "";
-        while(scanner.hasNext()){
-            temp += scanner.nextLine();
+    public List<Movie> initializeMovies() {
+        URL url;
+        try {
+            url = new URL("https://prog2.fh-campuswien.ac.at/movies");
+            Scanner scanner = new Scanner(url.openStream());
+            String temp = "";
+            while(scanner.hasNext()){
+                temp += scanner.nextLine();
+            }
+            List<Movie> movies = new Gson().fromJson(temp, new TypeToken<List<Movie>>() {}.getType());
+            return movies;
+        }catch (FileNotFoundException f){
+            System.out.println("no page found");
+        } catch (UnknownHostException o){
+            System.out.println("no Internet connection");
+        } catch (MalformedURLException e) {
+            System.out.println("no page found");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-        List<Movie> movies = new Gson().fromJson(temp, new TypeToken<List<Movie>>() {}.getType());
-        return movies;
+        return null;
     }
 }
