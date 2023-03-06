@@ -4,6 +4,7 @@ import com.example.Semicolon.Back.Movie;
 import com.example.Semicolon.Back.MovieCard;
 import javafx.animation.TranslateTransition;
 import javafx.collections.*;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.*;
 import javafx.scene.control.*;
@@ -63,7 +64,6 @@ public class HomeController implements Initializable {
         genresChoice.setValue("---All GENRES---");
         sortingChoice.setItems(sortingKeywords);
         sortingChoice.setValue("---NO SORTING---");
-
         if(originalMovieList != null) {
             movieList.addAll(originalMovieList);
             movieDisplay.setItems(movieList);
@@ -98,7 +98,7 @@ public class HomeController implements Initializable {
         }
         return null;
     }
-    private ObservableList<Movie> sortMovieGenres(Event event) {
+    private ObservableList<Movie> sortMovieGenres(ActionEvent event) {
         for (Movie movie : movieList) {
             for (int i = 0; i < movie.genres.length; i++) {
                 if (movie.genres[i] != genresChoice.getValue()) {

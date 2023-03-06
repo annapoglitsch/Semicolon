@@ -4,14 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="632c3f87-378d-459f-993b-b51a9090f282" name="Changes" comment="Moritz - renameing and updating">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Movie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Movie.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/MovieCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/MovieCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/FhmdbApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/FhmdbApplication.java" afterDir="false" />
+    <list default="true" id="632c3f87-378d-459f-993b-b51a9090f282" name="Changes" comment="Moritz - can come back to original list">
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/HomeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/Semicolon/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/Semicolon/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/Semicolon/test.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/Semicolon/test.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
