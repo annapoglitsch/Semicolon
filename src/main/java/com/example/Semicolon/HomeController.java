@@ -33,6 +33,7 @@ public class HomeController implements Initializable {
     private List<Movie> originalMovieList = movie.initializeMovies();
     private boolean menuActive = false;
     private ObservableList<Movie> movieList = FXCollections.observableArrayList();
+    private ObservableList<Movie> movieListRemovedObjects;
     private ObservableList<String> genres = FXCollections.observableList(Arrays.asList("---All GENRES---", "ACTION", "ADVENTURE", "ANIMATION", "BIOGRAPHY", "COMEDY",
             "CRIME", "DRAMA", "DOCUMENTARY", "FAMILY", "FANTASY", "HISTORY", "HORROR",
             "MUSICAL", "MYSTERY", "ROMANCE", "SCIENCE_FICTION", "SPORT", "THRILLER", "WAR",
@@ -100,10 +101,12 @@ public class HomeController implements Initializable {
         return null;
     }
     private ObservableList<Movie> sortMovieGenres(ActionEvent event) {
+       // movieList = (ObservableList<Movie>) originalMovieList;
         for (Movie movie : movieList) {
             for (int i = 0; i < movie.genres.length; i++) {
-                if (movie.genres[i] != genresChoice.getValue()) {
+                if (!Objects.equals(movie.genres[i], genresChoice.getValue())) {
                     movieList.remove(movie);
+                    movieListRemovedObjects.add(movie);
                 }
             }
         }
@@ -113,7 +116,7 @@ public class HomeController implements Initializable {
     private ObservableList<Movie> searchMovie(ActionEvent event) {
        try {
            for (Movie movie : movieList) {
-               if (movie.description != searchField.getText()) {
+               if (!Objects.equals(movie.description, searchField.getText())) {
                    movieList.remove(movie);
                }
            }
