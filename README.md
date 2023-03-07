@@ -10,16 +10,14 @@ Buttons:
 Methoden:
 -	Filmenamen, Genres und Description werden jeweils in eine Liste geladen
 -	Filme in der Liste werden alphabetisch sortiert
--	Methode die String übergeben bekommt sucht String in der Liste, Name, Genre, Description – gibt filme wieder
+-	Methode die eingabe mit description vergleicht
 -	Methode die Filme anzeigt zum jeweiligen Genre
--	Methode die Filterbutton ein und ausschaltet
 
 Tests:
 - Ist die Liste befüllt
 - Ist die Liste alphabetisch geführt
 - stimmen String und film, der herauskommt überein?
-- verändert sich die filmauswahl wenn genre angeklickt wird
-- Sind die Buttons eingeschaltet/kompatibel
+- können genre und a-z sortierung gleichzeitig gewählt werden
 
 Kleinigkeiten:
 Jeder Button und String müssen benannt und verknüpft werden
