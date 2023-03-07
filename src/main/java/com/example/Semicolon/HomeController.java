@@ -33,12 +33,13 @@ public class HomeController implements Initializable {
     private List<Movie> originalMovieList = movie.initializeMovies();
     private boolean menuActive = false;
     private ObservableList<Movie> movieList = FXCollections.observableArrayList();
-    private ObservableList<Movie> movieListRemovedObjects;
+    private List<Movie> tempList;
     private ObservableList<String> genres = FXCollections.observableList(Arrays.asList("---All GENRES---", "ACTION", "ADVENTURE", "ANIMATION", "BIOGRAPHY", "COMEDY",
             "CRIME", "DRAMA", "DOCUMENTARY", "FAMILY", "FANTASY", "HISTORY", "HORROR",
             "MUSICAL", "MYSTERY", "ROMANCE", "SCIENCE_FICTION", "SPORT", "THRILLER", "WAR",
             "WESTERN"));
     private ObservableList<String> sortingKeywords = FXCollections.observableList(Arrays.asList("---NO SORTING---", "A-Z", "Z-A"));
+    private String searchWord = "";
 
     @FXML
     private void activateMenu(){
@@ -72,7 +73,6 @@ public class HomeController implements Initializable {
         }
         sortingChoice.setOnAction(this::sortMoviesByTitle);
         genresChoice.setOnAction(this::sortMovieGenres);
-        //searchButton.setOnAction(this::searchMovie);
    }
 
     private ObservableList<Movie> sortMoviesByTitle(Event event) {
@@ -101,28 +101,21 @@ public class HomeController implements Initializable {
         return null;
     }
     private ObservableList<Movie> sortMovieGenres(ActionEvent event) {
-       // movieList = (ObservableList<Movie>) originalMovieList;
-        for (Movie movie : movieList) {
-            for (int i = 0; i < movie.genres.length; i++) {
-                if (!Objects.equals(movie.genres[i], genresChoice.getValue())) {
-                    movieList.remove(movie);
-                    movieListRemovedObjects.add(movie);
-                }
-            }
-        }
-        return movieList;
+       movieList.removeAll();
+       for (Movie movie : originalMovieList) {
+
+       }
+       return movieList;
     }
     @FXML
     private ObservableList<Movie> searchMovie(ActionEvent event) {
-       try {
-           for (Movie movie : movieList) {
-               if (!Objects.equals(movie.description, searchField.getText())) {
-                   movieList.remove(movie);
+        movieList.clear();
+           for (int i = 0; i < originalMovieList.size(); i++) {
+               if (originalMovieList.get(i).description.contains(searchField.getText()) ||
+                      originalMovieList.get(i).title.contains(searchField.getText())) {
+                   movieList.add(originalMovieList.get(i));
                }
            }
-       } catch (Exception e){
-           searchField.setText("error");
-       }
-       return movieList;
+           return movieList;
     }
     }

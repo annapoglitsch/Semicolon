@@ -25,6 +25,7 @@ public class MovieCard extends ListCell<Movie> {
         super.updateItem(movie, empty);
         if (empty || movie == null) {
             setText(null);
+            setGraphic(null);
         } else {
             this.getStyleClass().add("movie-cell");
             title.setText(movie.title);
