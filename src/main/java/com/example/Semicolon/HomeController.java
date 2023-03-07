@@ -75,7 +75,7 @@ public class HomeController implements Initializable {
         sortingChoice.setValue("---NO SORTING---");
         sortingChoice.setOnAction(this::sortMoviesByTitle);
         genresChoice.setOnAction(this::sortMoviesByGenre);
-        searchField.setOnKeyReleased(event -> {searchMovie();});
+        searchField.setOnKeyTyped(event -> {searchMovie();});
     }
 
     private ObservableList<Movie> sortMoviesByTitle(Event event) {
