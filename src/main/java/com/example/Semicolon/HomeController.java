@@ -11,7 +11,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
@@ -30,26 +29,23 @@ public class HomeController implements Initializable {
     ListView movieDisplay;
 
     private Movie movie = new Movie();
-    private List<Movie> originalMovieList = movie.initializeMovies();
-    private boolean menuActive = false;
+    private List<Movie> originalMovieList = movie.initializeMovies(), tempSortedMovieList = new ArrayList<>();
+    private boolean menuActive = false, started = false, sortedByGenre = false;
     private ObservableList<Movie> movieList = FXCollections.observableArrayList();
-    private ObservableList<String> genres = FXCollections.observableList(Arrays.asList("---All GENRES---", "ACTION", "ADVENTURE", "ANIMATION", "BIOGRAPHY", "COMEDY",
-            "CRIME", "DRAMA", "DOCUMENTARY", "FAMILY", "FANTASY", "HISTORY", "HORROR",
-            "MUSICAL", "MYSTERY", "ROMANCE", "SCIENCE_FICTION", "SPORT", "THRILLER", "WAR",
-            "WESTERN"));
+    private ObservableList<String> genres = FXCollections.observableList(Arrays.asList("---All GENRES---", "ACTION", "ADVENTURE", "ANIMATION", "BIOGRAPHY", "COMEDY", "CRIME", "DRAMA", "DOCUMENTARY", "FAMILY", "FANTASY", "HISTORY", "HORROR", "MUSICAL", "MYSTERY", "ROMANCE", "SCIENCE_FICTION", "SPORT", "THRILLER", "WAR", "WESTERN"));
     private ObservableList<String> sortingKeywords = FXCollections.observableList(Arrays.asList("---NO SORTING---", "A-Z", "Z-A"));
 
     @FXML
-    private void activateMenu(){
+    private void activateMenu() {
         TranslateTransition tt = new TranslateTransition();
         tt.setNode(menu);
         tt.setDuration(Duration.millis(500));
-        if(menuActive){
+        if (menuActive) {
             tt.setFromY(menu.getHeight());
             tt.setToY(0);
             menu.setDisable(true);
             menuActive = false;
-        }else {
+        } else {
             tt.setFromY(0);
             tt.setToY(menu.getHeight());
             menu.setDisable(false);
@@ -60,52 +56,74 @@ public class HomeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        if (!started) {
+            movieList.addAll(originalMovieList);
+            tempSortedMovieList.addAll(originalMovieList);
+            movieDisplay.setItems(movieList);
+            movieDisplay.setCellFactory(movieDisplay -> new MovieCard());
+            started = true;
+        }
         genresChoice.setItems(genres);
         genresChoice.setValue("---All GENRES---");
         sortingChoice.setItems(sortingKeywords);
         sortingChoice.setValue("---NO SORTING---");
-        if(originalMovieList != null) {
-            movieList.addAll(originalMovieList);
-            movieDisplay.setItems(movieList);
-            movieDisplay.setCellFactory(movieDisplay -> new MovieCard());
-        }
         sortingChoice.setOnAction(this::sortMoviesByTitle);
-        genresChoice.setOnAction(this::sortMovieGenres);
+        genresChoice.setOnAction(this::sortMoviesByGenre);
     }
 
     private ObservableList<Movie> sortMoviesByTitle(Event event) {
+        tempSortedMovieList.clear();
         if (sortingChoice.getValue().equals("A-Z")) {
-        Collections.sort(movieList, new Comparator<Movie>() {
-            @Override
-            public int compare(Movie o1, Movie o2) {
-                return o1.title.compareTo(o2.title);
-            }
-        });
-        }
-        else if (sortingChoice.getValue().equals("Z-A")) {
             Collections.sort(movieList, new Comparator<Movie>() {
-            @Override
-            public int compare(Movie o1, Movie o2) {
-                return o2.title.compareTo(o1.title);
+                @Override
+                public int compare(Movie o1, Movie o2) {
+                    return o1.title.compareTo(o2.title);
+                }
+            });
+            tempSortedMovieList.addAll(originalMovieList);
+            System.out.println(tempSortedMovieList.size());
+            return movieList;
+        } else if (sortingChoice.getValue().equals("Z-A")) {
+            Collections.sort(movieList, new Comparator<Movie>() {
+                @Override
+                public int compare(Movie o1, Movie o2) {
+                    return o2.title.compareTo(o1.title);
+                }
+            });
+            tempSortedMovieList.addAll(originalMovieList);
+            System.out.println(tempSortedMovieList.size());
+            return movieList;
+        } else if (sortingChoice.getValue().equals("---NO SORTING---")) {
+            if(!sortedByGenre){
+                movieList.clear();
+                movieList.addAll(originalMovieList);
             }
-        });
-
-        }
-        else if(sortingChoice.getValue().equals("---NO SORTING---")) {
-            movieList.clear();
-            movieList.addAll(originalMovieList);
+            tempSortedMovieList.addAll(originalMovieList);
+            System.out.println(tempSortedMovieList.size());
             return movieList;
         }
         return null;
     }
-    private ObservableList<Movie> sortMovieGenres(ActionEvent event) {
-        for (Movie movie : movieList) {
-            for (int i = 0; i < movie.genres.length; i++) {
-                if (movie.genres[i] != genresChoice.getValue()) {
-                    movieList.remove(movie);
+
+    private ObservableList<Movie> sortMoviesByGenre(Event event) {
+        ObservableList<Movie> tempList = FXCollections.observableArrayList();
+        movieList.clear();
+        movieList.addAll(tempSortedMovieList);
+        if (!genresChoice.getValue().equals("---All GENRES---")) {
+            sortedByGenre = true;
+            for (int j = 0; j < movieList.size(); j++) {
+                for (int i = 0; i < movieList.get(j).genres.length; i++) {
+                    if (genresChoice.getValue().equals(movieList.get(j).genres[i])) {
+                        tempList.add(movieList.get(j));
+                        break;
+                    }
                 }
             }
+            movieList.clear();
+            movieList.addAll(tempList);
+        }else{
+            sortedByGenre = false;
         }
         return movieList;
     }
-    }
+}
