@@ -75,6 +75,7 @@ public class HomeController implements Initializable {
         sortingChoice.setValue("---NO SORTING---");
         sortingChoice.setOnAction(this::sortMoviesByTitle);
         genresChoice.setOnAction(this::sortMoviesByGenre);
+        searchField.setOnKeyReleased(event -> {searchMovie();});
     }
 
     private ObservableList<Movie> sortMoviesByTitle(Event event) {
@@ -132,16 +133,16 @@ public class HomeController implements Initializable {
         }
         return movieList;
     }
-
     @FXML
-    private ObservableList<Movie> searchMovie(ActionEvent event) {
+    private ObservableList<Movie> searchMovie() {
         movieList.clear();
         for (int i = 0; i < originalMovieList.size(); i++) {
-            if (originalMovieList.get(i).description.contains(searchField.getText()) ||
-                    originalMovieList.get(i).title.contains(searchField.getText())) {
+            if (originalMovieList.get(i).description.toLowerCase().contains(searchField.getText()) ||
+                    originalMovieList.get(i).title.toLowerCase().contains(searchField.getText())) {
                 movieList.add(originalMovieList.get(i));
             }
         }
         return movieList;
     }
-}
+    }
+
