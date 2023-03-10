@@ -41,6 +41,7 @@ public class HomeController implements Initializable {
     private ObservableList<String> sortingKeywords = FXCollections.observableList(Arrays.asList("---NO SORTING---", "A-Z", "Z-A"));
     private String searchWord = "";
 
+
     @FXML
     private void activateMenu() {
         TranslateTransition tt = new TranslateTransition();
@@ -78,7 +79,7 @@ public class HomeController implements Initializable {
         searchField.setOnKeyTyped(event -> {searchMovie();});
     }
 
-    private ObservableList<Movie> sortMoviesByTitle(Event event) {
+    public ObservableList<Movie> sortMoviesByTitle(ActionEvent event) {
         tempSortedMovieList.clear();
         if (sortingChoice.getValue().equals("A-Z")) {
             Collections.sort(movieList, new Comparator<Movie>() {
@@ -112,7 +113,7 @@ public class HomeController implements Initializable {
         return null;
     }
 
-    private ObservableList<Movie> sortMoviesByGenre(Event event) {
+    public ObservableList<Movie> sortMoviesByGenre(ActionEvent event) {
         ObservableList<Movie> tempList = FXCollections.observableArrayList();
         movieList.clear();
         movieList.addAll(tempSortedMovieList);
@@ -137,7 +138,7 @@ public class HomeController implements Initializable {
         return movieList;
     }
     @FXML
-    private ObservableList<Movie> searchMovie() {
+    public ObservableList<Movie> searchMovie() {
         movieList.clear();
         for (int i = 0; i < originalMovieList.size(); i++) {
             if (originalMovieList.get(i).description.toLowerCase().contains(searchField.getText()) ||
