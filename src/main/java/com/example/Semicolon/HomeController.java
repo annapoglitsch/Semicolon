@@ -34,7 +34,7 @@ public class HomeController implements Initializable {
     private boolean menuActive = false, started = false, sortedByGenre = false;
     private ObservableList<Movie> movieList = FXCollections.observableArrayList();
     private List<Movie> tempList;
-    private ObservableList<String> genres = FXCollections.observableList(Arrays.asList("---All GENRES---", "ACTION", "ADVENTURE", "ANIMATION", "BIOGRAPHY", "COMEDY",
+    private ObservableList<String> genres = FXCollections.observableList(Arrays.asList("---ALL GENRES---", "ACTION", "ADVENTURE", "ANIMATION", "BIOGRAPHY", "COMEDY",
             "CRIME", "DRAMA", "DOCUMENTARY", "FAMILY", "FANTASY", "HISTORY", "HORROR",
             "MUSICAL", "MYSTERY", "ROMANCE", "SCIENCE_FICTION", "SPORT", "THRILLER", "WAR",
             "WESTERN"));
@@ -51,7 +51,7 @@ public class HomeController implements Initializable {
             tt.setToY(0);
             menu.setDisable(true);
             menuActive = false;
-        } else {
+        }  else {
             tt.setFromY(0);
             tt.setToY(menu.getHeight());
             menu.setDisable(false);
@@ -70,7 +70,7 @@ public class HomeController implements Initializable {
             started = true;
         }
         genresChoice.setItems(genres);
-        genresChoice.setValue("---All GENRES---");
+        genresChoice.setValue("---ALL GENRES---");
         sortingChoice.setItems(sortingKeywords);
         sortingChoice.setValue("---NO SORTING---");
         sortingChoice.setOnAction(this::sortMoviesByTitle);
@@ -116,7 +116,10 @@ public class HomeController implements Initializable {
         ObservableList<Movie> tempList = FXCollections.observableArrayList();
         movieList.clear();
         movieList.addAll(tempSortedMovieList);
-        if (!genresChoice.getValue().equals("---All GENRES---")) {
+        if (!genresChoice.getValue().equals("---ALL GENRES---")) {
+            activateMenu();
+            menu.setDisable(true);
+            menuActive = false;
             sortedByGenre = true;
             for (int j = 0; j < movieList.size(); j++) {
                 for (int i = 0; i < movieList.get(j).genres.length; i++) {
