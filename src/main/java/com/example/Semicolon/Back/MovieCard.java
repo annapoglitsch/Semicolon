@@ -1,8 +1,4 @@
 package com.example.Semicolon.Back;
-
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -29,7 +25,6 @@ public class MovieCard extends ListCell<Movie> {
         } else {
             this.getStyleClass().add("movie-cell");
             title.setText(movie.title);
-            System.out.println(movie.title);
             if(movie.description != null){
                 description.setText(movie.description);
             }else{
