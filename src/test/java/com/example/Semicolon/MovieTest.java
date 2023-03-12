@@ -221,7 +221,37 @@ class MovieTest extends ActionEvent {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    @Test
+    @Order(10)
+    void genre_and_sort_method_at_the_same_time() {
 
+        HomeController controller = new HomeController();
+        ObservableList<Movie> movieList = FXCollections.observableArrayList();
+        ObservableList<Movie> movieList2 = FXCollections.observableArrayList();
+    try {
+        for (int i = 9; i >= 0; i--) {
+            String genre;
+            if (i % 2 == 0) {
+                genre = "ACTION";
+            } else {
+                genre = "DRAMA";
+            }
+            Movie movie = new Movie(null, String.valueOf(i), new String[]{genre}, 0, String.valueOf(i), null, 0, null, null, null, 0);
+            movieList.add(movie);
+            if (i != 10) {
+                movieList2.add(0, movie);
+            } else {
+                movieList2.add(movie);
+            }
+        }
+
+        controller.movieList.addAll(movieList);
+        assertEquals(movieList2, controller.sortMoviesByTitle(this, "A-Z"));
+        assertEquals(movieList2, controller.sortMoviesByGenre(this, "ACTION"));
+    }catch (Exception e){
+        e.printStackTrace();
+    }
     }
 }
 
