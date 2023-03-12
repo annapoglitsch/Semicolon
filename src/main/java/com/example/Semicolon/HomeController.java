@@ -143,7 +143,7 @@ public class HomeController implements Initializable {
             movieList.clear();
             movieList.addAll(originalMovieList);
         }
-        if (sortedByTitle) {
+        if (sortedByTitle && sortingChoice != null) {
             sortMoviesByTitlePreparation(event);
         }
         if (movieList.size() == 0) {

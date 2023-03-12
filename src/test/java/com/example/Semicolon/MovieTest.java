@@ -206,54 +206,54 @@ class MovieTest extends ActionEvent {
 
         try {
             ObservableList<Movie> movieList = FXCollections.observableArrayList();
-            ObservableList<Movie> rightOrder = FXCollections.observableArrayList();
+            ObservableList<Movie> correct = FXCollections.observableArrayList();
             for (int i = 9; i >= 0; i--) {
                 Movie movie = new Movie(null, movieString[i], new String[]{"ACTION", "DRAMA"}, 0, String.valueOf(i), null, 0, null, null, null, 0);
                 movieList.add(movie);
                 if (movieString[i].toLowerCase().contains("this")) {
-                    rightOrder.add(movie);
+                    correct.add(movie);
                 }
             }
             controller = new HomeController();
             controller.movieList.addAll(movieList);
             controller.originalMovieList.addAll(movieList);
-            assertEquals(rightOrder, controller.searchMovie("this"));
+            assertEquals(correct, controller.searchMovie("this"));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
     @Test
     @Order(10)
     void genre_and_sort_method_at_the_same_time() {
-
-        HomeController controller = new HomeController();
+        controller = new HomeController();
         ObservableList<Movie> movieList = FXCollections.observableArrayList();
         ObservableList<Movie> movieList2 = FXCollections.observableArrayList();
-    try {
-        for (int i = 9; i >= 0; i--) {
-            String genre;
-            if (i % 2 == 0) {
-                genre = "ACTION";
-            } else {
-                genre = "DRAMA";
-            }
-            Movie movie = new Movie(null, String.valueOf(i), new String[]{genre}, 0, String.valueOf(i), null, 0, null, null, null, 0);
-            movieList.add(movie);
-            if (i % 2 == 0) {
-                if ( i != 10) {
-                    movieList2.add(0, movie);
+        try {
+            for (int i = 9; i >= 0; i--) {
+                String genre;
+                if (i % 2 == 0) {
+                    genre = "ACTION";
+                } else {
+                    genre = "DRAMA";
                 }
-            } else {
-                movieList2.add(movie);
+                Movie movie = new Movie(null, String.valueOf(i), new String[]{genre}, 0, String.valueOf(i), null, 0, null, null, null, 0);
+                movieList.add(movie);
+                if (i % 2 == 0) {
+                    if (i != 10) {
+                        movieList2.add(0, movie);
+                    } else {
+                        movieList2.add(movie);
+                    }
+                }
             }
-        }
 
-        controller.movieList.addAll(movieList);
-        controller.sortMoviesByTitle(this, "A-Z");
-        assertEquals(movieList2, controller.sortMoviesByGenre(this, "ACTION"));
-    }catch (Exception e){
-        e.printStackTrace();
-    }
+            controller.movieList.addAll(movieList);
+            controller.sortMoviesByTitle(this, "A-Z");
+            assertEquals(movieList2, controller.sortMoviesByGenre(this, "ACTION"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
 
