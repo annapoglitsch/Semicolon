@@ -133,7 +133,8 @@ class MovieTest extends ActionEvent {
                     }
                 }
                 controller = new HomeController();
-                controller.originalMovieList = movieList;
+                controller.movieList.addAll(movieList);
+                controller.originalMovieList.addAll(movieList);
                 assertEquals(rightOrder, controller.searchMovie("this"));
             } catch(Exception e){
                 e.printStackTrace();

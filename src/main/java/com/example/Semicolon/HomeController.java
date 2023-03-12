@@ -142,15 +142,16 @@ public class HomeController implements Initializable {
         searchMovie(searchField.getText().toLowerCase()); //so that searchField is not null
     }
     public ObservableList<Movie> searchMovie(String temp){
+        movieList.clear();
         ObservableList<Movie> tempList = FXCollections.observableArrayList();
         for (int i = 0; i < originalMovieList.size(); i++) {
             if (originalMovieList.get(i).description.toLowerCase().contains(temp) ||
                     originalMovieList.get(i).title.toLowerCase().contains(temp)) {
-                tempList.add(originalMovieList.get(i));
+                movieList.add(originalMovieList.get(i));
             }
         }
-        movieList.clear();
-        movieList.addAll(tempList);
+       // movieList.clear();
+        //movieList.addAll(tempList);
         if(movieList.size() == 0){
             movieList.add(emptyMovieList);
         }
