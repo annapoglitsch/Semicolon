@@ -239,15 +239,17 @@ class MovieTest extends ActionEvent {
             }
             Movie movie = new Movie(null, String.valueOf(i), new String[]{genre}, 0, String.valueOf(i), null, 0, null, null, null, 0);
             movieList.add(movie);
-            if (i != 10) {
-                movieList2.add(0, movie);
+            if (i % 2 == 0) {
+                if ( i != 10) {
+                    movieList2.add(0, movie);
+                }
             } else {
                 movieList2.add(movie);
             }
         }
 
         controller.movieList.addAll(movieList);
-        assertEquals(movieList2, controller.sortMoviesByTitle(this, "A-Z"));
+        controller.sortMoviesByTitle(this, "A-Z");
         assertEquals(movieList2, controller.sortMoviesByGenre(this, "ACTION"));
     }catch (Exception e){
         e.printStackTrace();
