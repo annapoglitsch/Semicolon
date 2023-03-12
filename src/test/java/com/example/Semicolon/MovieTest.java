@@ -99,8 +99,7 @@ class MovieTest extends ActionEvent {
                 }
             }
             controller = new HomeController();
-            controller.originalMovieList = movieList;
-            controller.tempSortedMovieList = movieList;
+            controller.movieList = movieList;
             assertEquals(movieList2, controller.sortMoviesByGenre(this, "ACTION"));
         } catch (Exception e) {
             e.printStackTrace();
@@ -134,8 +133,7 @@ class MovieTest extends ActionEvent {
                     }
                 }
                 controller = new HomeController();
-                controller.movieList.addAll(movieList);
-                controller.tempSortedMovieList.addAll(movieList);
+                controller.originalMovieList = movieList;
                 assertEquals(rightOrder, controller.searchMovie("this"));
             } catch(Exception e){
                 e.printStackTrace();
