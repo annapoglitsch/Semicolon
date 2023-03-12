@@ -65,17 +65,17 @@ public class HomeController implements Initializable {
         genresChoice.setValue("---ALL GENRES---");
         sortingChoice.setItems(sortingKeywords);
         sortingChoice.setValue("---NO SORTING---");
-        sortingChoice.setOnAction(this::sortMoviesByTitlePreparation);
-        genresChoice.setOnAction(this::sortMoviesByGenrePrep);
+        sortingChoice.setOnAction(this::sortMoviesByTitlePreparation);  //choiceBox sorting set on action
+        genresChoice.setOnAction(this::sortMoviesByGenrePrep);          //choiceBox ggenre set on action
         searchField.setOnKeyTyped(event -> {
             searchMoviePrep();});
     }
 
-    public void sortMoviesByTitlePreparation(ActionEvent event) {
+    public void sortMoviesByTitlePreparation(ActionEvent event) {   //prep so that choiceBox sorting is not null
         sortMoviesByTitle(event, sortingChoice.getValue());
     }
 
-    public void sortMoviesByGenrePrep(ActionEvent event) {
+    public void sortMoviesByGenrePrep(ActionEvent event) {      //prep so that choiceBox genre is not null
         sortMoviesByGenre(event, genresChoice.getValue());
         searchField.setText("");
     }
@@ -85,11 +85,11 @@ public class HomeController implements Initializable {
             sortedByTitle = true;
             Collections.sort(movieList, new Comparator<Movie>() {
                 @Override
-                public int compare(Movie o1, Movie o2) {
+                public int compare(Movie o1, Movie o2) { //compare class compare two movie title
                     return o1.title.compareTo(o2.title);
                 }
             });
-            tempSortedMovieList.addAll(originalMovieList);
+            tempSortedMovieList.addAll(originalMovieList); //after sorting add movieList to temp
             return movieList;
         } else if (keyWord.equals("Z-A")) {
             sortedByTitle = true;
@@ -97,11 +97,11 @@ public class HomeController implements Initializable {
                 @Override
                 public int compare(Movie o1, Movie o2) {
                     return o2.title.compareTo(o1.title);
-                }
+                }                                       //same structure as a-z but o1 and o2 changed position
             });
             tempSortedMovieList.addAll(originalMovieList);
             return movieList;
-        } else if (keyWord.equals("---NO SORTING---")) {
+        } else if (keyWord.equals("---NO SORTING---")) { //if you want to undo sorting mmovieList is originalList
             sortedByTitle = false;
             if (!sortedByGenre) {
                 movieList.clear();
@@ -122,11 +122,11 @@ public class HomeController implements Initializable {
     public ObservableList<Movie> sortMoviesByGenre(ActionEvent event, String genre){
         ObservableList<Movie> tempList = FXCollections.observableArrayList();
         movieList.clear();
-        movieList.addAll(tempSortedMovieList);
+        movieList.addAll(tempSortedMovieList);      //if other filter is in action
         if (!genre.equals("---ALL GENRES---")) {
             sortedByGenre = true;
             for (int j = 0; j < movieList.size(); j++) {
-                for (int i = 0; i < movieList.get(j).genres.length; i++) {
+                for (int i = 0; i < movieList.get(j).genres.length; i++) {  //get genre and add into list
                     if (genre.equals(movieList.get(j).genres[i])) {
                         tempList.add(movieList.get(j));
                         break;
@@ -152,7 +152,7 @@ public class HomeController implements Initializable {
     }
     @FXML
     public void searchMoviePrep() {
-        searchMovie(searchField.getText().toLowerCase());
+        searchMovie(searchField.getText().toLowerCase()); //so that searchField is not null
     }
     public ObservableList<Movie> searchMovie(String temp){
         movieList.clear();
@@ -161,8 +161,9 @@ public class HomeController implements Initializable {
                     tempSortedMovieList.get(i).title.toLowerCase().contains(temp)) {
                 movieList.add(tempSortedMovieList.get(i));
             }
+            //compare description with text in search field
         }
-        if(movieList.size() == 0){
+        if(movieList.size() == 0){      //if there is no suitable movie, no movie should be displayed
             movieList.add(emptyMovieList);
         }
         return movieList;
