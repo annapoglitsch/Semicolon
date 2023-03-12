@@ -14,12 +14,12 @@ Methoden:
 -	Methode die Filme anzeigt zum jeweiligen Genre
 
 Tests:
-- Ist die Liste befüllt
 - Ist die Liste alphabetisch geführt
 - stimmen String und film, der herauskommt überein?
-- können genre und a-z sortierung gleichzeitig gewählt werden
+- werden filme a-z, z-a, no sorting richtig angezeigt
+-können genre gewählt werden
 
 Kleinigkeiten:
 Jeder Button und String müssen benannt und verknüpft werden
 Code muss kommentiert werden
-Exception handling – was wenn der gesuchte string kein ergebnis liefert?
+Exception handling 
