@@ -1,13 +1,8 @@
 package com.example.Semicolon.Back;
-import javafx.geometry.Insets;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.image.Image;
+import javafx.geometry.*;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-
-import java.io.IOException;
-import java.util.List;
 
 public class MovieCard extends ListCell<Movie> {
 
@@ -19,6 +14,18 @@ public class MovieCard extends ListCell<Movie> {
     @Override
     protected void updateItem(Movie movie, boolean empty) {
         super.updateItem(movie, empty);
+        if(movie != null) {
+            if (movie.id.equals("error-404-Page-Not-Found") || movie.id.equals("error-502-Bad-Gateway-server")) {
+                setGraphic(null);
+                setErrorMessage(movie);
+                return;
+            }
+            if(movie.id.equals("Movie-list-is-empty")){
+                setGraphic(null);
+                setErrorMessage(movie);
+                return;
+            }
+        }
         if (empty || movie == null) {
             setText(null);
             setGraphic(null);
@@ -30,34 +37,34 @@ public class MovieCard extends ListCell<Movie> {
             }else{
                 description.setText("No description available");
             }
-            /*if(movie.imgUrl != null){
-                try {
-                    WebClient client = new WebClient();
-                    client.getOptions().setJavaScriptEnabled(false);
-                    client.getOptions().setCssEnabled(false);
-                    client.getOptions().setUseInsecureSSL(true);
-                    HtmlPage page = client.getPage(movie.imgUrl);
-                    HtmlElement imgElement = page.getFirstByXPath("//img[not(@height='1' or @width='1')]");
-                    Image image = new Image(imgElement.getAttribute("src"));
-                    cover.setImage(image);
-                    cover.setFitHeight(10);
-                    cover.setFitWidth(10);
-                    System.out.println("1");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }else{
-            }*/
+            title.getStyleClass().clear();
             title.getStyleClass().add("title-text-color");
+            description.getStyleClass().clear();
             description.getStyleClass().add("description-text-color");
             title.fontProperty().set(title.getFont().font(20));
-            //description.setMaxWidth(this.getScene().getWidth() - 30);
             description.setWrapText(true);
+            card.getStyleClass().clear();
             card.getStyleClass().add("cell-border");
             card.spacingProperty().set(10);
             card.setPadding(new Insets(5,30,5,10));
             card.alignmentProperty().set(javafx.geometry.Pos.CENTER_LEFT);
             setGraphic(card);
         }
+    }
+    private void setErrorMessage(Movie movie){
+        this.getStyleClass().add("movie-cell");
+        title.setText(movie.imgUrl);
+        title.alignmentProperty().set(Pos.TOP_CENTER);
+        title.getStyleClass().clear();
+        title.getStyleClass().add("text-color");
+        title.fontProperty().set(title.getFont().font(20));
+        description.setText("");
+        card.alignmentProperty().set(javafx.geometry.Pos.CENTER_LEFT);
+        card.spacingProperty().set(10);
+        card.setPadding(new Insets(5,30,5,10));
+        card.getStyleClass().clear();
+        card.getStyleClass().add("background-black");
+        card.alignmentProperty().set(Pos.CENTER);
+        setGraphic(card);
     }
 }

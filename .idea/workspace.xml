@@ -4,14 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="632c3f87-378d-459f-993b-b51a9090f282" name="Changes" comment="Moritz - changed when search quarry updates">
+    <list default="true" id="632c3f87-378d-459f-993b-b51a9090f282" name="Changes" comment="Moritz - changes to Methodes so they can be tested more easy">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Movie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Movie.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/MovieCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/MovieCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/webScraper.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/HomeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/Semicolon/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/Semicolon/styles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/example/Semicolon/MovieTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/Semicolon/MovieTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -82,7 +80,7 @@
       <recent name="com.example.Semicolon" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.MovieTest">
+  <component name="RunManager" selected="Application.FhmdbApplication">
     <configuration name="FhmdbApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.Semicolon.FhmdbApplication" />
       <module name="Semicolon" />
@@ -161,8 +159,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.MovieTest" />
         <item itemvalue="Application.FhmdbApplication" />
+        <item itemvalue="JUnit.MovieTest" />
         <item itemvalue="JUnit.MovieTest.is_movie_sorted_by_genre" />
         <item itemvalue="JUnit.MovieTest.is_movie_sorted_a_to_z" />
         <item itemvalue="JUnit.MovieTest.is_movie_sorted_by_a_to_z" />
@@ -183,7 +181,7 @@
       <workItem from="1678488412437" duration="5456000" />
       <workItem from="1678493889304" duration="120000" />
       <workItem from="1678494015925" duration="2018000" />
-      <workItem from="1678535960201" duration="4455000" />
+      <workItem from="1678535960201" duration="9297000" />
     </task>
     <task id="LOCAL-00001" summary="Moritz - rough draft of main page, added Movie Objects">
       <created>1677798635847</created>
@@ -199,7 +197,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677872083019</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Moritz - changes to Methodes so they can be tested more easy">
+      <created>1678542109434</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1678542109434</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -257,6 +262,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Moritz - rough draft of main page, added Movie Objects" />
     <MESSAGE value="Moritz - added MovieCards" />
-    <option name="LAST_COMMIT_MESSAGE" value="Moritz - added MovieCards" />
+    <MESSAGE value="Moritz - changes to Methodes so they can be tested more easy" />
+    <option name="LAST_COMMIT_MESSAGE" value="Moritz - changes to Methodes so they can be tested more easy" />
   </component>
 </project>

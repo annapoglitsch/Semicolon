@@ -25,8 +25,8 @@ public class HomeController implements Initializable {
     @FXML
     ListView movieDisplay;
 
-    private Movie movie = new Movie();
-    public List<Movie> originalMovieList = movie.initializeMovies(), tempSortedMovieList = originalMovieList;
+    private Movie movie = new Movie(), emptyMovieList = new Movie("Movie-list-is-empty","zzzzzzzzzzzzzzzzzzzzz", null, 0, "",  "No Movies", null, null, null, null,0);
+    public List<Movie> originalMovieList = movie.initializeMovies("https://prog2.fh-campuswien.ac.at/movies"), tempSortedMovieList = new ArrayList<>();
     public boolean menuActive = false, started = false, sortedByGenre = false, sortedByTitle = false;
     public ObservableList<Movie> movieList = FXCollections.observableArrayList();
     private ObservableList<String> genres = FXCollections.observableList(Arrays.asList("---ALL GENRES---", "ACTION", "ADVENTURE", "ANIMATION", "BIOGRAPHY", "COMEDY",
@@ -58,6 +58,7 @@ public class HomeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if (!started) {
+            tempSortedMovieList.addAll(originalMovieList);
             movieList.addAll(originalMovieList);
             movieDisplay.setItems(movieList);
             movieDisplay.setCellFactory(movieDisplay -> new MovieCard());
@@ -80,7 +81,7 @@ public class HomeController implements Initializable {
         sortMoviesByGenre(event, genresChoice.getValue());
     }
     public ObservableList<Movie> sortMoviesByTitle(ActionEvent event, String keyWord){
-        tempSortedMovieList = new ArrayList<>();
+        tempSortedMovieList.clear();
         if (keyWord.equals("A-Z")) {
             sortedByTitle = true;
             Collections.sort(movieList, new Comparator<Movie>() {
@@ -113,6 +114,9 @@ public class HomeController implements Initializable {
             sortMoviesByGenrePrep(event);
             return movieList;
         }
+        if(movieList.size() == 0){
+            movieList.add(emptyMovieList);
+        }
         return null;
 
     }
@@ -121,11 +125,6 @@ public class HomeController implements Initializable {
         movieList.clear();
         movieList.addAll(tempSortedMovieList);
         if (!genre.equals("---ALL GENRES---")) {
-            /*if(!testing) {
-                activateMenu();
-                menu.setDisable(true);
-                menuActive = false;
-            }*/
             sortedByGenre = true;
             for (int j = 0; j < movieList.size(); j++) {
                 for (int i = 0; i < movieList.get(j).genres.length; i++) {
@@ -145,6 +144,11 @@ public class HomeController implements Initializable {
         if(sortedByTitle){
             sortMoviesByTitlePreparation(event);
         }
+        if(movieList.size() == 0){
+            movieList.add(emptyMovieList);
+        }
+        tempSortedMovieList.clear();
+        tempSortedMovieList.addAll(movieList);
         return movieList;
     }
     @FXML
@@ -153,14 +157,16 @@ public class HomeController implements Initializable {
     }
     private ObservableList<Movie> test(String temp){
         movieList.clear();
-        for (int i = 0; i < originalMovieList.size(); i++) {
-            if (originalMovieList.get(i).description.toLowerCase().contains(temp) ||
-                    originalMovieList.get(i).title.toLowerCase().contains(temp)) {
-                movieList.add(originalMovieList.get(i));
+        for (int i = 0; i < tempSortedMovieList.size(); i++) {
+            if (tempSortedMovieList.get(i).description.toLowerCase().contains(temp) ||
+                    tempSortedMovieList.get(i).title.toLowerCase().contains(temp)) {
+                movieList.add(tempSortedMovieList.get(i));
             }
         }
+        if(movieList.size() == 0){
+            movieList.add(emptyMovieList);
+        }
         return movieList;
-
     }
 }
 

@@ -21,6 +21,9 @@
 .title-text-color {
     -fx-text-fill: #c9a71b;
 }
+.text-color {
+    -fx-text-fill: #454545;
+}
 
 .description-text-color {
     -fx-text-fill: #ffffff;

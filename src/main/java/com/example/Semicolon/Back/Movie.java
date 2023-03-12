@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -30,23 +31,25 @@ public class Movie {
         this.rating = rating;
     }
     public Movie(){}
-    public List<Movie> initializeMovies() {
-        URL url;
+    public List<Movie> initializeMovies(String path) {
+        List<Movie> movieList = new ArrayList<>();
         try {
-            url = new URL("https://prog2.fh-campuswien.ac.at/movies");
+            URL url = new URL(path);
             Scanner scanner = new Scanner(url.openStream());
             String temp = "";
             while(scanner.hasNext()){
                 temp += scanner.nextLine();
             }
-            return new Gson().fromJson(temp, new TypeToken<List<Movie>>() {}.getType());
+            movieList = new Gson().fromJson(temp, new TypeToken<List<Movie>>() {}.getType());
+            return movieList;
         }catch (FileNotFoundException | MalformedURLException f){
-            System.out.println("no page found");
+            movieList.add(new Movie("error-404-Page-Not-Found", null, null, 0, null, "Error-404", null, null, null, null, 0));
+            return movieList;
         } catch (UnknownHostException o){
-            System.out.println("no Internet connection");
+            movieList.add(new Movie("error-502-Bad-Gateway-server", null, null, 0, null, "Error-502", null, null, null, null, 0));
+            return movieList;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return null;
     }
 }
