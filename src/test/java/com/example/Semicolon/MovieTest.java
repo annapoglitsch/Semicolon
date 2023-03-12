@@ -1,9 +1,14 @@
 package com.example.Semicolon;
 
 import com.example.Semicolon.Back.Movie;
+import javafx.collections.*;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import org.junit.jupiter.api.Test;
+import javafx.event.ActionEvent;
+import org.junit.jupiter.api.*;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
@@ -105,6 +110,43 @@ class MovieTest extends ActionEvent {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        @Test
+        @Order(5)
+        void does_searchMethod_search_for_the_right_movies() {
+            HomeController controller;
+            String[] movieString = new String[10];
+            movieString[0] = "Hello";
+            movieString[1] = "World";
+            movieString[2] = "This is a test";
+            movieString[3] = "This is not a test";
+            movieString[4] = "Semicolon";
+            movieString[5] = "Exercise one";
+            movieString[6] = "Bye";
+            movieString[7] = "Pizza";
+            movieString[8] = "Soup";
+            movieString[9] = "I am tired";
+
+            try {
+                ObservableList<Movie> movieList = FXCollections.observableArrayList();
+                ObservableList<Movie> rightOrder = FXCollections.observableArrayList();
+                for (int i = 9; i >= 0; i--) {
+                    Movie movie = new Movie(null, movieString[i], new String[]{"ACTION", "DRAMA"}, 0, String.valueOf(i), null, null, null, null, null, 0);
+                    movieList.add(movie);
+                    if (movieString[i].toLowerCase().contains("this")) {
+                        rightOrder.add( movie);
+                    }
+                }
+                controller = new HomeController();
+                controller.movieList.addAll(movieList);
+                controller.tempSortedMovieList.addAll(movieList);
+                assertEquals(rightOrder, controller.searchMovie("this"));
+            } catch(Exception e){
+                e.printStackTrace();
+            }
+
+        }
     }
+
 }
 
