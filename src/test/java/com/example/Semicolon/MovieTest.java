@@ -2,15 +2,10 @@ package com.example.Semicolon;
 
 import com.example.Semicolon.Back.Movie;
 import javafx.collections.*;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import org.junit.jupiter.api.Test;
 import javafx.event.ActionEvent;
 import org.junit.jupiter.api.*;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.List;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MovieTest extends ActionEvent {
 
@@ -92,14 +87,14 @@ class MovieTest extends ActionEvent {
             ObservableList<Movie> movieList2 = FXCollections.observableArrayList();
             for (int i = 9; i >= 0; i--) {
                 String genre;
-                if(i%2 == 0){
+                if (i % 2 == 0) {
                     genre = "ACTION";
-                }else {
+                } else {
                     genre = "DRAMA";
                 }
                 Movie movie = new Movie(null, String.valueOf(i), new String[]{genre}, 0, String.valueOf(i), null, null, null, null, null, 0);
                 movieList.add(movie);
-                if(i%2 == 0){
+                if (i % 2 == 0) {
                     movieList2.add(movie);
                 }
             }
@@ -110,6 +105,7 @@ class MovieTest extends ActionEvent {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
         @Test
         @Order(5)
@@ -148,5 +144,4 @@ class MovieTest extends ActionEvent {
         }
     }
 
-}
 
