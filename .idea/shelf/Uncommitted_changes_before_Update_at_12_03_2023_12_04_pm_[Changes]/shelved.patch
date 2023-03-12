@@ -1,0 +1,253 @@
+Index: src/test/java/com/example/Semicolon/MovieTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/com/example/Semicolon/MovieTest.java b/src/test/java/com/example/Semicolon/MovieTest.java
+--- a/src/test/java/com/example/Semicolon/MovieTest.java	
++++ b/src/test/java/com/example/Semicolon/MovieTest.java	
+@@ -1,27 +1,107 @@
+ package com.example.Semicolon;
+ 
+ import com.example.Semicolon.Back.Movie;
+-import javafx.collections.ObservableList;
++import javafx.collections.*;
+ import javafx.event.ActionEvent;
+-import org.junit.jupiter.api.Test;
++import org.junit.jupiter.api.*;
+ 
+-import java.util.List;
++import static org.junit.jupiter.api.Assertions.*;
+ 
+ class MovieTest extends ActionEvent {
++    HomeController controller;
++    @Test
++    @Order(1)
++    void is_movie_sorted_a_to_z() {
++        try {
++            ObservableList<Movie> movieList = FXCollections.observableArrayList();
++            ObservableList<Movie> rightOrder = FXCollections.observableArrayList();
++            for (int i = 9; i >= 0; i--) {
++                Movie movie = new Movie(null, String.valueOf(i), new String[]{"ACTION", "DRAMA"}, 0, String.valueOf(i), null, null, null, null, null, 0);
++                movieList.add(movie);
++                if(i != 10) {
++                    rightOrder.add(0, movie);
++                }else{
++                    rightOrder.add(movie);
++                }
++            }
++            controller = new HomeController();
++            controller.movieList.addAll(movieList);
++            assertEquals(rightOrder, controller.sortMoviesByTitle(this, "A-Z"));
++        } catch (Exception e) {
++            e.printStackTrace();
++        }
++    }
+     @Test
+-    void is_movie_sorted_by_a_to_z(){
+-        //given
+-        HomeController controller = new HomeController();
+-        Movie movies = new Movie();
+-        List<Movie> aMovieList = movies.initializeMovies();
+-
+-        //when
+-        ObservableList<Movie> actual = controller.sortMoviesByTitle(this);
+-
+-        //then
+-
+-      //  List<Movie> expected = aMovieList;
+-
++    @Order(2)
++    void is_movie_sorted_z_to_a() {
++        try {
++            ObservableList<Movie> rightOrder = FXCollections.observableArrayList();
++            ObservableList<Movie> movieList = FXCollections.observableArrayList();
++            for (int i = 9; i >= 0; i--) {
++                Movie movie = new Movie(null, String.valueOf(i), new String[]{"ACTION", "DRAMA"}, 0, String.valueOf(i), null, null, null, null, null, 0);
++                rightOrder.add(movie);
++                if(i != 10) {
++                    movieList.add(0, movie);
++                }else{
++                    movieList.add(movie);
++                }
++            }
++            controller = new HomeController();
++            controller.movieList.addAll(movieList);
++            assertEquals(rightOrder, controller.sortMoviesByTitle(this, "Z-A"));
++        } catch (Exception e) {
++            e.printStackTrace();
++        }
++    }
++    @Test
++    @Order(3)
++    void is_movie_reset_sorting() {
++        try {
++            ObservableList<Movie> rightOrder = FXCollections.observableArrayList();
++            ObservableList<Movie> movieList = FXCollections.observableArrayList();
++            for (int i = 9; i >= 0; i--) {
++                Movie movie = new Movie(null, String.valueOf(i), new String[]{"ACTION", "DRAMA"}, 0, String.valueOf(i), null, null, null, null, null, 0);
++                rightOrder.add(movie);
++                if(i != 10) {
++                    movieList.add(0, movie);
++                }else{
++                    movieList.add(movie);
++                }
++            }
++            controller = new HomeController();
++            controller.movieList.addAll(rightOrder);
++            controller.originalMovieList = rightOrder;
++            assertEquals(rightOrder, controller.sortMoviesByTitle(this, "---NO SORTING---"));
++        } catch (Exception e) {
++            e.printStackTrace();
++        }
++    }
++    @Test
++    @Order(4)
++    void is_movie_sorted_by_genre() {
++        try {
++            ObservableList<Movie> movieList = FXCollections.observableArrayList();
++            ObservableList<Movie> movieList2 = FXCollections.observableArrayList();
++            for (int i = 9; i >= 0; i--) {
++                String genre;
++                if(i%2 == 0){
++                    genre = "ACTION";
++                }else {
++                    genre = "DRAMA";
++                }
++                Movie movie = new Movie(null, String.valueOf(i), new String[]{genre}, 0, String.valueOf(i), null, null, null, null, null, 0);
++                movieList.add(movie);
++                if(i%2 == 0){
++                    movieList2.add(movie);
++                }
++            }
++            controller = new HomeController();
++            controller.originalMovieList = movieList;
++            controller.tempSortedMovieList = movieList;
++            assertEquals(movieList2, controller.sortMoviesByGenre(this, "ACTION"));
++        } catch (Exception e) {
++            e.printStackTrace();
++        }
+     }
+ 
+ }
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -4,12 +4,12 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="632c3f87-378d-459f-993b-b51a9090f282" name="Changes" comment="Moritz - changes to Methodes so they can be tested more easy">
++    <list default="true" id="632c3f87-378d-459f-993b-b51a9090f282" name="Changes" comment="Moritz - exception handeling">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Movie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Movie.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/mvnw" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/MovieCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/MovieCard.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/HomeController.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/Semicolon/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/Semicolon/styles.css" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/test/java/com/example/Semicolon/MovieTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/Semicolon/MovieTest.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+@@ -57,30 +57,31 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent">{
+-  &quot;keyToString&quot;: {
+-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;corretto-17&quot;,
+-    &quot;last_opened_file_path&quot;: &quot;S:/FH/Programieren/exercise-5-Ign1tz&quot;,
+-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+-    &quot;project.structure.proportion&quot;: &quot;0.23242188&quot;,
+-    &quot;project.structure.side.proportion&quot;: &quot;0.37834394&quot;,
+-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
++  <component name="PropertiesComponent"><![CDATA[{
++  "keyToString": {
++    "Downloaded.Files.Path.Enabled": "false",
++    "Repository.Attach.Annotations": "false",
++    "Repository.Attach.JavaDocs": "false",
++    "Repository.Attach.Sources": "false",
++    "RunOnceActivity.OpenProjectViewOnStart": "true",
++    "RunOnceActivity.ShowReadmeOnStart": "true",
++    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
++    "WebServerToolWindowFactoryState": "false",
++    "jdk.selected.JAVA_MODULE": "corretto-17",
++    "last_opened_file_path": "S:/FH/Programieren/exercise-5-Ign1tz",
++    "nodejs_package_manager_path": "npm",
++    "project.structure.last.edited": "Libraries",
++    "project.structure.proportion": "0.23242188",
++    "project.structure.side.proportion": "0.37834394",
++    "settings.editor.selected.configurable": "preferences.lookFeel"
+   }
+-}</component>
++}]]></component>
+   <component name="RecentsManager">
+     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+       <recent name="com.example.Semicolon" />
+     </key>
+   </component>
+-  <component name="RunManager" selected="Application.FhmdbApplication">
++  <component name="RunManager" selected="JUnit.MovieTest">
+     <configuration name="FhmdbApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+       <option name="MAIN_CLASS_NAME" value="com.example.Semicolon.FhmdbApplication" />
+       <module name="Semicolon" />
+@@ -159,8 +160,8 @@
+     </configuration>
+     <recent_temporary>
+       <list>
+-        <item itemvalue="Application.FhmdbApplication" />
+         <item itemvalue="JUnit.MovieTest" />
++        <item itemvalue="Application.FhmdbApplication" />
+         <item itemvalue="JUnit.MovieTest.is_movie_sorted_by_genre" />
+         <item itemvalue="JUnit.MovieTest.is_movie_sorted_a_to_z" />
+         <item itemvalue="JUnit.MovieTest.is_movie_sorted_by_a_to_z" />
+@@ -181,7 +182,8 @@
+       <workItem from="1678488412437" duration="5456000" />
+       <workItem from="1678493889304" duration="120000" />
+       <workItem from="1678494015925" duration="2018000" />
+-      <workItem from="1678535960201" duration="9297000" />
++      <workItem from="1678535960201" duration="10217000" />
++      <workItem from="1678615597572" duration="2950000" />
+     </task>
+     <task id="LOCAL-00001" summary="Moritz - rough draft of main page, added Movie Objects">
+       <created>1677798635847</created>
+@@ -204,7 +206,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1678542109434</updated>
+     </task>
+-    <option name="localTasksCounter" value="4" />
++    <task id="LOCAL-00004" summary="Moritz - exception handeling">
++      <created>1678586217065</created>
++      <option name="number" value="00004" />
++      <option name="presentableId" value="LOCAL-00004" />
++      <option name="project" value="LOCAL" />
++      <updated>1678586217065</updated>
++    </task>
++    <option name="localTasksCounter" value="5" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -263,6 +272,7 @@
+     <MESSAGE value="Moritz - rough draft of main page, added Movie Objects" />
+     <MESSAGE value="Moritz - added MovieCards" />
+     <MESSAGE value="Moritz - changes to Methodes so they can be tested more easy" />
+-    <option name="LAST_COMMIT_MESSAGE" value="Moritz - changes to Methodes so they can be tested more easy" />
++    <MESSAGE value="Moritz - exception handeling" />
++    <option name="LAST_COMMIT_MESSAGE" value="Moritz - exception handeling" />
+   </component>
+ </project>
+\ No newline at end of file

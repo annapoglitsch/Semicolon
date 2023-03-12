@@ -76,6 +76,7 @@ public class HomeController implements Initializable {
 
     public void sortMoviesByGenrePrep(ActionEvent event) {
         sortMoviesByGenre(event, genresChoice.getValue());
+        searchField.setText("");
     }
     public ObservableList<Movie> sortMoviesByTitle(ActionEvent event, String keyWord){
         tempSortedMovieList.clear();
