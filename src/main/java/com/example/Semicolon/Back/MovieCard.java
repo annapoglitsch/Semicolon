@@ -18,13 +18,7 @@ public class MovieCard extends ListCell<Movie> {
     protected void updateItem(Movie movie, boolean empty) {
         super.updateItem(movie, empty);
         if(movie != null) {
-            if (movie.id.equals("error-404-Page-Not-Found") || movie.id.equals("error-502-Bad-Gateway-server")) {
-                setGraphic(null);
-                setErrorMessage(movie);
-                return;
-            }
-            if(movie.id.equals("Movie-list-is-empty")){
-                setGraphic(null);
+            if (movie.id.equals("error") || movie.id.equals("Movie-list-is-empty")) {
                 setErrorMessage(movie);
                 return;
             }
