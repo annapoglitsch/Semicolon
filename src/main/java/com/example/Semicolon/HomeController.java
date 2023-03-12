@@ -57,13 +57,10 @@ public class HomeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if (!started) {
             tempSortedMovieList.addAll(originalMovieList);
             movieList.addAll(originalMovieList);
             movieDisplay.setItems(movieList);
             movieDisplay.setCellFactory(movieDisplay -> new MovieCard());
-            started = true;
-        }
         genresChoice.setItems(genres);
         genresChoice.setValue("---ALL GENRES---");
         sortingChoice.setItems(sortingKeywords);

@@ -4,12 +4,15 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
+import java.lang.reflect.Array;
+
 public class MovieCard extends ListCell<Movie> {
 
     private final Label title = new Label();
     private final Label description = new Label();
+    private final Label genres = new Label();
     private final ImageView cover = new ImageView();
-    private final VBox card = new VBox(cover, title, description);
+    private final VBox card = new VBox(cover, title, description, genres);
 
     @Override
     protected void updateItem(Movie movie, boolean empty) {
@@ -37,11 +40,22 @@ public class MovieCard extends ListCell<Movie> {
             }else{
                 description.setText("No description available");
             }
+            String genreList = "";
+            for (int i = 0; i < movie.genres.length; i++){
+                if(i == 0){
+                    genreList = movie.genres[i];
+                }else{
+                    genreList += (", " + movie.genres[i]);
+                }
+            }
+            genres.setText(genreList);
+            genres.getStyleClass().add("description-text-color");
+            genres.setWrapText(true);
             title.getStyleClass().clear();
             title.getStyleClass().add("title-text-color");
+            title.fontProperty().set(title.getFont().font(20));
             description.getStyleClass().clear();
             description.getStyleClass().add("description-text-color");
-            title.fontProperty().set(title.getFont().font(20));
             description.setWrapText(true);
             card.getStyleClass().clear();
             card.getStyleClass().add("cell-border");
