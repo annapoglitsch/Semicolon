@@ -38,7 +38,7 @@ public class HomeController implements Initializable {
 
     @FXML
     private void activateMenu(ActionEvent event) { //make menu slide down/up
-        if(event.getTarget() == advancedOptions) {
+        if(event.getTarget() == advancedOptions || event.getTarget() == genresChoice) {
         TranslateTransition tt = new TranslateTransition();
         tt.setNode(menu);
         tt.setDuration(Duration.millis(500));
