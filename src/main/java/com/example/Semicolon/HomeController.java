@@ -8,7 +8,6 @@ import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
-
 import java.net.URL;
 import java.util.*;
 

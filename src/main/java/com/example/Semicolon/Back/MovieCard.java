@@ -1,10 +1,9 @@
 package com.example.Semicolon.Back;
+
 import javafx.geometry.*;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-
-import java.lang.reflect.Array;
 
 public class MovieCard extends ListCell<Movie> {
 
