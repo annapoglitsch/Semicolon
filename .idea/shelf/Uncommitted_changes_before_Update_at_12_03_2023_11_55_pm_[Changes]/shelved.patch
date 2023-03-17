@@ -1,0 +1,226 @@
+Index: src/main/java/com/example/Semicolon/HomeController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.Semicolon;\r\n\r\nimport com.example.Semicolon.Back.*;\r\nimport javafx.animation.TranslateTransition;\r\nimport javafx.collections.*;\r\nimport javafx.event.ActionEvent;\r\nimport javafx.fxml.*;\r\nimport javafx.scene.control.*;\r\nimport javafx.scene.layout.GridPane;\r\nimport javafx.util.Duration;\r\nimport java.net.URL;\r\nimport java.util.*;\r\n\r\npublic class HomeController implements Initializable {\r\n    @FXML\r\n    GridPane HomeGrid, menu;\r\n    @FXML\r\n    Button advancedOptions;\r\n    @FXML\r\n    ChoiceBox<String> genresChoice, sortingChoice;\r\n    @FXML\r\n    TextField searchField;\r\n    @FXML\r\n    ListView movieDisplay;\r\n    private String[] allGenres = new String[]{\"---ALL GENRES---\", \"ACTION\", \"ADVENTURE\", \"ANIMATION\", \"BIOGRAPHY\", \"COMEDY\",\r\n            \"CRIME\", \"DRAMA\", \"DOCUMENTARY\", \"FAMILY\", \"FANTASY\", \"HISTORY\", \"HORROR\",\r\n            \"MUSICAL\", \"MYSTERY\", \"ROMANCE\", \"SCIENCE_FICTION\", \"SPORT\", \"THRILLER\", \"WAR\",\r\n            \"WESTERN\"};\r\n\r\n    private Movie movie = new Movie(), emptyMovie = new Movie(\"Movie-list-is-empty\", \"zzzzzzzzzzzzzzzzzzzzz\", allGenres, 0, \"\", \"No Movies\", 0, null, null, null, 0);\r\n    public List<Movie> originalMovieList = movie.initializeMovies(\"https://prog2.fh-campuswien.ac.at/movies\");\r\n    //public List<Movie> originalMovieList = movie.staticMovieList();\r\n    public boolean menuActive = false, sortedByGenre = false, sortedByTitle = false;\r\n    public ObservableList<Movie> movieList = FXCollections.observableArrayList();\r\n    private ObservableList<String> genres = FXCollections.observableList(Arrays.asList(allGenres));\r\n    public ObservableList<String> sortingKeywords = FXCollections.observableList(Arrays.asList(\"---NO SORTING---\", \"A-Z\", \"Z-A\"));\r\n\r\n\r\n    @FXML\r\n    private void activateMenu(ActionEvent event) { //make menu slide down/up\r\n        if(event.getTarget() == advancedOptions) {\r\n        TranslateTransition tt = new TranslateTransition();\r\n        tt.setNode(menu);\r\n        tt.setDuration(Duration.millis(500));\r\n            if (menuActive) {\r\n                tt.setFromY(menu.getHeight());\r\n                tt.setToY(0);\r\n                menu.setDisable(true);\r\n                menuActive = false;\r\n            } else {\r\n                tt.setFromY(0);\r\n                tt.setToY(menu.getHeight());\r\n                menu.setDisable(false);\r\n                menuActive = true;\r\n            }\r\n        tt.play();\r\n        }\r\n    }\r\n\r\n    @Override\r\n    public void initialize(URL url, ResourceBundle resourceBundle) {\r\n        movieList.addAll(originalMovieList);\r\n        movieDisplay.setItems(movieList);\r\n        movieDisplay.setCellFactory(movieDisplay -> new MovieCard());\r\n        if(originalMovieList.size() > 1) {\r\n            searchField.setPromptText(originalMovieList.get(new Random().nextInt(originalMovieList.size() - 1)).title);\r\n        }else if(!Objects.equals(originalMovieList.get(0).id, \"error\")){\r\n            searchField.setPromptText(originalMovieList.get(0).title);\r\n        }else {\r\n            searchField.setPromptText(\"Search\");\r\n        }\r\n        genresChoice.setItems(genres);\r\n        genresChoice.setValue(\"---ALL GENRES---\");\r\n        sortingChoice.setItems(sortingKeywords);\r\n        sortingChoice.setValue(\"---NO SORTING---\");\r\n        sortingChoice.setOnAction(this::sortMoviesByTitlePreparation);  //choiceBox sorting set on action\r\n        genresChoice.setOnAction(this::sortMoviesByGenrePrep);          //choiceBox genre set on action\r\n        searchField.setOnKeyTyped(event -> {\r\n            searchMoviePrep();\r\n        });\r\n    }\r\n\r\n    public void sortMoviesByTitlePreparation(ActionEvent event) {   //prep so that choiceBox sorting is not null\r\n        sortMoviesByTitle(event, sortingChoice.getValue());\r\n    }\r\n\r\n    public void sortMoviesByGenrePrep(ActionEvent event) {      //prep so that choiceBox genre is not null\r\n        sortMoviesByGenre(event, genresChoice.getValue());\r\n        searchField.setText(\"\");\r\n    }\r\n\r\n    public ObservableList<Movie> sortMoviesByTitle(ActionEvent event, String keyWord) {\r\n        if (keyWord.equals(\"A-Z\")) {\r\n            sortedByTitle = true;\r\n            Collections.sort(movieList, new Comparator<Movie>() {\r\n                @Override\r\n                public int compare(Movie o1, Movie o2) { //compare class compare two movie title\r\n                    return o1.title.compareTo(o2.title);\r\n                }\r\n            });\r\n            return movieList;\r\n        } else if (keyWord.equals(\"Z-A\")) {\r\n            sortedByTitle = true;\r\n            Collections.sort(movieList, new Comparator<Movie>() {\r\n                @Override\r\n                public int compare(Movie o1, Movie o2) {\r\n                    return o2.title.compareTo(o1.title);\r\n                }                                       //same structure as a-z but o1 and o2 changed position\r\n            });\r\n            return movieList;\r\n        } else if (keyWord.equals(\"---NO SORTING---\")) { //if you want to undo sorting mmovieList is originalList\r\n            sortedByTitle = false;\r\n            movieList.clear();\r\n            movieList.addAll(originalMovieList);\r\n            if (sortingChoice != null) {\r\n                sortMoviesByGenrePrep(event);\r\n            }\r\n            return movieList;\r\n        }\r\n        if (movieList.size() == 0) {\r\n            movieList.add(emptyMovie);\r\n        }\r\n        return null;\r\n\r\n    }\r\n\r\n    public ObservableList<Movie> sortMoviesByGenre(ActionEvent event, String genre) {\r\n        ObservableList<Movie> tempList = FXCollections.observableArrayList();\r\n        if (!genre.equals(\"---ALL GENRES---\")) {\r\n            sortedByGenre = true;\r\n            for (int j = 0; j < movieList.size(); j++) {\r\n                for (int i = 0; i < movieList.get(j).genres.length; i++) {  //get genre and add into list\r\n                    if (genre.equals(movieList.get(j).genres[i])) {\r\n                        tempList.add(movieList.get(j));\r\n                        break;\r\n                    }\r\n                }\r\n            }\r\n            movieList.clear();\r\n            movieList.addAll(tempList);\r\n        } else {\r\n            sortedByGenre = false;\r\n            movieList.clear();\r\n            movieList.addAll(originalMovieList);\r\n        }\r\n        if (sortedByTitle) {\r\n            sortMoviesByTitlePreparation(event);\r\n        }\r\n        if (movieList.size() == 0) {\r\n            movieList.add(emptyMovie);\r\n        }\r\n        if (menu != null) {\r\n            activateMenu(event);\r\n        }\r\n        return movieList;\r\n    }\r\n\r\n    @FXML\r\n    public void searchMoviePrep() {\r\n        searchMovie(searchField.getText().toLowerCase()); //so that searchField is not null\r\n    }\r\n\r\n    public ObservableList<Movie> searchMovie(String temp) {\r\n        movieList.clear();\r\n        for (int i = 0; i < originalMovieList.size(); i++) {\r\n            if (originalMovieList.get(i).description.toLowerCase().contains(temp) ||\r\n                    originalMovieList.get(i).title.toLowerCase().contains(temp)) {\r\n                movieList.add(originalMovieList.get(i));\r\n            }\r\n        }\r\n        if (movieList.size() == 0) {\r\n            movieList.add(emptyMovie);\r\n        }\r\n\r\n        return movieList;\r\n    }\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/Semicolon/HomeController.java b/src/main/java/com/example/Semicolon/HomeController.java
+--- a/src/main/java/com/example/Semicolon/HomeController.java	(revision 1d2ebaf9b5927268e20cf98b1067f354e0ef3207)
++++ b/src/main/java/com/example/Semicolon/HomeController.java	(date 1678661409845)
+@@ -143,7 +143,7 @@
+             movieList.clear();
+             movieList.addAll(originalMovieList);
+         }
+-        if (sortedByTitle) {
++        if (sortedByTitle && sortingChoice != null) {
+             sortMoviesByTitlePreparation(event);
+         }
+         if (movieList.size() == 0) {
+Index: src/test/java/com/example/Semicolon/MovieTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.Semicolon;\r\n\r\nimport com.example.Semicolon.Back.Movie;\r\nimport javafx.collections.*;\r\nimport javafx.event.ActionEvent;\r\nimport org.junit.jupiter.api.*;\r\n\r\nimport java.util.*;\r\n\r\nimport static org.junit.jupiter.api.Assertions.assertEquals;\r\n\r\nclass MovieTest extends ActionEvent {\r\n\r\n    HomeController controller;\r\n    Movie movie = new Movie();\r\n\r\n    @Test\r\n    @Order(1)\r\n    void has_web_list_changed() {\r\n        try {\r\n            List<Movie> correct = movie.staticMovieList();\r\n            List<Movie> movieList = movie.initializeMovies(\"https://prog2.fh-campuswien.ac.at/movies\");\r\n            if (correct.size() == movieList.size()) {\r\n                for (int i = 0; i < correct.size(); i++) {\r\n                    if (!Objects.equals(correct.get(i).id, movieList.get(i).id)) {\r\n                        assertEquals(correct.get(i).id, movieList.get(i).id);\r\n                    }\r\n                }\r\n            }\r\n        } catch (Exception e) {\r\n            e.printStackTrace();\r\n        }\r\n    }\r\n\r\n    @Test\r\n    @Order(2)\r\n    void url_is_worng() {\r\n        try {\r\n            List<Movie> movieList = movie.initializeMovies(\"wrongURL\");\r\n            assertEquals(\"error\", movieList.get(0).id);\r\n        } catch (Exception e) {\r\n            e.printStackTrace();\r\n        }\r\n    }\r\n\r\n    @Test\r\n    @Order(3)\r\n    void are_movies_sorted_a_to_z() {\r\n        try {\r\n            ObservableList<Movie> movieList = FXCollections.observableArrayList();\r\n            ObservableList<Movie> rightOrder = FXCollections.observableArrayList();\r\n            for (int i = 9; i >= 0; i--) {\r\n                Movie movie = new Movie(null, String.valueOf(i), new String[]{\"ACTION\", \"DRAMA\"}, 0, String.valueOf(i), null, 0, null, null, null, 0);\r\n                movieList.add(movie);\r\n                if (i != 10) {\r\n                    rightOrder.add(0, movie);\r\n                } else {\r\n                    rightOrder.add(movie);\r\n                }\r\n            }\r\n            controller = new HomeController();\r\n            controller.movieList.addAll(movieList);\r\n            assertEquals(rightOrder, controller.sortMoviesByTitle(this, \"A-Z\"));\r\n        } catch (Exception e) {\r\n            e.printStackTrace();\r\n        }\r\n    }\r\n\r\n    @Test\r\n    @Order(4)\r\n    void are_movies_sorted_z_to_a() {\r\n        try {\r\n            ObservableList<Movie> rightOrder = FXCollections.observableArrayList();\r\n            ObservableList<Movie> movieList = FXCollections.observableArrayList();\r\n            for (int i = 9; i >= 0; i--) {\r\n                Movie movie = new Movie(null, String.valueOf(i), new String[]{\"ACTION\", \"DRAMA\"}, 0, String.valueOf(i), null, 0, null, null, null, 0);\r\n                rightOrder.add(movie);\r\n                if (i != 10) {\r\n                    movieList.add(0, movie);\r\n                } else {\r\n                    movieList.add(movie);\r\n                }\r\n            }\r\n            controller = new HomeController();\r\n            controller.movieList.addAll(movieList);\r\n            assertEquals(rightOrder, controller.sortMoviesByTitle(this, \"Z-A\"));\r\n        } catch (Exception e) {\r\n            e.printStackTrace();\r\n        }\r\n    }\r\n\r\n    @Test\r\n    @Order(5)\r\n    void is_movie_sorting_reseted() {\r\n        try {\r\n            ObservableList<Movie> rightOrder = FXCollections.observableArrayList();\r\n            ObservableList<Movie> movieList = FXCollections.observableArrayList();\r\n            for (int i = 9; i >= 0; i--) {\r\n                Movie movie = new Movie(null, String.valueOf(i), new String[]{\"ACTION\", \"DRAMA\"}, 0, String.valueOf(i), null, 0, null, null, null, 0);\r\n                rightOrder.add(movie);\r\n                if (i != 10) {\r\n                    movieList.add(0, movie);\r\n                } else {\r\n                    movieList.add(movie);\r\n                }\r\n            }\r\n            controller = new HomeController();\r\n            controller.movieList.addAll(rightOrder);\r\n            controller.originalMovieList = rightOrder;\r\n            assertEquals(rightOrder, controller.sortMoviesByTitle(this, \"---NO SORTING---\"));\r\n        } catch (Exception e) {\r\n            e.printStackTrace();\r\n        }\r\n    }\r\n\r\n    @Test\r\n    @Order(6)\r\n    void are_movies_sorted_by_genre() {\r\n        try {\r\n            ObservableList<Movie> movieList = FXCollections.observableArrayList();\r\n            ObservableList<Movie> movieList2 = FXCollections.observableArrayList();\r\n            for (int i = 9; i >= 0; i--) {\r\n                String genre;\r\n                if (i % 2 == 0) {\r\n                    genre = \"ACTION\";\r\n                } else {\r\n                    genre = \"DRAMA\";\r\n                }\r\n                Movie movie = new Movie(null, String.valueOf(i), new String[]{genre}, 0, String.valueOf(i), null, 0, null, null, null, 0);\r\n                movieList.add(movie);\r\n                if (i % 2 == 0) {\r\n                    movieList2.add(movie);\r\n                }\r\n            }\r\n            controller = new HomeController();\r\n            controller.movieList = movieList;\r\n            assertEquals(movieList2, controller.sortMoviesByGenre(this, \"ACTION\"));\r\n        } catch (Exception e) {\r\n            e.printStackTrace();\r\n        }\r\n    }\r\n\r\n    @Test\r\n    @Order(7)\r\n    void empty_movie_list_after_sorted_by_genre() {\r\n        try {\r\n            Movie empty = new Movie(\"Movie-list-is-empty\", \"zzzzzzzzzzzzzzzzzzzzz\", null, 0, \"\", \"No Movies\", 0, null, null, null, 0);\r\n            ObservableList<Movie> movieList = FXCollections.observableArrayList();\r\n            for (int i = 9; i >= 0; i--) {\r\n                String genre;\r\n                if (i % 2 == 0) {\r\n                    genre = \"ACTION\";\r\n                } else {\r\n                    genre = \"DRAMA\";\r\n                }\r\n                Movie movie = new Movie(null, String.valueOf(i), new String[]{genre}, 0, String.valueOf(i), null, 0, null, null, null, 0);\r\n                movieList.add(movie);\r\n            }\r\n            controller = new HomeController();\r\n            controller.movieList = movieList;\r\n            assertEquals(empty.id, controller.sortMoviesByGenre(this, \"ANIMATION\").get(0).id);\r\n        } catch (Exception e) {\r\n            e.printStackTrace();\r\n        }\r\n    }\r\n\r\n    @Test\r\n    @Order(8)\r\n    void empty_movie_list_after_search() {\r\n        try {\r\n            Movie empty = new Movie(\"Movie-list-is-empty\", \"zzzzzzzzzzzzzzzzzzzzz\", null, 0, \"\", \"No Movies\", 0, null, null, null, 0);\r\n            ObservableList<Movie> movieList = FXCollections.observableArrayList();\r\n            for (int i = 9; i >= 0; i--) {\r\n                String genre;\r\n                if (i % 2 == 0) {\r\n                    genre = \"ACTION\";\r\n                } else {\r\n                    genre = \"DRAMA\";\r\n                }\r\n                Movie movie = new Movie(null, String.valueOf(i), new String[]{genre}, 0, String.valueOf(i), null, 0, null, null, null, 0);\r\n                movieList.add(movie);\r\n            }\r\n            controller = new HomeController();\r\n            controller.movieList = movieList;\r\n            assertEquals(empty.id, controller.searchMovie(\"not part of the title\").get(0).id);\r\n        } catch (Exception e) {\r\n            e.printStackTrace();\r\n        }\r\n    }\r\n\r\n    @Test\r\n    @Order(9)\r\n    void does_searchMethod_search_for_the_right_movies() {\r\n        HomeController controller;\r\n        String[] movieString = new String[10];\r\n        movieString[0] = \"Hello\";\r\n        movieString[1] = \"World\";\r\n        movieString[2] = \"This is a test\";\r\n        movieString[3] = \"This is not a test\";\r\n        movieString[4] = \"Semicolon\";\r\n        movieString[5] = \"Exercise one\";\r\n        movieString[6] = \"Bye\";\r\n        movieString[7] = \"Pizza\";\r\n        movieString[8] = \"Soup\";\r\n        movieString[9] = \"I am tired\";\r\n\r\n        try {\r\n            ObservableList<Movie> movieList = FXCollections.observableArrayList();\r\n            ObservableList<Movie> rightOrder = FXCollections.observableArrayList();\r\n            for (int i = 9; i >= 0; i--) {\r\n                Movie movie = new Movie(null, movieString[i], new String[]{\"ACTION\", \"DRAMA\"}, 0, String.valueOf(i), null, 0, null, null, null, 0);\r\n                movieList.add(movie);\r\n                if (movieString[i].toLowerCase().contains(\"this\")) {\r\n                    rightOrder.add(movie);\r\n                }\r\n            }\r\n            controller = new HomeController();\r\n            controller.movieList.addAll(movieList);\r\n            controller.originalMovieList.addAll(movieList);\r\n            assertEquals(rightOrder, controller.searchMovie(\"this\"));\r\n        } catch (Exception e) {\r\n            e.printStackTrace();\r\n        }\r\n    }\r\n    @Test\r\n    @Order(10)\r\n    void genre_and_sort_method_at_the_same_time() {\r\n\r\n        HomeController controller = new HomeController();\r\n        ObservableList<Movie> movieList = FXCollections.observableArrayList();\r\n        ObservableList<Movie> movieList2 = FXCollections.observableArrayList();\r\n    try {\r\n        for (int i = 9; i >= 0; i--) {\r\n            String genre;\r\n            if (i % 2 == 0) {\r\n                genre = \"ACTION\";\r\n            } else {\r\n                genre = \"DRAMA\";\r\n            }\r\n            Movie movie = new Movie(null, String.valueOf(i), new String[]{genre}, 0, String.valueOf(i), null, 0, null, null, null, 0);\r\n            movieList.add(movie);\r\n            if (i != 10) {\r\n                movieList2.add(0, movie);\r\n            } else {\r\n                movieList2.add(movie);\r\n            }\r\n        }\r\n\r\n        controller.movieList.addAll(movieList);\r\n        assertEquals(movieList2, controller.sortMoviesByTitle(this, \"A-Z\"));\r\n        assertEquals(movieList2, controller.sortMoviesByGenre(this, \"ACTION\"));\r\n    }catch (Exception e){\r\n        e.printStackTrace();\r\n    }\r\n    }\r\n}\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/com/example/Semicolon/MovieTest.java b/src/test/java/com/example/Semicolon/MovieTest.java
+--- a/src/test/java/com/example/Semicolon/MovieTest.java	(revision 1d2ebaf9b5927268e20cf98b1067f354e0ef3207)
++++ b/src/test/java/com/example/Semicolon/MovieTest.java	(date 1678661504026)
+@@ -191,7 +191,6 @@
+     @Test
+     @Order(9)
+     void does_searchMethod_search_for_the_right_movies() {
+-        HomeController controller;
+         String[] movieString = new String[10];
+         movieString[0] = "Hello";
+         movieString[1] = "World";
+@@ -206,52 +205,54 @@
+ 
+         try {
+             ObservableList<Movie> movieList = FXCollections.observableArrayList();
+-            ObservableList<Movie> rightOrder = FXCollections.observableArrayList();
++            ObservableList<Movie> correct = FXCollections.observableArrayList();
+             for (int i = 9; i >= 0; i--) {
+                 Movie movie = new Movie(null, movieString[i], new String[]{"ACTION", "DRAMA"}, 0, String.valueOf(i), null, 0, null, null, null, 0);
+                 movieList.add(movie);
+                 if (movieString[i].toLowerCase().contains("this")) {
+-                    rightOrder.add(movie);
++                    correct.add(movie);
+                 }
+             }
+             controller = new HomeController();
+             controller.movieList.addAll(movieList);
+             controller.originalMovieList.addAll(movieList);
+-            assertEquals(rightOrder, controller.searchMovie("this"));
++            assertEquals(correct, controller.searchMovie("this"));
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
+     }
++
+     @Test
+     @Order(10)
+     void genre_and_sort_method_at_the_same_time() {
+-
+-        HomeController controller = new HomeController();
++        controller = new HomeController();
+         ObservableList<Movie> movieList = FXCollections.observableArrayList();
+         ObservableList<Movie> movieList2 = FXCollections.observableArrayList();
+-    try {
+-        for (int i = 9; i >= 0; i--) {
+-            String genre;
+-            if (i % 2 == 0) {
+-                genre = "ACTION";
+-            } else {
+-                genre = "DRAMA";
+-            }
+-            Movie movie = new Movie(null, String.valueOf(i), new String[]{genre}, 0, String.valueOf(i), null, 0, null, null, null, 0);
+-            movieList.add(movie);
+-            if (i != 10) {
+-                movieList2.add(0, movie);
+-            } else {
+-                movieList2.add(movie);
+-            }
+-        }
++        try {
++            for (int i = 9; i >= 0; i--) {
++                String genre;
++                if (i % 2 == 0) {
++                    genre = "ACTION";
++                } else {
++                    genre = "DRAMA";
++                }
++                Movie movie = new Movie(null, String.valueOf(i), new String[]{genre}, 0, String.valueOf(i), null, 0, null, null, null, 0);
++                movieList.add(movie);
++                if (i % 2 == 0) {
++                    if (i != 10) {
++                        movieList2.add(0, movie);
++                    } else {
++                        movieList2.add(movie);
++                    }
++                }
++            }
+ 
+-        controller.movieList.addAll(movieList);
+-        assertEquals(movieList2, controller.sortMoviesByTitle(this, "A-Z"));
+-        assertEquals(movieList2, controller.sortMoviesByGenre(this, "ACTION"));
+-    }catch (Exception e){
+-        e.printStackTrace();
+-    }
++            controller.movieList.addAll(movieList);
++            controller.sortMoviesByTitle(this, "A-Z");
++            assertEquals(movieList2, controller.sortMoviesByGenre(this, "ACTION"));
++        } catch (Exception e) {
++            e.printStackTrace();
++        }
+     }
+ }
+ 
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"632c3f87-378d-459f-993b-b51a9090f282\" name=\"Changes\" comment=\"Anna - local changes after pull\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_05_03_2023_12_14_pm_[Changes]/shelved.patch\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_05_03_2023_12_14_pm__Changes_.xml\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_03_2023_03_21_pm__Changes_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_03_2023_03_21_pm__Changes_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_03_2023_08_32_pm__Changes_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_03_2023_08_32_pm__Changes_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/test/java/com/example/Semicolon/MovieTest.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/test/java/com/example/Semicolon/MovieTest.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"FxmlFile\" />\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <favorite-branches>\r\n      <branch-storage>\r\n        <map>\r\n          <entry type=\"LOCAL\">\r\n            <value>\r\n              <list>\r\n                <branch-info repo=\"$PROJECT_DIR$\" source=\"main\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n        </map>\r\n      </branch-storage>\r\n    </favorite-branches>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"MavenImportPreferences\">\r\n    <option name=\"generalSettings\">\r\n      <MavenGeneralSettings>\r\n        <option name=\"mavenHome\" value=\"Use Maven wrapper\" />\r\n        <option name=\"useMavenConfig\" value=\"true\" />\r\n      </MavenGeneralSettings>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2MTS9OnWH3J9sJFu0Q4wx3LULS4\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,\r\n    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,\r\n    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,\r\n    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,\r\n    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;corretto-17&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;S:/FH/Programieren/exercise-5-Ign1tz&quot;,\r\n    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,\r\n    &quot;project.structure.proportion&quot;: &quot;0.23242188&quot;,\r\n    &quot;project.structure.side.proportion&quot;: &quot;0.37834394&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"MoveClassesOrPackagesDialog.RECENTS_KEY\">\r\n      <recent name=\"com.example.Semicolon\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"JUnit.MovieTest.genre_and_sort_method_at_the_same_time\">\r\n    <configuration name=\"FhmdbApplication\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.example.Semicolon.FhmdbApplication\" />\r\n      <module name=\"Semicolon\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.example.Semicolon.Back.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"MovieTest\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"Semicolon\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.example.Semicolon.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <option name=\"PACKAGE_NAME\" value=\"com.example.Semicolon\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.example.Semicolon.MovieTest\" />\r\n      <option name=\"TEST_OBJECT\" value=\"class\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"MovieTest.genre_and_sort_method_at_the_same_time\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"Semicolon\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.example.Semicolon.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <option name=\"PACKAGE_NAME\" value=\"com.example.Semicolon\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.example.Semicolon.MovieTest\" />\r\n      <option name=\"METHOD_NAME\" value=\"genre_and_sort_method_at_the_same_time\" />\r\n      <option name=\"TEST_OBJECT\" value=\"method\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"MovieTest.is_movie_sorted_a_to_z\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"Semicolon\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.example.Semicolon.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <option name=\"PACKAGE_NAME\" value=\"com.example.Semicolon\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.example.Semicolon.MovieTest\" />\r\n      <option name=\"METHOD_NAME\" value=\"is_movie_sorted_a_to_z\" />\r\n      <option name=\"TEST_OBJECT\" value=\"method\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"MovieTest.is_movie_sorted_by_genre\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"Semicolon\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.example.Semicolon.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <option name=\"PACKAGE_NAME\" value=\"com.example.Semicolon\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.example.Semicolon.MovieTest\" />\r\n      <option name=\"METHOD_NAME\" value=\"is_movie_sorted_by_genre\" />\r\n      <option name=\"TEST_OBJECT\" value=\"method\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <list>\r\n      <item itemvalue=\"Application.FhmdbApplication\" />\r\n      <item itemvalue=\"JUnit.MovieTest.genre_and_sort_method_at_the_same_time\" />\r\n      <item itemvalue=\"JUnit.MovieTest\" />\r\n      <item itemvalue=\"JUnit.MovieTest.is_movie_sorted_a_to_z\" />\r\n      <item itemvalue=\"JUnit.MovieTest.is_movie_sorted_by_genre\" />\r\n    </list>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"JUnit.MovieTest.genre_and_sort_method_at_the_same_time\" />\r\n        <item itemvalue=\"JUnit.MovieTest\" />\r\n        <item itemvalue=\"JUnit.MovieTest.is_movie_sorted_by_genre\" />\r\n        <item itemvalue=\"Application.FhmdbApplication\" />\r\n        <item itemvalue=\"JUnit.MovieTest.is_movie_sorted_a_to_z\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"632c3f87-378d-459f-993b-b51a9090f282\" name=\"Changes\" comment=\"\" />\r\n      <created>1677789926911</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1677789926911</updated>\r\n      <workItem from=\"1677789928233\" duration=\"354000\" />\r\n      <workItem from=\"1677790285601\" duration=\"9080000\" />\r\n      <workItem from=\"1677865967266\" duration=\"5361000\" />\r\n      <workItem from=\"1678488412437\" duration=\"5456000\" />\r\n      <workItem from=\"1678493889304\" duration=\"120000\" />\r\n      <workItem from=\"1678494015925\" duration=\"2018000\" />\r\n      <workItem from=\"1678535960201\" duration=\"9297000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"Moritz - rough draft of main page, added Movie Objects\">\r\n      <created>1677798635847</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1677798635847</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"Moritz - added MovieCards\">\r\n      <created>1677872083019</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1677872083019</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"Moritz - changes to Methodes so they can be tested more easy\">\r\n      <created>1678542109434</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1678542109434</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"Anna - local changes after pull\">\r\n      <created>1678632884774</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1678632884774</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"5\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State>\r\n              <option name=\"FILTERS\">\r\n                <map>\r\n                  <entry key=\"branch\">\r\n                    <value>\r\n                      <list>\r\n                        <option value=\"origin/main\" />\r\n                      </list>\r\n                    </value>\r\n                  </entry>\r\n                </map>\r\n              </option>\r\n            </State>\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_FILTERS\">\r\n      <map>\r\n        <entry key=\"Branch\">\r\n          <value>\r\n            <list>\r\n              <RecentGroup>\r\n                <option name=\"FILTER_VALUES\">\r\n                  <option value=\"HEAD\" />\r\n                </option>\r\n              </RecentGroup>\r\n            </list>\r\n          </value>\r\n        </entry>\r\n        <entry key=\"User\">\r\n          <value>\r\n            <list>\r\n              <RecentGroup>\r\n                <option name=\"FILTER_VALUES\">\r\n                  <option value=\"*\" />\r\n                </option>\r\n              </RecentGroup>\r\n            </list>\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"Moritz - rough draft of main page, added Movie Objects\" />\r\n    <MESSAGE value=\"Moritz - added MovieCards\" />\r\n    <MESSAGE value=\"Moritz - changes to Methodes so they can be tested more easy\" />\r\n    <MESSAGE value=\"Anna - local changes after pull\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Anna - local changes after pull\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 1d2ebaf9b5927268e20cf98b1067f354e0ef3207)
++++ b/.idea/workspace.xml	(date 1678661592020)
+@@ -5,11 +5,8 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="632c3f87-378d-459f-993b-b51a9090f282" name="Changes" comment="Anna - local changes after pull">
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_05_03_2023_12_14_pm_[Changes]/shelved.patch" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_05_03_2023_12_14_pm__Changes_.xml" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_03_2023_03_21_pm__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_03_2023_03_21_pm__Changes_.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_03_2023_08_32_pm__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_03_2023_08_32_pm__Changes_.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/HomeController.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/test/java/com/example/Semicolon/MovieTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/Semicolon/MovieTest.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+@@ -109,7 +106,7 @@
+         <option name="Make" enabled="true" />
+       </method>
+     </configuration>
+-    <configuration name="MovieTest.genre_and_sort_method_at_the_same_time" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
++    <configuration name="MovieTest.does_searchMethod_search_for_the_right_movies" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+       <module name="Semicolon" />
+       <extension name="coverage">
+         <pattern>
+@@ -119,13 +116,13 @@
+       </extension>
+       <option name="PACKAGE_NAME" value="com.example.Semicolon" />
+       <option name="MAIN_CLASS_NAME" value="com.example.Semicolon.MovieTest" />
+-      <option name="METHOD_NAME" value="genre_and_sort_method_at_the_same_time" />
++      <option name="METHOD_NAME" value="does_searchMethod_search_for_the_right_movies" />
+       <option name="TEST_OBJECT" value="method" />
+       <method v="2">
+         <option name="Make" enabled="true" />
+       </method>
+     </configuration>
+-    <configuration name="MovieTest.is_movie_sorted_a_to_z" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
++    <configuration name="MovieTest.genre_and_sort_method_at_the_same_time" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+       <module name="Semicolon" />
+       <extension name="coverage">
+         <pattern>
+@@ -135,7 +132,7 @@
+       </extension>
+       <option name="PACKAGE_NAME" value="com.example.Semicolon" />
+       <option name="MAIN_CLASS_NAME" value="com.example.Semicolon.MovieTest" />
+-      <option name="METHOD_NAME" value="is_movie_sorted_a_to_z" />
++      <option name="METHOD_NAME" value="genre_and_sort_method_at_the_same_time" />
+       <option name="TEST_OBJECT" value="method" />
+       <method v="2">
+         <option name="Make" enabled="true" />
+@@ -161,16 +158,16 @@
+       <item itemvalue="Application.FhmdbApplication" />
+       <item itemvalue="JUnit.MovieTest.genre_and_sort_method_at_the_same_time" />
+       <item itemvalue="JUnit.MovieTest" />
+-      <item itemvalue="JUnit.MovieTest.is_movie_sorted_a_to_z" />
++      <item itemvalue="JUnit.MovieTest.does_searchMethod_search_for_the_right_movies" />
+       <item itemvalue="JUnit.MovieTest.is_movie_sorted_by_genre" />
+     </list>
+     <recent_temporary>
+       <list>
+         <item itemvalue="JUnit.MovieTest.genre_and_sort_method_at_the_same_time" />
++        <item itemvalue="Application.FhmdbApplication" />
++        <item itemvalue="JUnit.MovieTest.does_searchMethod_search_for_the_right_movies" />
+         <item itemvalue="JUnit.MovieTest" />
+         <item itemvalue="JUnit.MovieTest.is_movie_sorted_by_genre" />
+-        <item itemvalue="Application.FhmdbApplication" />
+-        <item itemvalue="JUnit.MovieTest.is_movie_sorted_a_to_z" />
+       </list>
+     </recent_temporary>
+   </component>
+@@ -211,14 +208,7 @@
+       <option name="project" value="LOCAL" />
+       <updated>1678542109434</updated>
+     </task>
+-    <task id="LOCAL-00004" summary="Anna - local changes after pull">
+-      <created>1678632884774</created>
+-      <option name="number" value="00004" />
+-      <option name="presentableId" value="LOCAL-00004" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1678632884774</updated>
+-    </task>
+-    <option name="localTasksCounter" value="5" />
++    <option name="localTasksCounter" value="4" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -277,7 +267,10 @@
+     <MESSAGE value="Moritz - rough draft of main page, added Movie Objects" />
+     <MESSAGE value="Moritz - added MovieCards" />
+     <MESSAGE value="Moritz - changes to Methodes so they can be tested more easy" />
+-    <MESSAGE value="Anna - local changes after pull" />
+-    <option name="LAST_COMMIT_MESSAGE" value="Anna - local changes after pull" />
++    <option name="LAST_COMMIT_MESSAGE" value="Moritz - changes to Methodes so they can be tested more easy" />
++  </component>
++  <component name="XSLT-Support.FileAssociations.UIState">
++    <expand />
++    <select />
+   </component>
+ </project>
+\ No newline at end of file
