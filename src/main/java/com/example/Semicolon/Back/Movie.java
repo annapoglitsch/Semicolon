@@ -2,16 +2,19 @@ package com.example.Semicolon.Back;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
 import java.io.*;
 import java.net.*;
+import java.nio.charset.Charset;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Movie {
     public String id, title, description, imgUrl;
     public String[] genres, directors, writers, cast;
     public double rating, releaseYear, length;
 
-    public Movie(String id, String title, String[] genres, double releaseYear, String description, String imgUrl, double length, String[] directors, String[] writers, String[] cast, double rating){
+    public Movie(String id, String title, String[] genres, double releaseYear, String description, String imgUrl, double length, String[] directors, String[] writers, String[] cast, double rating) {
         this.id = id;
         this.title = title;
         this.genres = genres;
@@ -24,7 +27,29 @@ public class Movie {
         this.cast = cast;
         this.rating = rating;
     }
-    public Movie(){}
+
+    public Movie() {
+    }
+
+    public List<Movie> initializeMoviesNew(String path) {
+        List<Movie> movieList;
+        URL url;
+        try {
+            url = new URL(path);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            String temp = new BufferedReader(new InputStreamReader(connection.getInputStream(), Charset.defaultCharset())).lines().collect(Collectors.joining("\n"));
+            movieList = new Gson().fromJson(temp, new TypeToken<List<Movie>>(){}.getType());
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        } catch (ProtocolException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return movieList;
+    }
+
     public List<Movie> initializeMovies(String path) {
         List<Movie> movieList = new ArrayList<>();
         String[] allGenres = new String[]{"---ALL GENRES---", "ACTION", "ADVENTURE", "ANIMATION", "BIOGRAPHY", "COMEDY",
@@ -35,22 +60,24 @@ public class Movie {
             URL url = new URL(path);
             Scanner scanner = new Scanner(url.openStream());
             String temp = "";
-            while(scanner.hasNext()){ //scan the webpage and save it as a string
+            while (scanner.hasNext()) { //scan the webpage and save it as a string
                 temp += scanner.nextLine();
             }
-            movieList = new Gson().fromJson(temp, new TypeToken<List<Movie>>() {}.getType()); // get json from string
+            movieList = new Gson().fromJson(temp, new TypeToken<List<Movie>>() {
+            }.getType()); // get json from string
             return movieList;
-        }catch (FileNotFoundException | MalformedURLException f){ // url not valid
+        } catch (FileNotFoundException | MalformedURLException f) { // url not valid
             movieList.add(new Movie("error", " ", allGenres, 0, " ", "Error-404", 0, null, null, null, 0));
             return movieList;
-        } catch (UnknownHostException o){ //no internet
-                movieList.add(new Movie("error", " ", allGenres, 0, " ", "Error-502", 0, null, null, null, 0));
+        } catch (UnknownHostException o) { //no internet
+            movieList.add(new Movie("error", " ", allGenres, 0, " ", "Error-502", 0, null, null, null, 0));
             return movieList;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-    public List<Movie> staticMovieList(){
+
+    public List<Movie> staticMovieList() {
         List<Movie> movieList = new ArrayList<>();
         movieList.add(new Movie("88f841f7-103a-40d1-ac68-f6c7db56ab85", "The Godfather", new String[]{"DRAMA"}, 1972.0, "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.", "http://www.imdb.com/title/tt0068646/mediaviewer/rm1067457536", 0.0, new String[]{"Francis Ford Coppola"}, new String[]{"Mario Puzo", "Francis Ford Coppola"}, new String[]{null}, 9.2));
         movieList.add(new Movie("9c3a11f9-0c87-44c5-b87c-b4bfa57c29c3", "The Shawshank Redemption", new String[]{"DRAMA"}, 1994.0, "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.", "http://www.imdb.com/title/tt0111161/mediaviewer/rm1018725120", 0.0, new String[]{"Frank Darabont"}, new String[]{"Stephen King, Frank Darabont"}, new String[]{null}, 9.3));

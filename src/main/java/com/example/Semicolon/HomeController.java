@@ -28,7 +28,7 @@ public class HomeController implements Initializable {
             "WESTERN"};
 
     private Movie movie = new Movie(), emptyMovie = new Movie("Movie-list-is-empty", "zzzzzzzzzzzzzzzzzzzzz", allGenres, 0, "", "No Movies", 0, null, null, null, 0);
-    public List<Movie> originalMovieList = movie.initializeMovies("https://prog2.fh-campuswien.ac.at/movies");
+    public List<Movie> originalMovieList = movie.initializeMoviesNew("https://prog2.fh-campuswien.ac.at/movies");
     //public List<Movie> originalMovieList = movie.staticMovieList();
     public boolean menuActive = false, sortedByGenre = false, sortedByTitle = false, checkedOthers = false;
     public ObservableList<Movie> movieList = FXCollections.observableArrayList();
