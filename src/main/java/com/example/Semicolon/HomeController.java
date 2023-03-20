@@ -10,6 +10,7 @@ import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 import java.net.URL;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class HomeController implements Initializable {
     @FXML
@@ -169,12 +170,12 @@ public class HomeController implements Initializable {
                 if(sortedByTitle){
                     sortMoviesByTitlePreparation(event);
                 }
-                if (searchField.getText() != "") {
+                if (!Objects.equals(searchField.getText(), "")) {
                     searchMovie(searchField.getText());
                 }
                 activateMenu(event);
             }else if(event.getTarget() == sortingChoice){
-                if (searchField.getText() != "") {
+                if (!Objects.equals(searchField.getText(), "")) {
                     searchMovie(searchField.getText());
                 }
                 if(sortedByGenre) {

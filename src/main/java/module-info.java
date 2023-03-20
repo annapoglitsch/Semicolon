@@ -2,6 +2,7 @@ module com.example.demo2 {
     requires javafx.controls;
     requires javafx.fxml;
     requires com.google.gson;
+    requires java.mail;
 
 
     opens com.example.Semicolon to javafx.fxml;

@@ -3,19 +3,13 @@ package com.example.Semicolon.Back;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
+import java.io.*;
+import java.net.*;
 import java.nio.charset.Charset;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class MovieAPI {
-
     public List<Movie> initializeMoviesNew(String path) {
         List<Movie> movieList;
         URL url;
