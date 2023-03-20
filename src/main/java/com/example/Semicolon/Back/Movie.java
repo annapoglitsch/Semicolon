@@ -31,24 +31,6 @@ public class Movie {
     public Movie() {
     }
 
-    public List<Movie> initializeMoviesNew(String path) {
-        List<Movie> movieList;
-        URL url;
-        try {
-            url = new URL(path);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
-            String temp = new BufferedReader(new InputStreamReader(connection.getInputStream(), Charset.defaultCharset())).lines().collect(Collectors.joining("\n"));
-            movieList = new Gson().fromJson(temp, new TypeToken<List<Movie>>(){}.getType());
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-        } catch (ProtocolException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return movieList;
-    }
 
     public List<Movie> initializeMovies(String path) {
         List<Movie> movieList = new ArrayList<>();
