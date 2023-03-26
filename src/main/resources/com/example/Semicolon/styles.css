@@ -58,3 +58,9 @@
     -fx-border-radius: 10;
     -fx-background-color: #454545;
 }
+#sortingChoice{
+    -fx-font-weight: bold;
+}
+#genresChoice{
+    -fx-font-weight: bold;
+}
