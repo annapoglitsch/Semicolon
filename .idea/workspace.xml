@@ -4,14 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="632c3f87-378d-459f-993b-b51a9090f282" name="Changes" comment="Anna - case-sensitive is no issue anymore">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_07_03_2023_01_22_am__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_07_03_2023_01_22_am__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_03_2023_12_04_pm__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_03_2023_12_04_pm__Changes_.xml" afterDir="false" />
+    <list default="true" id="632c3f87-378d-459f-993b-b51a9090f282" name="Changes" comment="Moritz - new initialize Movies">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Movie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Movie.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/writeOut.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/writeOut.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/HomeController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +48,7 @@
     </option>
   </component>
   <component name="ProjectId" id="2MTS9OnWH3J9sJFu0Q4wx3LULS4" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -68,12 +63,18 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;corretto-17&quot;,
-    &quot;last_opened_file_path&quot;: &quot;S:/FH/Programieren/exercise-5-Ign1tz&quot;,
+    &quot;full.screen.before.presentation.mode&quot;: &quot;false&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;19&quot;,
+    &quot;last_opened_file_path&quot;: &quot;S:/FH/Programieren/Java/Semicolon&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.23242188&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.37834394&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -81,9 +82,35 @@
       <recent name="com.example.Semicolon" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.HomeController">
+  <component name="RunManager" selected="Application.SendEmail">
     <configuration name="FhmdbApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.Semicolon.FhmdbApplication" />
+      <module name="semicolon" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.Semicolon.Back.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SendEmail" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.Semicolon.Back.SendEmail" />
+      <module name="semicolon" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.Semicolon.Back.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="writeOut" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.Semicolon.Back.writeOut" />
       <module name="Semicolon" />
       <extension name="coverage">
         <pattern>
@@ -95,21 +122,28 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="HomeController" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.example.Semicolon.HomeController" />
-      <module name="Semicolon" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.Semicolon.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+    <configuration default="true" type="DjangoTestsConfigurationType">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="TARGET" value="" />
+      <option name="SETTINGS_FILE" value="" />
+      <option name="CUSTOM_SETTINGS" value="false" />
+      <option name="USE_OPTIONS" value="false" />
+      <option name="OPTIONS" value="" />
+      <method v="2" />
     </configuration>
     <configuration name="MovieTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Semicolon" />
+      <module name="semicolon" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.example.Semicolon.*" />
@@ -118,12 +152,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.example.Semicolon" />
       <option name="MAIN_CLASS_NAME" value="com.example.Semicolon.MovieTest" />
+      <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MovieTest.genre_and_sort_method_at_the_same_time" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MovieTest.empty_movie_list_after_sorted_by_genre" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Semicolon" />
       <extension name="coverage">
         <pattern>
@@ -133,44 +168,101 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.example.Semicolon" />
       <option name="MAIN_CLASS_NAME" value="com.example.Semicolon.MovieTest" />
-      <option name="METHOD_NAME" value="genre_and_sort_method_at_the_same_time" />
+      <option name="METHOD_NAME" value="empty_movie_list_after_sorted_by_genre" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MovieTest.is_movie_sorted_by_genre" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Semicolon" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.Semicolon.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.example.Semicolon" />
-      <option name="MAIN_CLASS_NAME" value="com.example.Semicolon.MovieTest" />
-      <option name="METHOD_NAME" value="is_movie_sorted_by_genre" />
-      <option name="TEST_OBJECT" value="method" />
+    <configuration default="true" type="JetRunConfigurationType">
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="PyBehaveRunConfigurationType" factoryName="Behave">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="ADDITIONAL_ARGS" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="Python.FlaskServer">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="Tox" factoryName="Tox">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Application.HomeController" />
+      <item itemvalue="Application.SendEmail" />
+      <item itemvalue="Application.writeOut" />
       <item itemvalue="Application.FhmdbApplication" />
-      <item itemvalue="JUnit.MovieTest.genre_and_sort_method_at_the_same_time" />
+      <item itemvalue="JUnit.MovieTest.empty_movie_list_after_sorted_by_genre" />
       <item itemvalue="JUnit.MovieTest" />
-      <item itemvalue="JUnit.MovieTest.is_movie_sorted_by_genre" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.HomeController" />
-        <item itemvalue="Application.FhmdbApplication" />
-        <item itemvalue="JUnit.MovieTest.genre_and_sort_method_at_the_same_time" />
+        <item itemvalue="Application.SendEmail" />
         <item itemvalue="JUnit.MovieTest" />
-        <item itemvalue="JUnit.MovieTest.is_movie_sorted_by_genre" />
+        <item itemvalue="Application.FhmdbApplication" />
+        <item itemvalue="JUnit.MovieTest.empty_movie_list_after_sorted_by_genre" />
+        <item itemvalue="Application.writeOut" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SeleniumInternalSettingsState">
+    <option name="lastUrl" value="https://prog2.fh-campuswien.ac.at/movies" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -187,6 +279,28 @@
       <workItem from="1678493889304" duration="120000" />
       <workItem from="1678494015925" duration="2018000" />
       <workItem from="1678535960201" duration="9297000" />
+      <workItem from="1678705864586" duration="4938000" />
+      <workItem from="1678716290783" duration="4074000" />
+      <workItem from="1679084355780" duration="3298000" />
+      <workItem from="1679091874135" duration="5000" />
+      <workItem from="1679092055373" duration="51000" />
+      <workItem from="1679094188426" duration="61000" />
+      <workItem from="1679094263415" duration="1273000" />
+      <workItem from="1679257551191" duration="456000" />
+      <workItem from="1679258023242" duration="37000" />
+      <workItem from="1679258064863" duration="13000" />
+      <workItem from="1679258080519" duration="10000" />
+      <workItem from="1679258094523" duration="4132000" />
+      <workItem from="1679320828371" duration="1252000" />
+      <workItem from="1679402675195" duration="1813000" />
+      <workItem from="1679417110794" duration="25000" />
+      <workItem from="1679483375596" duration="111000" />
+      <workItem from="1679492358366" duration="1885000" />
+      <workItem from="1679604090345" duration="742000" />
+      <workItem from="1679689943658" duration="661000" />
+      <workItem from="1679857636962" duration="2104000" />
+      <workItem from="1679871274180" duration="3504000" />
+      <workItem from="1679921717647" duration="629000" />
     </task>
     <task id="LOCAL-00001" summary="Moritz - rough draft of main page, added Movie Objects">
       <created>1677798635847</created>
@@ -216,28 +330,42 @@
       <option name="project" value="LOCAL" />
       <updated>1678632884774</updated>
     </task>
-    <task id="LOCAL-00005" summary="Anna - new Test">
-      <created>1678660995263</created>
+    <task id="LOCAL-00005" summary="Moritz - small changes">
+      <created>1678661814627</created>
       <option name="number" value="00005" />
       <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
-      <updated>1678660995264</updated>
+      <updated>1678661814627</updated>
     </task>
-    <task id="LOCAL-00006" summary="Anna - FrontEnd Layout correction &amp; first try regarding streams">
-      <created>1679832573265</created>
+    <task id="LOCAL-00006" summary="Moritz - small changes">
+      <created>1678661999763</created>
       <option name="number" value="00006" />
       <option name="presentableId" value="LOCAL-00006" />
       <option name="project" value="LOCAL" />
-      <updated>1679832573265</updated>
+      <updated>1678661999763</updated>
     </task>
-    <task id="LOCAL-00007" summary="Anna - FrontEnd Layout correction &amp; first try regarding streams">
-      <created>1679922357627</created>
+    <task id="LOCAL-00007" summary="Moritz - canged when what is additionaly searched">
+      <created>1679092100065</created>
       <option name="number" value="00007" />
       <option name="presentableId" value="LOCAL-00007" />
       <option name="project" value="LOCAL" />
-      <updated>1679922357627</updated>
+      <updated>1679092100066</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Moritz - new initialize Movies">
+      <created>1679258648032</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1679258648032</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Moritz - new initialize Movies">
+      <created>1679321439896</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1679321439896</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -297,8 +425,13 @@
     <MESSAGE value="Moritz - added MovieCards" />
     <MESSAGE value="Moritz - changes to Methodes so they can be tested more easy" />
     <MESSAGE value="Anna - local changes after pull" />
-    <MESSAGE value="Anna - new Test" />
-    <MESSAGE value="Anna - FrontEnd Layout correction &amp; first try regarding streams" />
-    <option name="LAST_COMMIT_MESSAGE" value="Anna - FrontEnd Layout correction &amp; first try regarding streams" />
+    <MESSAGE value="Moritz - small changes" />
+    <MESSAGE value="Moritz - canged when what is additionaly searched" />
+    <MESSAGE value="Moritz - new initialize Movies" />
+    <option name="LAST_COMMIT_MESSAGE" value="Moritz - new initialize Movies" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
