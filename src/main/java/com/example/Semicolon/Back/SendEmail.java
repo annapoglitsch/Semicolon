@@ -13,7 +13,7 @@ public class SendEmail {
     private static Session session = Session.getInstance(setProps(), new javax.mail.Authenticator() {
         @Override
         protected PasswordAuthentication getPasswordAuthentication() {
-            return new PasswordAuthentication("redditmenews@gmail.com", "j6ad96HEX!cC9k5N");
+            return new PasswordAuthentication("redditmenews@gmail.com", "******");
         }
     });
 

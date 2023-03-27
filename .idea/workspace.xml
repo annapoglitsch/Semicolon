@@ -5,25 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="632c3f87-378d-459f-993b-b51a9090f282" name="Changes" comment="Moritz - new initialize Movies">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/MovieAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_03_2023_02_08_pm_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_03_2023_02_08_pm__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_03_2023_02_12_pm_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_03_2023_02_12_pm__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_03_2023_03_21_pm_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_03_2023_03_21_pm__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_03_2023_08_32_pm_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_03_2023_08_32_pm__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_03_2023_11_43_pm_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_03_2023_11_43_pm__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_03_2023_11_55_pm_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_03_2023_11_55_pm__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Movie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Movie.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/HomeController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +70,7 @@
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.23242188&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.37834394&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
@@ -100,9 +82,22 @@
       <recent name="com.example.Semicolon" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.FhmdbApplication">
+  <component name="RunManager" selected="Application.SendEmail">
     <configuration name="FhmdbApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.Semicolon.FhmdbApplication" />
+      <module name="semicolon" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.Semicolon.Back.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SendEmail" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.Semicolon.Back.SendEmail" />
       <module name="semicolon" />
       <extension name="coverage">
         <pattern>
@@ -179,22 +174,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MovieTest.genre_and_sort_method_at_the_same_time" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Semicolon" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.Semicolon.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.example.Semicolon" />
-      <option name="MAIN_CLASS_NAME" value="com.example.Semicolon.MovieTest" />
-      <option name="METHOD_NAME" value="genre_and_sort_method_at_the_same_time" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <method v="2">
         <option name="Make" enabled="true" />
@@ -266,19 +245,19 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Application.SendEmail" />
       <item itemvalue="Application.writeOut" />
       <item itemvalue="Application.FhmdbApplication" />
       <item itemvalue="JUnit.MovieTest.empty_movie_list_after_sorted_by_genre" />
-      <item itemvalue="JUnit.MovieTest.genre_and_sort_method_at_the_same_time" />
       <item itemvalue="JUnit.MovieTest" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.FhmdbApplication" />
+        <item itemvalue="Application.SendEmail" />
         <item itemvalue="JUnit.MovieTest" />
+        <item itemvalue="Application.FhmdbApplication" />
         <item itemvalue="JUnit.MovieTest.empty_movie_list_after_sorted_by_genre" />
         <item itemvalue="Application.writeOut" />
-        <item itemvalue="JUnit.MovieTest.genre_and_sort_method_at_the_same_time" />
       </list>
     </recent_temporary>
   </component>
@@ -312,7 +291,16 @@
       <workItem from="1679258064863" duration="13000" />
       <workItem from="1679258080519" duration="10000" />
       <workItem from="1679258094523" duration="4132000" />
-      <workItem from="1679320828371" duration="522000" />
+      <workItem from="1679320828371" duration="1252000" />
+      <workItem from="1679402675195" duration="1813000" />
+      <workItem from="1679417110794" duration="25000" />
+      <workItem from="1679483375596" duration="111000" />
+      <workItem from="1679492358366" duration="1885000" />
+      <workItem from="1679604090345" duration="742000" />
+      <workItem from="1679689943658" duration="661000" />
+      <workItem from="1679857636962" duration="2104000" />
+      <workItem from="1679871274180" duration="3504000" />
+      <workItem from="1679921717647" duration="629000" />
     </task>
     <task id="LOCAL-00001" summary="Moritz - rough draft of main page, added Movie Objects">
       <created>1677798635847</created>
@@ -370,7 +358,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679258648032</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Moritz - new initialize Movies">
+      <created>1679321439896</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1679321439896</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
