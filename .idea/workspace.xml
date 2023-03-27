@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="632c3f87-378d-459f-993b-b51a9090f282" name="Changes" comment="Moritz - new initialize Movies">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="632c3f87-378d-459f-993b-b51a9090f282" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/HomeController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,45 +83,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.SendEmail">
-    <configuration name="FhmdbApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.example.Semicolon.FhmdbApplication" />
-      <module name="semicolon" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.Semicolon.Back.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SendEmail" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.example.Semicolon.Back.SendEmail" />
-      <module name="semicolon" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.Semicolon.Back.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="writeOut" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.example.Semicolon.Back.writeOut" />
-      <module name="Semicolon" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.Semicolon.Back.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="DjangoTestsConfigurationType">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -141,49 +102,6 @@
       <option name="USE_OPTIONS" value="false" />
       <option name="OPTIONS" value="" />
       <method v="2" />
-    </configuration>
-    <configuration name="MovieTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="semicolon" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.Semicolon.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.example.Semicolon" />
-      <option name="MAIN_CLASS_NAME" value="com.example.Semicolon.MovieTest" />
-      <option name="METHOD_NAME" value="" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="MovieTest.empty_movie_list_after_sorted_by_genre" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Semicolon" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.Semicolon.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.example.Semicolon" />
-      <option name="MAIN_CLASS_NAME" value="com.example.Semicolon.MovieTest" />
-      <option name="METHOD_NAME" value="empty_movie_list_after_sorted_by_genre" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
     </configuration>
     <configuration default="true" type="PyBehaveRunConfigurationType" factoryName="Behave">
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -243,6 +161,88 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <method v="2" />
+    </configuration>
+    <configuration name="FhmdbApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.Semicolon.FhmdbApplication" />
+      <module name="semicolon" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.Semicolon.Back.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SendEmail" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.Semicolon.Back.SendEmail" />
+      <module name="semicolon" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.Semicolon.Back.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="writeOut" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.Semicolon.Back.writeOut" />
+      <module name="Semicolon" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.Semicolon.Back.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MovieTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="semicolon" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.Semicolon.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.Semicolon" />
+      <option name="MAIN_CLASS_NAME" value="com.example.Semicolon.MovieTest" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MovieTest.empty_movie_list_after_sorted_by_genre" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Semicolon" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.Semicolon.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.Semicolon" />
+      <option name="MAIN_CLASS_NAME" value="com.example.Semicolon.MovieTest" />
+      <option name="METHOD_NAME" value="empty_movie_list_after_sorted_by_genre" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <list>
       <item itemvalue="Application.SendEmail" />

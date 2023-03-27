@@ -10,6 +10,7 @@ import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 import java.net.URL;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -211,5 +212,25 @@ public class HomeController implements Initializable {
     }*/
     //long countMoviesFrom(List<Movie> movies, String director){}
     //List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear){}
-}
+    public static void main(String[] args) {
+        HomeController controller = new HomeController();
+
+        List<String> newList = new ArrayList<>();
+
+        System.out.println(controller.originalMovieList.get(0).mainCast);
+
+        controller.originalMovieList.forEach(m -> newList.addAll(Arrays.asList(m.mainCast)));
+
+        Map<String,Long> test = newList.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        System.out.println(newList.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting())));
+        Map.Entry<String, Long> maxEntry = Collections.max(test.entrySet(), new Comparator<Map.Entry<String, Long>>() {
+            @Override
+            public int compare(Map.Entry<String, Long> o1, Map.Entry<String, Long> o2) {
+                return o1.getValue().compareTo(o2.getValue());
+            }
+        });
+        System.out.println(maxEntry.getKey());
+    }
+    }
+
 
