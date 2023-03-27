@@ -5,16 +5,14 @@ import com.google.gson.reflect.TypeToken;
 
 import java.io.*;
 import java.net.*;
-import java.nio.charset.Charset;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Movie {
     public String id, title, description, imgUrl;
-    public String[] genres, directors, writers, cast;
+    public String[] genres, directors, writers, mainCast;
     public double rating, releaseYear, length;
 
-    public Movie(String id, String title, String[] genres, double releaseYear, String description, String imgUrl, double length, String[] directors, String[] writers, String[] cast, double rating) {
+    public Movie(String id, String title, String[] genres, double releaseYear, String description, String imgUrl, double length, String[] directors, String[] writers, String[] mainCast, double rating) {
         this.id = id;
         this.title = title;
         this.genres = genres;
@@ -24,7 +22,7 @@ public class Movie {
         this.length = length;
         this.directors = directors;
         this.writers = writers;
-        this.cast = cast;
+        this.mainCast = mainCast;
         this.rating = rating;
     }
 

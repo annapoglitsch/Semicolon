@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="632c3f87-378d-459f-993b-b51a9090f282" name="Changes" comment="Anna - FrontEnd Layout correction &amp; first try regarding streams" />
+    <list default="true" id="632c3f87-378d-459f-993b-b51a9090f282" name="Changes" comment="Anna - case-sensitive is no issue anymore">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_07_03_2023_01_22_am__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_07_03_2023_01_22_am__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_03_2023_12_04_pm__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_03_2023_12_04_pm__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Movie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Movie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/writeOut.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/writeOut.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/HomeController.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -73,13 +81,26 @@
       <recent name="com.example.Semicolon" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.FhmdbApplication">
+  <component name="RunManager" selected="Application.HomeController">
     <configuration name="FhmdbApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.Semicolon.FhmdbApplication" />
       <module name="Semicolon" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.example.Semicolon.Back.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HomeController" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.Semicolon.HomeController" />
+      <module name="Semicolon" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.Semicolon.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -118,22 +139,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MovieTest.is_movie_sorted_a_to_z" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Semicolon" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.Semicolon.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.example.Semicolon" />
-      <option name="MAIN_CLASS_NAME" value="com.example.Semicolon.MovieTest" />
-      <option name="METHOD_NAME" value="is_movie_sorted_a_to_z" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="MovieTest.is_movie_sorted_by_genre" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Semicolon" />
       <extension name="coverage">
@@ -151,19 +156,19 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.HomeController" />
       <item itemvalue="Application.FhmdbApplication" />
       <item itemvalue="JUnit.MovieTest.genre_and_sort_method_at_the_same_time" />
       <item itemvalue="JUnit.MovieTest" />
-      <item itemvalue="JUnit.MovieTest.is_movie_sorted_a_to_z" />
       <item itemvalue="JUnit.MovieTest.is_movie_sorted_by_genre" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.HomeController" />
         <item itemvalue="Application.FhmdbApplication" />
         <item itemvalue="JUnit.MovieTest.genre_and_sort_method_at_the_same_time" />
         <item itemvalue="JUnit.MovieTest" />
         <item itemvalue="JUnit.MovieTest.is_movie_sorted_by_genre" />
-        <item itemvalue="JUnit.MovieTest.is_movie_sorted_a_to_z" />
       </list>
     </recent_temporary>
   </component>
