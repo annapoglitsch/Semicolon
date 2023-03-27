@@ -11,6 +11,9 @@ import javafx.util.Duration;
 import java.net.URL;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+//                                         *****Variables*****
 
 public class HomeController implements Initializable {
     @FXML
@@ -28,6 +31,7 @@ public class HomeController implements Initializable {
             "MUSICAL", "MYSTERY", "ROMANCE", "SCIENCE_FICTION", "SPORT", "THRILLER", "WAR",
             "WESTERN"};
 
+    //                                  ******Lists******
     private Movie movie = new Movie(), emptyMovie = new Movie("Movie-list-is-empty", "zzzzzzzzzzzzzzzzzzzzz", allGenres, 0, "", "No Movies", 0, null, null, null, 0);
     private MovieAPI api = new MovieAPI();
     public List<Movie> originalMovieList = api.initializeMoviesNew("https://prog2.fh-campuswien.ac.at/movies");
@@ -37,6 +41,7 @@ public class HomeController implements Initializable {
     private ObservableList<String> genres = FXCollections.observableList(Arrays.asList(allGenres));
     public ObservableList<String> sortingKeywords = FXCollections.observableList(Arrays.asList("---NO SORTING---", "A-Z", "Z-A"));
 
+//                                      *****Methods*****
     @FXML
     private void activateMenu(ActionEvent event) { //make menu slide down/up
         if(event.getTarget() == advancedOptions || event.getTarget() == genresChoice) {
@@ -194,5 +199,17 @@ public class HomeController implements Initializable {
             movieList.add(emptyMovie);
         }
     }
+    //                                 *****Stream Methods*****
+    /*String getMostPopularActor(List<Movie> movies){
+    movies.stream().forEach(m -> );
+     }*/
+   /* int getLongestMovieTitle(List<Movie> movies){
+    int longestTitle;
+        Optional<Operation> maxOp = movies.stream()
+            .map (()-> new Operation(movie, movie.length()))
+            .max (Comparator.comparingInt(Operation::getLength()));
+    }*/
+    //long countMoviesFrom(List<Movie> movies, String director){}
+    //List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear){}
 }
 
