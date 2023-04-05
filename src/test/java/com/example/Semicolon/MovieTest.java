@@ -134,7 +134,8 @@ class MovieTest extends ActionEvent {
             }
             controller = new HomeController();
             controller.movieList = movieList;
-            assertEquals(movieList2, controller.sortMoviesByGenre(this, "ACTION"));
+            controller.filterMoviesByGenre(this, "ACTION");
+            assertEquals(movieList2, controller.movieList);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -158,7 +159,8 @@ class MovieTest extends ActionEvent {
             }
             controller = new HomeController();
             controller.movieList = movieList;
-            assertEquals(empty.id, controller.sortMoviesByGenre(this, "ANIMATION").get(0).id);
+            controller.filterMoviesByGenre(this, "DOCUMENTATION");
+            assertEquals(empty.id, controller.movieList.get(0).id);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -168,7 +170,7 @@ class MovieTest extends ActionEvent {
     @Order(8)
     void empty_movie_list_after_search() {
         try {
-            Movie empty = new Movie("Movie-list-is-empty", "zzzzzzzzzzzzzzzzzzzzz", null, 0, "", "No Movies", 0, null, null, null, 0);
+            Movie empty = new Movie("Movie-list-is-empty", "zzzzzzzzzzzzzzzzzzzzz", (String[]) null, 0, "", "No Movies", 0, null, null, null, 0);
             ObservableList<Movie> movieList = FXCollections.observableArrayList();
             for (int i = 9; i >= 0; i--) {
                 String genre;
@@ -182,7 +184,8 @@ class MovieTest extends ActionEvent {
             }
             controller = new HomeController();
             controller.movieList = movieList;
-            assertEquals(empty.id, controller.searchMovie("not part of the title").get(0).id);
+            controller.searchMovies("not part of the title");
+            assertEquals(empty.id, controller.movieList.get(0).id);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -217,7 +220,8 @@ class MovieTest extends ActionEvent {
             controller = new HomeController();
             controller.movieList.addAll(movieList);
             controller.originalMovieList.addAll(movieList);
-            assertEquals(correct, controller.searchMovie("this"));
+            controller.searchMovies("this");
+            assertEquals(correct, controller.movieList);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -250,7 +254,8 @@ class MovieTest extends ActionEvent {
 
             controller.movieList.addAll(movieList);
             controller.sortMoviesByTitle(this, "A-Z");
-            assertEquals(movieList2, controller.sortMoviesByGenre(this, "ACTION"));
+            controller.filterMoviesByGenre(this, "ACTION");
+            assertEquals(movieList2, controller.movieList);
         } catch (Exception e) {
             e.printStackTrace();
         }

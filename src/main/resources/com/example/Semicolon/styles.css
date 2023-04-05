@@ -58,9 +58,15 @@
     -fx-border-radius: 10;
     -fx-background-color: #454545;
 }
+.choice-box .context-menu{
+    -fx-max-height: 600;
+}
 #sortingChoice{
     -fx-font-weight: bold;
 }
 #genresChoice{
+    -fx-font-weight: bold;
+}
+#releaseYearChoice{
     -fx-font-weight: bold;
 }

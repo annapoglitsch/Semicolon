@@ -6,14 +6,12 @@ import javax.mail.*;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
-import javax.mail.internet.MimeBodyPart;
 
 public class SendEmail {
     private static Session session = Session.getInstance(setProps(), new javax.mail.Authenticator() {
         @Override
         protected PasswordAuthentication getPasswordAuthentication() {
-            return new PasswordAuthentication("redditmenews@gmail.com", "******");
+            return new PasswordAuthentication("redditmenews@gmail.com", "j6ad96HEX!cC9k5N");
         }
     });
 

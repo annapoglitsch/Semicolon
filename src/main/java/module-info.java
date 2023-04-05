@@ -3,6 +3,7 @@ module com.example.demo2 {
     requires javafx.fxml;
     requires com.google.gson;
     requires java.mail;
+    requires okhttp3;
 
 
     opens com.example.Semicolon to javafx.fxml;

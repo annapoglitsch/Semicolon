@@ -25,10 +25,11 @@ public class Movie {
         this.mainCast = mainCast;
         this.rating = rating;
     }
+    public Movie(){};
 
-    public Movie() {
+    public double getReleaseYear() {
+        return releaseYear;
     }
-
 
     public List<Movie> initializeMovies(String path) {
         List<Movie> movieList = new ArrayList<>();
