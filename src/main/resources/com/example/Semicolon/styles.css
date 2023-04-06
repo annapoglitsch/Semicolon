@@ -70,3 +70,6 @@
 #releaseYearChoice{
     -fx-font-weight: bold;
 }
+#raingtext{
+ -fx-text-fill: #da8e32;
+}

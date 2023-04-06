@@ -245,7 +245,31 @@ public class HomeController implements Initializable {
             releaseYearChoice.setItems(allYears);
         }
     }
+    //                                 *****Stream Methods*****
+    String getMostPopularActor(List<Movie> movies){
 
+        List<String> newList = new ArrayList<>();
+
+
+        movies.stream().map(m -> newList.addAll(Arrays.asList(m.mainCast))).collect(Collectors.toList());
+
+        Map<String, Long> test = newList.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        //System.out.println(newList.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting())));
+        Map.Entry<String, Long> maxEntry = Collections.max(test.entrySet(), new Comparator<Map.Entry<String, Long>>() {
+            @Override
+            public int compare(Map.Entry<String, Long> o1, Map.Entry<String, Long> o2) {
+                return o1.getValue().compareTo(o2.getValue());
+            }
+        });
+       return maxEntry.getKey();
+        }
+   /* int getLongestMovieTitle(List<Movie> movies){
+        List<String> newMovieTitleList = new ArrayList<>();
+
+        return movies.stream().max(Comparator.comparingInt(String::length));
+    }*/
+    //long countMoviesFrom(List<Movie> movies, String director){}
+    //List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear){}
     public static void main(String[] args) {
         HomeController controller = new HomeController();
 
@@ -253,10 +277,10 @@ public class HomeController implements Initializable {
 
         System.out.println(controller.originalMovieList.get(0).mainCast);
 
-        controller.originalMovieList.forEach(m -> newList.addAll(Arrays.asList(m.mainCast)));
+        controller.originalMovieList.stream().map(m -> newList.addAll(Arrays.asList(m.mainCast))).collect(Collectors.toList());
 
         Map<String, Long> test = newList.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-        System.out.println(newList.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting())));
+       // System.out.println(newList.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting())));
         Map.Entry<String, Long> maxEntry = Collections.max(test.entrySet(), new Comparator<Map.Entry<String, Long>>() {
             @Override
             public int compare(Map.Entry<String, Long> o1, Map.Entry<String, Long> o2) {
@@ -330,20 +354,7 @@ public class HomeController implements Initializable {
             movieList.add(emptyMovie);
         }
     }
-    +/
-
-    //                                 *****Stream Methods*****
-    /*String getMostPopularActor(List<Movie> movies){
-    movies.stream().forEach(m -> );
-     }*/
-   /* int getLongestMovieTitle(List<Movie> movies){
-    int longestTitle;
-        Optional<Operation> maxOp = movies.stream()
-            .map (()-> new Operation(movie, movie.length()))
-            .max (Comparator.comparingInt(Operation::getLength()));
-    }*/
-    //long countMoviesFrom(List<Movie> movies, String director){}
-    //List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear){}
+    */
 
 }
 
