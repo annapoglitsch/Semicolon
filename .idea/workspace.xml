@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="632c3f87-378d-459f-993b-b51a9090f282" name="Changes" comment="">
+    <list default="true" id="632c3f87-378d-459f-993b-b51a9090f282" name="Changes" comment="Anna - added label and second method">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/HomeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/Semicolon/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/Semicolon/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/Semicolon/test.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/Semicolon/test.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +84,7 @@
       <recent name="com.example.Semicolon" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.FhmdbApplication">
+  <component name="RunManager" selected="Application.HomeController">
     <configuration default="true" type="DjangoTestsConfigurationType">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -179,12 +177,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SendEmail" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.example.Semicolon.Back.SendEmail" />
-      <module name="semicolon" />
+    <configuration name="HomeController" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.Semicolon.HomeController" />
+      <module name="Semicolon" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.example.Semicolon.Back.*" />
+          <option name="PATTERN" value="com.example.Semicolon.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -192,9 +190,9 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="writeOut" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.example.Semicolon.Back.writeOut" />
-      <module name="Semicolon" />
+    <configuration name="SendEmail" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.Semicolon.Back.SendEmail" />
+      <module name="semicolon" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.example.Semicolon.Back.*" />
@@ -248,7 +246,7 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.writeOut" />
+      <item itemvalue="Application.HomeController" />
       <item itemvalue="Application.SendEmail" />
       <item itemvalue="Application.FhmdbApplication" />
       <item itemvalue="JUnit.MovieTest.empty_movie_list_after_sorted_by_genre" />
@@ -256,11 +254,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.HomeController" />
         <item itemvalue="Application.FhmdbApplication" />
         <item itemvalue="Application.SendEmail" />
         <item itemvalue="JUnit.MovieTest" />
         <item itemvalue="Application.FhmdbApplication" />
-        <item itemvalue="JUnit.MovieTest.empty_movie_list_after_sorted_by_genre" />
       </list>
     </recent_temporary>
   </component>
@@ -372,7 +370,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679321439896</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Anna - added label and second method">
+      <created>1680817786296</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1680817786296</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -435,7 +440,8 @@
     <MESSAGE value="Moritz - small changes" />
     <MESSAGE value="Moritz - canged when what is additionaly searched" />
     <MESSAGE value="Moritz - new initialize Movies" />
-    <option name="LAST_COMMIT_MESSAGE" value="Moritz - new initialize Movies" />
+    <MESSAGE value="Anna - added label and second method" />
+    <option name="LAST_COMMIT_MESSAGE" value="Anna - added label and second method" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -263,17 +263,43 @@ public class HomeController implements Initializable {
         });
        return maxEntry.getKey();
         }
-   /* int getLongestMovieTitle(List<Movie> movies){
-        List<String> newMovieTitleList = new ArrayList<>();
+   int getLongestMovieTitle(List<Movie> movies) {
+       List<String> newMovieTitleList = new ArrayList<>();
 
-        return movies.stream().max(Comparator.comparingInt(String::length));
-    }*/
+       movies.stream().map(m -> newMovieTitleList.addAll(Arrays.asList(m.title))).collect(Collectors.toList());
+      Optional<String> longestString = newMovieTitleList.stream().max(Comparator.comparingInt(String::length));
+      int valueOfLongestString = (int) longestString.stream().count();
+       System.out.println(valueOfLongestString);
+      return valueOfLongestString;
+   }
     //long countMoviesFrom(List<Movie> movies, String director){}
     //List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear){}
     public static void main(String[] args) {
         HomeController controller = new HomeController();
+        List<String> newMovieTitleList = new ArrayList<>();
 
-        List<String> newList = new ArrayList<>();
+        controller.originalMovieList.stream().map(m -> newMovieTitleList.addAll(Arrays.asList(m.title))).collect(Collectors.toList()); //add movie titles to new list
+        newMovieTitleList.stream().map(m -> m.replaceAll("\\s+","")); //replace white spaces
+        //System.out.println(newMovieTitleList.stream().max(Comparator.comparing(String::length)));
+        newMovieTitleList.stream().filter(m -> m.length() == 0);    //filter movies with no title - exception
+        newMovieTitleList.stream().max(Comparator.comparing(String::length));   //compare length of title
+        //System.out.println(newMovieTitleList);
+
+
+      /*  Map<String, Long> test = newMovieTitleList.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        Map.Entry<String, Long> maxEntry = Collections.max(test.entrySet(), new Comparator<Map.Entry<String, Long>>() {
+            @Override
+            public int compare(Map.Entry<String, Long> o1, Map.Entry<String, Long> o2) {
+                return o1.getValue().compareTo(o2.getValue());
+            }
+        });
+        System.out.println(maxEntry.getKey());*/
+        //Optional<String> longestString = newMovieTitleList.stream().max(Comparator.comparingInt(String::length));
+       // int valueOfLongestString =
+       // System.out.println(valueOfLongestString);
+        //return valueOfLongestString;
+
+       /* List<String> newList = new ArrayList<>();
 
         System.out.println(controller.originalMovieList.get(0).mainCast);
 
@@ -287,7 +313,7 @@ public class HomeController implements Initializable {
                 return o1.getValue().compareTo(o2.getValue());
             }
         });
-        System.out.println(maxEntry.getKey());
+        System.out.println(maxEntry.getKey());*/
     }
 /*
     public ObservableList<Movie> filterMoviesByGenre(ActionEvent event, String genre) {
