@@ -274,6 +274,33 @@ public class HomeController implements Initializable {
    }
     //long countMoviesFrom(List<Movie> movies, String director){}
     //List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear){}
+
+    /**
+     * Gibt die Anzahl der Filme eines bestimmten Regisseurs zurück.
+     *
+     * @param movies    Liste von Filmen
+     * @param director  Regisseur, dessen Filme gezählt werden sollen
+     * @return Anzahl der Filme des Regisseurs
+     */
+    public long countMoviesFrom(List<Movie> movies, String director) {
+        return movies.stream()
+                .filter(movie -> movie.getDirector().equals(director))
+                .count();
+    }
+
+    /**
+     * Gibt die Filme zurück, die zwischen zwei gegebenen Jahren veröffentlicht wurden.
+     *
+     * @param movies     Liste von Filmen
+     * @param startYear  Anfangsjahr
+     * @param endYear    Endjahr
+     * @return Liste von Filmen, die zwischen startYear und endYear veröffentlicht wurden
+     */
+    public List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear) {
+        return movies.stream()
+                .filter(movie -> movie.getYear() >= startYear && movie.getYear() <= endYear)
+                .collect(Collectors.toList());
+    }
     public static void main(String[] args) {
         HomeController controller = new HomeController();
         List<String> newMovieTitleList = new ArrayList<>();

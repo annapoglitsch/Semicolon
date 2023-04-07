@@ -25,7 +25,11 @@ public class Movie {
         this.mainCast = mainCast;
         this.rating = rating;
     }
-    public Movie(){};
+
+    public Movie() {
+    }
+
+    ;
 
     public double getReleaseYear() {
         return releaseYear;
@@ -95,4 +99,14 @@ public class Movie {
         movieList.add(new Movie("89f796e6-d144-4e3e-a4bc-5cfc21ab9f97", "The Wolf of Wall Street", new String[]{"BIOGRAPHY", "COMEDY", "CRIME", "DRAMA"}, 2013.0, "Based on the true story of Jordan Belfort, from his rise to a wealthy stock-broker living the high life to his fall involving crime, corruption and the federal government.", "https://www.imdb.com/title/tt0993846/mediaviewer/rm1146323456/?ref_=tt_ov_i", 0.0, new String[]{"Martin Scorsese"}, new String[]{"Terence Winter"}, new String[]{null}, 8.2));
         return movieList;
     }
+
+    public Object getDirector() {
+        return null;
+    }
+
+    public int getYear() {
+        return 0;
+    }
 }
+
+
