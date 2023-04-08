@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="632c3f87-378d-459f-993b-b51a9090f282" name="Changes" comment="Anna - added label and second method">
+    <list default="true" id="632c3f87-378d-459f-993b-b51a9090f282" name="Changes" comment="Anna - so close to finish second method, letting my colleagues look through it">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Movie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Movie.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/HomeController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -367,7 +366,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680817786296</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Anna - so close to finish second method, letting my colleagues look through it">
+      <created>1680881433075</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1680881433077</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -431,7 +437,8 @@
     <MESSAGE value="Moritz - canged when what is additionaly searched" />
     <MESSAGE value="Moritz - new initialize Movies" />
     <MESSAGE value="Anna - added label and second method" />
-    <option name="LAST_COMMIT_MESSAGE" value="Anna - added label and second method" />
+    <MESSAGE value="Anna - so close to finish second method, letting my colleagues look through it" />
+    <option name="LAST_COMMIT_MESSAGE" value="Anna - so close to finish second method, letting my colleagues look through it" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

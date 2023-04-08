@@ -16,8 +16,7 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-//                                         *****Variables*****
-
+                                         /** Variables */
 public class HomeController implements Initializable {
     @FXML
     GridPane HomeGrid, menu;
@@ -49,7 +48,7 @@ public class HomeController implements Initializable {
     private ObservableList<String> genres = FXCollections.observableList(Arrays.asList(allGenres));
     public ObservableList<String> sortingKeywords = FXCollections.observableList(Arrays.asList("---NO SORTING---", "A-Z", "Z-A"));
 
-    //                                      *****Methods*****
+                                             /** Methods */
     @FXML
     private void activateMenu(ActionEvent event) { //make menu slide down/up
         if (event.getTarget() == advancedOptions || event.getTarget() == genresChoice) {
@@ -245,16 +244,13 @@ public class HomeController implements Initializable {
             releaseYearChoice.setItems(allYears);
         }
     }
-    //                                 *****Stream Methods*****
+                                        /** Stream Methods */
     String getMostPopularActor(List<Movie> movies){
+    List<String> newList = new ArrayList<>();
 
-        List<String> newList = new ArrayList<>();
-
-
-        movies.stream().map(m -> newList.addAll(Arrays.asList(m.mainCast))).collect(Collectors.toList());
-
-        Map<String, Long> test = newList.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-        //System.out.println(newList.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting())));
+         movies.stream().map(m -> newList.addAll(Arrays.asList(m.mainCast))).collect(Collectors.toList());
+        // newList.stream().max(String).stream().count();
+       Map<String, Long> test = newList.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
         Map.Entry<String, Long> maxEntry = Collections.max(test.entrySet(), new Comparator<Map.Entry<String, Long>>() {
             @Override
             public int compare(Map.Entry<String, Long> o1, Map.Entry<String, Long> o2) {
@@ -262,18 +258,16 @@ public class HomeController implements Initializable {
             }
         });
        return maxEntry.getKey();
+       // return "Toni";
         }
    int getLongestMovieTitle(List<Movie> movies) {
-       List<String> newMovieTitleList = new ArrayList<>();
 
-       movies.stream().map(m -> newMovieTitleList.addAll(Arrays.asList(m.title))).collect(Collectors.toList());
-      Optional<String> longestString = newMovieTitleList.stream().max(Comparator.comparingInt(String::length));
-      int valueOfLongestString = (int) longestString.stream().count();
-       System.out.println(valueOfLongestString);
-      return valueOfLongestString;
+      List<String> newMovieTitleList = movies.stream().map(m -> m.title).collect(Collectors.toList());
+
+      return newMovieTitleList.stream().mapToInt(String::length).max().orElse(0); //or Else damit es kein OptionalInt ist
+
    }
-    //long countMoviesFrom(List<Movie> movies, String director){}
-    //List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear){}
+
 
     /**
      * Gibt die Anzahl der Filme eines bestimmten Regisseurs zurück.
@@ -313,101 +307,9 @@ public class HomeController implements Initializable {
         //System.out.println(newMovieTitleList);
 
 
-      /*  Map<String, Long> test = newMovieTitleList.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-        Map.Entry<String, Long> maxEntry = Collections.max(test.entrySet(), new Comparator<Map.Entry<String, Long>>() {
-            @Override
-            public int compare(Map.Entry<String, Long> o1, Map.Entry<String, Long> o2) {
-                return o1.getValue().compareTo(o2.getValue());
-            }
-        });
-        System.out.println(maxEntry.getKey());*/
-        //Optional<String> longestString = newMovieTitleList.stream().max(Comparator.comparingInt(String::length));
-       // int valueOfLongestString =
-       // System.out.println(valueOfLongestString);
-        //return valueOfLongestString;
 
-       /* List<String> newList = new ArrayList<>();
-
-        System.out.println(controller.originalMovieList.get(0).mainCast);
-
-        controller.originalMovieList.stream().map(m -> newList.addAll(Arrays.asList(m.mainCast))).collect(Collectors.toList());
-
-        Map<String, Long> test = newList.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-       // System.out.println(newList.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting())));
-        Map.Entry<String, Long> maxEntry = Collections.max(test.entrySet(), new Comparator<Map.Entry<String, Long>>() {
-            @Override
-            public int compare(Map.Entry<String, Long> o1, Map.Entry<String, Long> o2) {
-                return o1.getValue().compareTo(o2.getValue());
-            }
-        });
-        System.out.println(maxEntry.getKey());*/
-    }
-/*
-    public ObservableList<Movie> filterMoviesByGenre(ActionEvent event, String genre) {
-        if(HomeGrid == null){
-            event = new ActionEvent();
-        }
-        if (!genre.equals("---ALL GENRES---")) {
-            sortedByGenre = true;
-            movieList.removeIf(m -> !Arrays.asList(m.genres).contains(genre));
-        } else {
-            sortedByGenre = false;
-            movieList.clear();
-            movieList.addAll(originalMovieList);
-        }
-        if(!checkedOthers) {
-            checkOthers(event);
-        }
-        checkedOthers = false;
-        return movieList;
     }
 
-    public ObservableList<Movie> searchMovie(String temp) {
-        movieList.clear();
-        movieList.addAll(originalMovieList);
-        if (sortingChoice != null) {
-            filterMoviesByGenrePrep(new ActionEvent());
-        }
-        movieList.removeIf(m -> !m.description.toLowerCase().contains(temp) && !m.title.toLowerCase().contains(temp));
-        if(!checkedOthers) {
-            checkOthers(new ActionEvent());
-        }
-        checkedOthers = false;
-        return movieList;
-    }
-
-    private void checkOthers(ActionEvent event){
-        checkedOthers = true;
-        if(HomeGrid != null) {
-            if(event.getTarget() == genresChoice){
-                if(sortedByTitle){
-                    sortMoviesByTitlePreparation(event);
-                }
-                if (!Objects.equals(searchField.getText(), "")) {
-                    searchMovie(searchField.getText());
-                }
-                activateMenu(event);
-            }else if(event.getTarget() == sortingChoice){
-                if (!Objects.equals(searchField.getText(), "")) {
-                    searchMovie(searchField.getText());
-                }
-                if(sortedByGenre) {
-                    filterMoviesByGenrePrep(event);
-                }
-            }else {
-                if(sortedByGenre) {
-                    filterMoviesByGenrePrep(event);
-                }
-                if(sortedByTitle){
-                    sortMoviesByTitlePreparation(event);
-                }
-            }
-        }
-        if (movieList.size() == 0) {
-            movieList.add(emptyMovie);
-        }
-    }
-    */
 
 }
 
