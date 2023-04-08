@@ -100,13 +100,6 @@ public class Movie {
         return movieList;
     }
 
-    public Object getDirector() {
-        return null;
-    }
-
-    public int getYear() {
-        return 0;
-    }
 }
 
 
