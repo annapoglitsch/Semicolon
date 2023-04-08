@@ -7,11 +7,9 @@ import javafx.scene.layout.*;
 
 public class MovieCard extends ListCell<Movie> {
 
-    private final Label title = new Label();
-    private final Label description = new Label();
-    private final Label genres = new Label();
+    private final Label title = new Label(), genres = new Label(), description = new Label(), rating = new Label();
     private final ImageView cover = new ImageView();
-    private final VBox card = new VBox(cover, title, description, genres);
+    private final VBox card = new VBox(cover, title, rating, description, genres);
 
     @Override
     protected void updateItem(Movie movie, boolean empty) {
@@ -27,7 +25,7 @@ public class MovieCard extends ListCell<Movie> {
             setGraphic(null);
         } else {
             this.getStyleClass().add("movie-cell");
-            title.setText(movie.title);
+            title.setText(movie.title + " (" + (int) movie.releaseYear + ")");
             if(movie.description != null){
                 description.setText(movie.description);
             }else{
@@ -41,6 +39,9 @@ public class MovieCard extends ListCell<Movie> {
                     genreList += (", " + movie.genres[i]);
                 }
             }
+            rating.setText("FHMDb rating: " + movie.rating + "/10");
+            rating.getStyleClass().clear();
+            rating.getStyleClass().add("description-text-color");
             genres.setText(genreList);
             genres.getStyleClass().add("description-text-color");
             genres.setWrapText(true);

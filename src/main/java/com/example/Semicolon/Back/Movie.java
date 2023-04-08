@@ -48,8 +48,7 @@ public class Movie {
             while (scanner.hasNext()) { //scan the webpage and save it as a string
                 temp += scanner.nextLine();
             }
-            movieList = new Gson().fromJson(temp, new TypeToken<List<Movie>>() {
-            }.getType()); // get json from string
+            movieList = new Gson().fromJson(temp, new TypeToken<List<Movie>>() {}.getType()); // get json from string
             return movieList;
         } catch (FileNotFoundException | MalformedURLException f) { // url not valid
             movieList.add(new Movie("error", " ", allGenres, 0, " ", "Error-404", 0, null, null, null, 0));

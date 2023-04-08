@@ -38,7 +38,7 @@ public class HomeController implements Initializable {
             "WESTERN"};
     private ObservableList<String> allYears = FXCollections.observableArrayList();
     public boolean menuActive = false, sortedByGenre = false, sortedByTitle = false, checkedOthers = false;
-    private String URL, query = "", genre = "", title = "", rating = "", releaseYear = "";
+    private String URL = "https://prog2.fh-campuswien.ac.at/movies", query = "", genre = "", title = "", rating = "", releaseYear = "";
     //                                  ******Lists******
     private Movie movie = new Movie(), emptyMovie = new Movie("Movie-list-is-empty", "zzzzzzzzzzzzzzzzzzzzz", allGenres, 0, "", "No Movies", 0, null, null, null, 0);
     private MovieAPI api = new MovieAPI();
@@ -46,7 +46,7 @@ public class HomeController implements Initializable {
     //public List<Movie> originalMovieList = movie.staticMovieList();
     public ObservableList<Movie> movieList = FXCollections.observableArrayList();
     private ObservableList<String> genres = FXCollections.observableList(Arrays.asList(allGenres));
-    public ObservableList<String> sortingKeywords = FXCollections.observableList(Arrays.asList("---NO SORTING---", "A-Z", "Z-A"));
+    public ObservableList<String> sortingKeywords = FXCollections.observableList(Arrays.asList("---NO SORTING---", "A-Z", "Z-A", "Rating - High to Low", "Rating - Low to High", "New to Old", "Old to New"));
 
                                              /** Methods */
     @FXML
@@ -114,11 +114,12 @@ public class HomeController implements Initializable {
     public void filterMoviesByGenrePrep(ActionEvent event) {      //prep so that choiceBox genre is not null
         filterMoviesByGenre(event, genresChoice.getValue());
         setYearChoice();
-        if(movieList.size() == 0){
+        if (movieList.size() == 0) {
             movieList.add(emptyMovie);
         }
     }
-    public void filterByReleaseYearPrep(ActionEvent event){
+
+    public void filterByReleaseYearPrep(ActionEvent event) {
         filterByReleaseYear(event, releaseYearChoice.getValue());
     }
 
@@ -126,7 +127,7 @@ public class HomeController implements Initializable {
     public void searchMoviePrep() {
         searchMovies(searchField.getText().toLowerCase()); //so that searchField is not null
         setYearChoice();
-        if(movieList.size() == 0){
+        if (movieList.size() == 0) {
             movieList.add(emptyMovie);
         }
     }
@@ -197,42 +198,71 @@ public class HomeController implements Initializable {
         changeURL(keyWord, "query");
     }
 
-
     public ObservableList<Movie> sortMoviesByTitle(ActionEvent event, String keyWord) {
-        if (HomeGrid == null) {
-            event = new ActionEvent();
-        }
-        if (keyWord.equals("A-Z")) {
-            sortedByTitle = true;
-            Collections.sort(movieList, new Comparator<Movie>() {
-                @Override
-                public int compare(Movie o1, Movie o2) { //compare class compare two movie title
-                    return o1.title.compareTo(o2.title);
-                }
-            });
-            return movieList;
-        } else if (keyWord.equals("Z-A")) {
-            sortedByTitle = true;
-            Collections.sort(movieList, new Comparator<Movie>() {
-                @Override
-                public int compare(Movie o1, Movie o2) {
-                    return o2.title.compareTo(o1.title);
-                }                                       //same structure as a-z but o1 and o2 changed position
-            });
-            return movieList;
-        } else if (keyWord.equals("---NO SORTING---")) { //if you want to undo sorting movieList is originalList
+        sortedByTitle = true;
+        if (Objects.equals(keyWord, "---NO SORTING---")) {
             sortedByTitle = false;
             setMovieList();
             return movieList;
         }
-        return null;
-
+        if (sortingKeywords.contains(keyWord)) {
+            Collections.sort(movieList, new Comparator<Movie>() {
+                @Override
+                public int compare(Movie o1, Movie o2) {
+                    return HomeController.this.compare(o1, o2, keyWord);
+                }
+            });
+        }
+        return movieList;
     }
 
+    private int compare(Movie m1, Movie m2, String keyWord) {
+        int value = 0;
+        String type = null;
+        switch (keyWord) {
+            case "Rating - Low to High":
+                value = -1;
+                type = "Rating";
+                break;
+            case "Rating - High to Low":
+                value = 1;
+                type = "Rating";
+                break;
+            case "Old to New":
+                value = -1;
+                type = "Year";
+                break;
+            case "New to Old":
+                value = 1;
+                type = "Year";
+                break;
+            case "A-Z":
+                value = 1;
+                type = "Alphabetical";
+                break;
+            case "Z-A":
+                value = -1;
+                type = "Alphabetical";
+                break;
+        }
+        if ((m1.rating > m2.rating && Objects.equals(type, "Rating")) || (m1.releaseYear > m2.releaseYear && Objects.equals(type, "Year"))) {
+            return -value;
+        } else if ((m1.rating < m2.rating && Objects.equals(type, "Rating")) || (m1.releaseYear < m2.releaseYear && Objects.equals(type, "Year"))) {
+            return value;
+        } else if (value == 1 && Objects.equals(type, "Alphabetical")) {
+            return m1.title.compareTo(m2.title);
+        } else if (value == -1 && Objects.equals(type, "Alphabetical")) {
+            return m2.title.compareTo(m1.title);
+        } else {
+            return 0;
+        }
+    }
+
+    /**
+     * Stream Methods
+     */
     public void setYearChoice() {
-        System.out.println(movieList);
-        if(movieList.size() != 0) {
-            System.out.println("test");
+        if (movieList.size() != 0) {
             double endingYear, startingYear;
             endingYear = movieList.stream().max(Comparator.comparing(Movie::getReleaseYear)).orElseThrow(NoSuchElementException::new).releaseYear;
             startingYear = movieList.stream().min(Comparator.comparing(Movie::getReleaseYear)).orElseThrow(NoSuchElementException::new).releaseYear;
@@ -244,29 +274,27 @@ public class HomeController implements Initializable {
             releaseYearChoice.setItems(allYears);
         }
     }
-                                        /** Stream Methods */
-    String getMostPopularActor(List<Movie> movies){
-    List<String> newList = new ArrayList<>();
 
-         movies.stream().map(m -> newList.addAll(Arrays.asList(m.mainCast))).collect(Collectors.toList());
+    String getMostPopularActor(List<Movie> movies) {
+        List<String> newList = new ArrayList<>();
+        movies.stream().map(m -> newList.addAll(Arrays.asList(m.mainCast))).collect(Collectors.toList());
         // newList.stream().max(String).stream().count();
-       Map<String, Long> test = newList.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        Map<String, Long> test = newList.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
         Map.Entry<String, Long> maxEntry = Collections.max(test.entrySet(), new Comparator<Map.Entry<String, Long>>() {
             @Override
             public int compare(Map.Entry<String, Long> o1, Map.Entry<String, Long> o2) {
                 return o1.getValue().compareTo(o2.getValue());
             }
         });
-       return maxEntry.getKey();
-       // return "Toni";
-        }
-   int getLongestMovieTitle(List<Movie> movies) {
+        return maxEntry.getKey();
+        // return "Toni";
+    }
 
-      List<String> newMovieTitleList = movies.stream().map(m -> m.title).collect(Collectors.toList());
+    int getLongestMovieTitle(List<Movie> movies) {
+        List<String> newMovieTitleList = movies.stream().map(m -> m.title).collect(Collectors.toList());
+        return newMovieTitleList.stream().mapToInt(String::length).max().orElse(0); //or Else damit es kein OptionalInt ist
 
-      return newMovieTitleList.stream().mapToInt(String::length).max().orElse(0); //or Else damit es kein OptionalInt ist
-
-   }
+    }
 
 
      /**
@@ -298,20 +326,17 @@ public class HomeController implements Initializable {
 
      public static void main(String[] args) {
         HomeController controller = new HomeController();
-        List<String> newMovieTitleList = new ArrayList<>();
+        /*List<String> newMovieTitleList = new ArrayList<>();
 
         controller.originalMovieList.stream().map(m -> newMovieTitleList.addAll(Arrays.asList(m.title))).collect(Collectors.toList()); //add movie titles to new list
         newMovieTitleList.stream().map(m -> m.replaceAll("\\s+","")); //replace white spaces
         //System.out.println(newMovieTitleList.stream().max(Comparator.comparing(String::length)));
         newMovieTitleList.stream().filter(m -> m.length() == 0);    //filter movies with no title - exception
         newMovieTitleList.stream().max(Comparator.comparing(String::length));   //compare length of title
-        //System.out.println(newMovieTitleList);
-
-
-
+        //System.out.println(newMovieTitleList);*/
+        System.out.println(controller.countMoviesFrom(controller.originalMovieList, "Peter Jackson"));
+        System.out.println(controller.getMoviesBetweenYears(controller.originalMovieList, 1900, 3000));
+        System.out.println(controller.getMostPopularActor(controller.originalMovieList));
+        System.out.println(controller.getLongestMovieTitle(controller.originalMovieList));
     }
-
-
 }
-
-

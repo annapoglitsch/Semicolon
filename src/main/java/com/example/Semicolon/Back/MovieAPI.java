@@ -16,10 +16,10 @@ public class MovieAPI {
         List<Movie> movieList;
         URL url;
         try {
+            System.out.println(path);
             url = new URL(path);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
-            System.out.println();
             String temp = new BufferedReader(new InputStreamReader(connection.getInputStream(), Charset.defaultCharset())).lines().collect(Collectors.joining("\n"));
             movieList = new Gson().fromJson(temp, new TypeToken<List<Movie>>(){}.getType());
         } catch (MalformedURLException e) {
