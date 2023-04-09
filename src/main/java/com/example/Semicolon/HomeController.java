@@ -12,6 +12,7 @@ import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 
 import java.net.URL;
+import java.security.Key;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -278,15 +279,15 @@ public class HomeController implements Initializable {
     String getMostPopularActor(List<Movie> movies) {
         List<String> newList = new ArrayList<>();
         movies.stream().map(m -> newList.addAll(Arrays.asList(m.mainCast))).collect(Collectors.toList());
-        // newList.stream().max(String).stream().count();
-        Map<String, Long> test = newList.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-        Map.Entry<String, Long> maxEntry = Collections.max(test.entrySet(), new Comparator<Map.Entry<String, Long>>() {
+        Map<String, Long> newMap = newList.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        return newMap.entrySet().stream().max(Map.Entry.comparingByValue()).map(Map.Entry::getKey).orElse(null);
+        /*Map.Entry<String, Long> maxEntry = Collections.max(test.entrySet(), new Comparator<Map.Entry<String, Long>>() {
             @Override
             public int compare(Map.Entry<String, Long> o1, Map.Entry<String, Long> o2) {
                 return o1.getValue().compareTo(o2.getValue());
             }
         });
-        return maxEntry.getKey();
+        return maxEntry.getKey();*/
         // return "Toni";
     }
 
@@ -334,6 +335,9 @@ public class HomeController implements Initializable {
         newMovieTitleList.stream().filter(m -> m.length() == 0);    //filter movies with no title - exception
         newMovieTitleList.stream().max(Comparator.comparing(String::length));   //compare length of title
         //System.out.println(newMovieTitleList);*/
+         List<String> newMovieTitleList = new ArrayList<>();
+         controller.originalMovieList.stream().map(m -> newMovieTitleList.addAll(Arrays.asList(m.mainCast))).collect(Collectors.toList());
+         System.out.println(newMovieTitleList);
         System.out.println(controller.countMoviesFrom(controller.originalMovieList, "Peter Jackson"));
         System.out.println(controller.getMoviesBetweenYears(controller.originalMovieList, 1900, 3000));
         System.out.println(controller.getMostPopularActor(controller.originalMovieList));
