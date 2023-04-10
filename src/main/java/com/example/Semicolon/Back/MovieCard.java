@@ -68,6 +68,7 @@ public class MovieCard extends ListCell<Movie> {
         title.fontProperty().set(title.getFont().font(20));
         description.setText("");
         genres.setText("");
+        rating.setText("");
         card.alignmentProperty().set(javafx.geometry.Pos.CENTER_LEFT);
         card.spacingProperty().set(10);
         card.setPadding(new Insets(5,30,5,10));
