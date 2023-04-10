@@ -177,7 +177,7 @@ public class HomeController implements Initializable {
     public void filterByRatingFrom(int value) {
         ratingLabel.setText(String.valueOf(value / 10.));
         String keyWord;
-        if (value / 10. >= 10) {
+        if (value / 10. <= 0) {
             keyWord = "RESET";
         } else {
             keyWord = String.valueOf(value / 10.);
@@ -307,7 +307,7 @@ public class HomeController implements Initializable {
       */
      public long countMoviesFrom(List<Movie> movies, String director) {
          return movies.stream()
-                 .filter(movie -> movie.directors != null && movie.directors.equals(director))
+                 .filter(movie -> movie.directors != null && Arrays.asList(movie.directors).contains(director))
                  .count();
      }
 
@@ -322,7 +322,7 @@ public class HomeController implements Initializable {
      public List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear) {
          return movies.stream()
                  .filter(movie -> movie.releaseYear >= startYear && movie.releaseYear <= endYear)
-                 .collect(Collectors.toList());
+                 .toList();
      }
 
      public static void main(String[] args) {
