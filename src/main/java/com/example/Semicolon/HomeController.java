@@ -17,7 +17,7 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-                                                /** Variables */
+/** Variables */
 public class HomeController implements Initializable {
     @FXML
     GridPane HomeGrid, menu;
@@ -49,7 +49,7 @@ public class HomeController implements Initializable {
     private ObservableList<String> genres = FXCollections.observableList(Arrays.asList(allGenres));
     public ObservableList<String> sortingKeywords = FXCollections.observableList(Arrays.asList("---NO SORTING---", "A-Z", "Z-A", "Rating - High to Low", "Rating - Low to High", "New to Old", "Old to New"));
 
-                                                /** Methods */
+    /** Methods */
     @FXML
     private void activateMenu(ActionEvent event) { /**make menu slide down/up */
         if (event.getTarget() == advancedOptions || event.getTarget() == genresChoice) {
@@ -259,7 +259,7 @@ public class HomeController implements Initializable {
         }
     }
 
-                                        /** Stream Methods */
+    /** Stream Methods */
     public void setYearChoice() {
         if (movieList.size() != 0) {
             double endingYear, startingYear;
@@ -288,38 +288,35 @@ public class HomeController implements Initializable {
     }
 
 
-     /**
-      * Gibt die Anzahl der Filme eines bestimmten Regisseurs zurück.
-      *
-      * @param movies    Liste von Filmen
-      * @param director  Regisseur, dessen Filme gezählt werden sollen
-      * @return Anzahl der Filme des Regisseurs
-      */
-     public long countMoviesFrom(List<Movie> movies, String director) {
-         return movies.stream()
-                 .filter(movie -> movie.directors != null && Arrays.asList(movie.directors).contains(director))
-                 .count();
-     }
+    /**
+     * Gibt die Anzahl der Filme eines bestimmten Regisseurs zurück.
+     *
+     * @param movies    Liste von Filmen
+     * @param director  Regisseur, dessen Filme gezählt werden sollen
+     * @return Anzahl der Filme des Regisseurs
+     */
+    public long countMoviesFrom(List<Movie> movies, String director) {
+        return movies.stream()
+                .filter(movie -> movie.directors != null && Arrays.asList(movie.directors).contains(director))
+                .count();
+    }
 
-     /**
-      * Gibt die Filme zurück, die zwischen zwei gegebenen Jahren veröffentlicht wurden.
-      *
-      * @param movies     Liste von Filmen
-      * @param startYear  Anfangsjahr
-      * @param endYear    Endjahr
-      * @return Liste von Filmen, die zwischen startYear und endYear veröffentlicht wurden
-      */
-     public List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear) {
-         return movies.stream()
-                 .filter(movie -> movie.releaseYear >= startYear && movie.releaseYear <= endYear)
-                 .toList();
-     }
+    /**
+     * Gibt die Filme zurück, die zwischen zwei gegebenen Jahren veröffentlicht wurden.
+     *
+     * @param movies     Liste von Filmen
+     * @param startYear  Anfangsjahr
+     * @param endYear    Endjahr
+     * @return Liste von Filmen, die zwischen startYear und endYear veröffentlicht wurden
+     */
+    public List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear) {
+        return movies.stream()
+                .filter(movie -> movie.releaseYear >= startYear && movie.releaseYear <= endYear)
+                .toList();
+    }
 
-     public static void main(String[] args) {
+    public static void main(String[] args) {
         HomeController controller = new HomeController();
-         List<String> newMovieTitleList = new ArrayList<>();
-         controller.originalMovieList.stream().map(m -> newMovieTitleList.addAll(Arrays.asList(m.mainCast))).toList();
-        // System.out.println(newMovieTitleList);
         System.out.println(controller.countMoviesFrom(controller.originalMovieList, "Peter Jackson"));
         System.out.println(controller.getMoviesBetweenYears(controller.originalMovieList, 1900, 3000));
         System.out.println(controller.getMostPopularActor(controller.originalMovieList));
