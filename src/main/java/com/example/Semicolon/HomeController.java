@@ -17,7 +17,7 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-                                         /** Variables */
+                                                /** Variables */
 public class HomeController implements Initializable {
     @FXML
     GridPane HomeGrid, menu;
@@ -49,7 +49,7 @@ public class HomeController implements Initializable {
     private ObservableList<String> genres = FXCollections.observableList(Arrays.asList(allGenres));
     public ObservableList<String> sortingKeywords = FXCollections.observableList(Arrays.asList("---NO SORTING---", "A-Z", "Z-A", "Rating - High to Low", "Rating - Low to High", "New to Old", "Old to New"));
 
-                                             /** Methods */
+                                                /** Methods */
     @FXML
     private void activateMenu(ActionEvent event) { //make menu slide down/up
         if (event.getTarget() == advancedOptions || event.getTarget() == genresChoice) {
@@ -90,8 +90,8 @@ public class HomeController implements Initializable {
         setYearChoice();
         releaseYearChoice.setItems(allYears);
         releaseYearChoice.setValue("---All YEARS---");
-        sortingChoice.setOnAction(this::sortMoviesByTitlePreparation);  //choiceBox sorting set on action
-        genresChoice.setOnAction(this::filterMoviesByGenrePrep);          //choiceBox genre set on action
+        sortingChoice.setOnAction(this::sortMoviesByTitlePreparation);  /** choiceBox sorting set on action */
+        genresChoice.setOnAction(this::filterMoviesByGenrePrep);          /** choiceBox genre set on action */
         searchField.setOnKeyTyped(event -> {
             searchMoviePrep();
         });
@@ -112,7 +112,7 @@ public class HomeController implements Initializable {
         sortMoviesByTitle(event, sortingChoice.getValue());
     }
 
-    public void filterMoviesByGenrePrep(ActionEvent event) {      //prep so that choiceBox genre is not null
+    public void filterMoviesByGenrePrep(ActionEvent event) {      /** prep so that choiceBox genre is not null */
         filterMoviesByGenre(event, genresChoice.getValue());
         setYearChoice();
         if (movieList.size() == 0) {
@@ -126,7 +126,7 @@ public class HomeController implements Initializable {
 
     @FXML
     public void searchMoviePrep() {
-        searchMovies(searchField.getText().toLowerCase()); //so that searchField is not null
+        searchMovies(searchField.getText().toLowerCase()); /** so that searchField is not null */
         setYearChoice();
         if (movieList.size() == 0) {
             movieList.add(emptyMovie);
@@ -259,9 +259,7 @@ public class HomeController implements Initializable {
         }
     }
 
-    /**
-     * Stream Methods
-     */
+                                        /** Stream Methods */
     public void setYearChoice() {
         if (movieList.size() != 0) {
             double endingYear, startingYear;
@@ -277,23 +275,15 @@ public class HomeController implements Initializable {
     }
 
     String getMostPopularActor(List<Movie> movies) {
-        List<String> newList = new ArrayList<>();
-        movies.stream().map(m -> newList.addAll(Arrays.asList(m.mainCast))).collect(Collectors.toList());
-        Map<String, Long> newMap = newList.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-        return newMap.entrySet().stream().max(Map.Entry.comparingByValue()).map(Map.Entry::getKey).orElse(null);
-        /*Map.Entry<String, Long> maxEntry = Collections.max(test.entrySet(), new Comparator<Map.Entry<String, Long>>() {
-            @Override
-            public int compare(Map.Entry<String, Long> o1, Map.Entry<String, Long> o2) {
-                return o1.getValue().compareTo(o2.getValue());
-            }
-        });
-        return maxEntry.getKey();*/
-        // return "Toni";
+        List<String> newList = new ArrayList<>();   /** erstellt neue Liste*/
+        movies.stream().map(m -> newList.addAll(Arrays.asList(m.mainCast))).toList();   /** added den maincast zur neuen Liste*/
+        Map<String, Long> newMap = newList.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting())); /** grouped alle doppelten Cast zu einem und zählt Auftreten*/
+        return newMap.entrySet().stream().max(Map.Entry.comparingByValue()).map(Map.Entry::getKey).orElse(null); /** liefert höchsten Wert indem verglichen wird*/
     }
 
     int getLongestMovieTitle(List<Movie> movies) {
-        List<String> newMovieTitleList = movies.stream().map(m -> m.title).collect(Collectors.toList());
-        return newMovieTitleList.stream().mapToInt(String::length).max().orElse(0); //or Else damit es kein OptionalInt ist
+        List<String> newMovieTitleList = movies.stream().map(m -> m.title).toList(); /** fügt titel zur Liste hinzu*/
+        return newMovieTitleList.stream().mapToInt(String::length).max().orElse(0); /** or Else damit es kein OptionalInt ist */
 
     }
 
@@ -307,7 +297,7 @@ public class HomeController implements Initializable {
       */
      public long countMoviesFrom(List<Movie> movies, String director) {
          return movies.stream()
-                 .filter(movie -> movie.directors != null && movie.directors.equals(director))
+                 .filter(movie -> movie.directors != null && Arrays.asList(movie.directors).contains(director))
                  .count();
      }
 
@@ -327,17 +317,9 @@ public class HomeController implements Initializable {
 
      public static void main(String[] args) {
         HomeController controller = new HomeController();
-        /*List<String> newMovieTitleList = new ArrayList<>();
-
-        controller.originalMovieList.stream().map(m -> newMovieTitleList.addAll(Arrays.asList(m.title))).collect(Collectors.toList()); //add movie titles to new list
-        newMovieTitleList.stream().map(m -> m.replaceAll("\\s+","")); //replace white spaces
-        //System.out.println(newMovieTitleList.stream().max(Comparator.comparing(String::length)));
-        newMovieTitleList.stream().filter(m -> m.length() == 0);    //filter movies with no title - exception
-        newMovieTitleList.stream().max(Comparator.comparing(String::length));   //compare length of title
-        //System.out.println(newMovieTitleList);*/
          List<String> newMovieTitleList = new ArrayList<>();
-         controller.originalMovieList.stream().map(m -> newMovieTitleList.addAll(Arrays.asList(m.mainCast))).collect(Collectors.toList());
-         System.out.println(newMovieTitleList);
+         controller.originalMovieList.stream().map(m -> newMovieTitleList.addAll(Arrays.asList(m.mainCast))).toList();
+        // System.out.println(newMovieTitleList);
         System.out.println(controller.countMoviesFrom(controller.originalMovieList, "Peter Jackson"));
         System.out.println(controller.getMoviesBetweenYears(controller.originalMovieList, 1900, 3000));
         System.out.println(controller.getMostPopularActor(controller.originalMovieList));

@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="632c3f87-378d-459f-993b-b51a9090f282" name="Changes" comment="Anna - second method is done - started first method to be shorter">
+    <list default="true" id="632c3f87-378d-459f-993b-b51a9090f282" name="Changes" comment="Anna - made first method shorter and simpler">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/HomeController.java" afterDir="false" />
     </list>
@@ -411,7 +411,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680951372773</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Anna - made first method shorter and simpler">
+      <created>1681038905530</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1681038905530</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -477,7 +484,8 @@
     <MESSAGE value="Anna - added label and second method" />
     <MESSAGE value="Anna - so close to finish second method, letting my colleagues look through it" />
     <MESSAGE value="Anna - second method is done - started first method to be shorter" />
-    <option name="LAST_COMMIT_MESSAGE" value="Anna - second method is done - started first method to be shorter" />
+    <MESSAGE value="Anna - made first method shorter and simpler" />
+    <option name="LAST_COMMIT_MESSAGE" value="Anna - made first method shorter and simpler" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
