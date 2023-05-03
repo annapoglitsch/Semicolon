@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="632c3f87-378d-459f-993b-b51a9090f282" name="Changes" comment="Anna - made first method shorter and simpler"/>
+    <list default="true" id="632c3f87-378d-459f-993b-b51a9090f282" name="Changes" comment="Anna - small fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    <list default="true" id="632c3f87-378d-459f-993b-b51a9090f282" name="Changes" comment="Anna - second method is done - started first method to be shorter">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/HomeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/Semicolon/test.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/Semicolon/test.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,7 +84,7 @@
       <recent name="com.example.Semicolon" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.HomeController">
+  <component name="RunManager" selected="Application.FhmdbApplication">
     <configuration default="true" type="DjangoTestsConfigurationType">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -191,6 +190,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="MovieAPI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.Semicolon.Back.MovieAPI" />
+      <module name="Semicolon" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.Semicolon.Back.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="SendEmail" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.Semicolon.Back.SendEmail" />
       <module name="semicolon" />
@@ -250,36 +262,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MovieTest.empty_movie_list_after_sorted_by_genre" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Semicolon" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.Semicolon.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.example.Semicolon" />
-      <option name="MAIN_CLASS_NAME" value="com.example.Semicolon.MovieTest" />
-      <option name="METHOD_NAME" value="empty_movie_list_after_sorted_by_genre" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
+      <item itemvalue="Application.MovieAPI" />
       <item itemvalue="Application.HomeController" />
       <item itemvalue="Application.SendEmail" />
       <item itemvalue="Application.FhmdbApplication" />
-      <item itemvalue="JUnit.MovieTest.empty_movie_list_after_sorted_by_genre" />
       <item itemvalue="JUnit.MovieTest" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.HomeController" />
         <item itemvalue="Application.FhmdbApplication" />
+        <item itemvalue="Application.MovieAPI" />
+        <item itemvalue="Application.HomeController" />
         <item itemvalue="Application.SendEmail" />
         <item itemvalue="JUnit.MovieTest" />
-        <item itemvalue="Application.FhmdbApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -419,7 +415,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681038905530</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Anna - small fix">
+      <created>1681143772330</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1681143772330</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -486,7 +489,8 @@
     <MESSAGE value="Anna - so close to finish second method, letting my colleagues look through it" />
     <MESSAGE value="Anna - second method is done - started first method to be shorter" />
     <MESSAGE value="Anna - made first method shorter and simpler" />
-    <option name="LAST_COMMIT_MESSAGE" value="Anna - made first method shorter and simpler" />
+    <MESSAGE value="Anna - small fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Anna - small fix" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
