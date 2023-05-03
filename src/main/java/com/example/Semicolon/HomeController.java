@@ -17,7 +17,7 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-                                                /** Variables */
+/** Variables */
 public class HomeController implements Initializable {
     @FXML
     GridPane HomeGrid, menu;
@@ -49,7 +49,7 @@ public class HomeController implements Initializable {
     private ObservableList<String> genres = FXCollections.observableList(Arrays.asList(allGenres));
     public ObservableList<String> sortingKeywords = FXCollections.observableList(Arrays.asList("---NO SORTING---", "A-Z", "Z-A", "Rating - High to Low", "Rating - Low to High", "New to Old", "Old to New"));
 
-                                                /** Methods */
+    /** Methods */
     @FXML
     private void activateMenu(ActionEvent event) { /**make menu slide down/up */
         if (event.getTarget() == advancedOptions || event.getTarget() == genresChoice) {
@@ -78,6 +78,7 @@ public class HomeController implements Initializable {
         movieDisplay.setCellFactory(movieDisplay -> new MovieCard());
         if (originalMovieList.size() > 1) {
             searchField.setPromptText(originalMovieList.get(new Random().nextInt(originalMovieList.size() - 1)).title);
+            setYearChoice();
         } else if (!Objects.equals(originalMovieList.get(0).id, "error")) {
             searchField.setPromptText(originalMovieList.get(0).title);
         } else {
@@ -87,7 +88,6 @@ public class HomeController implements Initializable {
         genresChoice.setValue("---ALL GENRES---");
         sortingChoice.setItems(sortingKeywords);
         sortingChoice.setValue("---NO SORTING---");
-        setYearChoice();
         releaseYearChoice.setItems(allYears);
         releaseYearChoice.setValue("---All YEARS---");
         sortingChoice.setOnAction(this::sortMoviesByTitlePreparation);  /** choiceBox sorting set on action */
@@ -103,6 +103,8 @@ public class HomeController implements Initializable {
                 setYearChoice();
                 if(movieList.size() == 0){
                     movieList.add(emptyMovie);
+                }else {
+                    setYearChoice();
                 }
             }
         });
@@ -114,9 +116,10 @@ public class HomeController implements Initializable {
 
     public void filterMoviesByGenrePrep(ActionEvent event) {      /** prep so that choiceBox genre is not null */
         filterMoviesByGenre(event, genresChoice.getValue());
-        setYearChoice();
         if (movieList.size() == 0) {
             movieList.add(emptyMovie);
+        }else {
+            setYearChoice();
         }
     }
 
@@ -127,14 +130,16 @@ public class HomeController implements Initializable {
     @FXML
     public void searchMoviePrep() {
         searchMovies(searchField.getText().toLowerCase()); /** so that searchField is not null */
-        setYearChoice();
         if (movieList.size() == 0) {
             movieList.add(emptyMovie);
+        }else {
+            setYearChoice();
         }
     }
 
     public void changeURL(String addon, String source) {
-        addon = addon.replaceAll(" ", "%20");
+        if(addon != null) {
+            addon = addon.replaceAll(" ", "%20");
         if (addon.equals("RESET")) {
             addon = "";
         }
@@ -157,6 +162,7 @@ public class HomeController implements Initializable {
         }
         URL = "https://prog2.fh-campuswien.ac.at/movies?query=" + query + "&genre=" + genre + "&title=" + title + "&ratingFrom=" + rating + "&releaseYear=" + releaseYear;
         setMovieList();
+        }
     }
 
     private void setMovieList() {
@@ -259,7 +265,7 @@ public class HomeController implements Initializable {
         }
     }
 
-                                        /** Stream Methods */
+    /** Stream Methods */
     public void setYearChoice() {
         if (movieList.size() != 0) {
             double endingYear, startingYear;
@@ -267,10 +273,11 @@ public class HomeController implements Initializable {
             startingYear = movieList.stream().min(Comparator.comparing(Movie::getReleaseYear)).orElseThrow(NoSuchElementException::new).releaseYear;
             allYears.clear();
             allYears.add("---All Years---");
-            for (double currentYear = startingYear; currentYear < endingYear; currentYear++) {
+            for (double currentYear = startingYear; currentYear <= endingYear; currentYear++) {
                 allYears.add(1, String.valueOf((int) currentYear));
             }
             releaseYearChoice.setItems(allYears);
+            releaseYearChoice.setValue("---All Years---");
         }
     }
 
@@ -288,38 +295,35 @@ public class HomeController implements Initializable {
     }
 
 
-     /**
-      * Gibt die Anzahl der Filme eines bestimmten Regisseurs zurück.
-      *
-      * @param movies    Liste von Filmen
-      * @param director  Regisseur, dessen Filme gezählt werden sollen
-      * @return Anzahl der Filme des Regisseurs
-      */
-     public long countMoviesFrom(List<Movie> movies, String director) {
-         return movies.stream()
-                 .filter(movie -> movie.directors != null && Arrays.asList(movie.directors).contains(director))
-                 .count();
-     }
+    /**
+     * Gibt die Anzahl der Filme eines bestimmten Regisseurs zurück.
+     *
+     * @param movies    Liste von Filmen
+     * @param director  Regisseur, dessen Filme gezählt werden sollen
+     * @return Anzahl der Filme des Regisseurs
+     */
+    public long countMoviesFrom(List<Movie> movies, String director) {
+        return movies.stream()
+                .filter(movie -> movie.directors != null && Arrays.asList(movie.directors).contains(director))
+                .count();
+    }
 
-     /**
-      * Gibt die Filme zurück, die zwischen zwei gegebenen Jahren veröffentlicht wurden.
-      *
-      * @param movies     Liste von Filmen
-      * @param startYear  Anfangsjahr
-      * @param endYear    Endjahr
-      * @return Liste von Filmen, die zwischen startYear und endYear veröffentlicht wurden
-      */
-     public List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear) {
-         return movies.stream()
-                 .filter(movie -> movie.releaseYear >= startYear && movie.releaseYear <= endYear)
-                 .toList();
-     }
+    /**
+     * Gibt die Filme zurück, die zwischen zwei gegebenen Jahren veröffentlicht wurden.
+     *
+     * @param movies     Liste von Filmen
+     * @param startYear  Anfangsjahr
+     * @param endYear    Endjahr
+     * @return Liste von Filmen, die zwischen startYear und endYear veröffentlicht wurden
+     */
+    public List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear) {
+        return movies.stream()
+                .filter(movie -> movie.releaseYear >= startYear && movie.releaseYear <= endYear)
+                .toList();
+    }
 
-     public static void main(String[] args) {
+    public static void main(String[] args) {
         HomeController controller = new HomeController();
-         List<String> newMovieTitleList = new ArrayList<>();
-         controller.originalMovieList.stream().map(m -> newMovieTitleList.addAll(Arrays.asList(m.mainCast))).toList();
-        // System.out.println(newMovieTitleList);
         System.out.println(controller.countMoviesFrom(controller.originalMovieList, "Peter Jackson"));
         System.out.println(controller.getMoviesBetweenYears(controller.originalMovieList, 1900, 3000));
         System.out.println(controller.getMostPopularActor(controller.originalMovieList));
