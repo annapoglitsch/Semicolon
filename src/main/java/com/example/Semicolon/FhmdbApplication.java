@@ -1,11 +1,13 @@
 package com.example.Semicolon;
 
+import com.example.Semicolon.database.Database;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.*;
 
 public class FhmdbApplication extends Application {
@@ -18,6 +20,12 @@ public class FhmdbApplication extends Application {
         stage.setScene(scene);
         stage.setMaximized(true);
         stage.show();
+
+        try {
+            Database.getDatabase().testDB();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {

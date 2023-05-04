@@ -17,7 +17,9 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-/** Variables */
+/**
+ * Variables
+ */
 public class HomeController implements Initializable {
     @FXML
     GridPane HomeGrid, menu;
@@ -49,7 +51,9 @@ public class HomeController implements Initializable {
     private ObservableList<String> genres = FXCollections.observableList(Arrays.asList(allGenres));
     public ObservableList<String> sortingKeywords = FXCollections.observableList(Arrays.asList("---NO SORTING---", "A-Z", "Z-A", "Rating - High to Low", "Rating - Low to High", "New to Old", "Old to New"));
 
-    /** Methods */
+    /**
+     * Methods
+     */
     @FXML
     private void activateMenu(ActionEvent event) { /**make menu slide down/up */
         if (event.getTarget() == advancedOptions || event.getTarget() == genresChoice) {
@@ -101,9 +105,9 @@ public class HomeController implements Initializable {
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
                 filterByRatingFrom((int) ratingSlider.getValue());
                 setYearChoice();
-                if(movieList.size() == 0){
+                if (movieList.size() == 0) {
                     movieList.add(emptyMovie);
-                }else {
+                } else {
                     setYearChoice();
                 }
             }
@@ -118,7 +122,7 @@ public class HomeController implements Initializable {
         filterMoviesByGenre(event, genresChoice.getValue());
         if (movieList.size() == 0) {
             movieList.add(emptyMovie);
-        }else {
+        } else {
             setYearChoice();
         }
     }
@@ -132,36 +136,36 @@ public class HomeController implements Initializable {
         searchMovies(searchField.getText().toLowerCase()); /** so that searchField is not null */
         if (movieList.size() == 0) {
             movieList.add(emptyMovie);
-        }else {
+        } else {
             setYearChoice();
         }
     }
 
     public void changeURL(String addon, String source) {
-        if(addon != null) {
+        if (addon != null) {
             addon = addon.replaceAll(" ", "%20");
-        if (addon.equals("RESET")) {
-            addon = "";
-        }
-        switch (source) {
-            case "genre":
-                genre = addon;
-                break;
-            case "title":
-                title = addon;
-                break;
-            case "rating":
-                rating = addon;
-                break;
-            case "releaseYear":
-                releaseYear = addon;
-                break;
-            case "query":
-                query = addon;
-                break;
-        }
-        URL = "https://prog2.fh-campuswien.ac.at/movies?query=" + query + "&genre=" + genre + "&title=" + title + "&ratingFrom=" + rating + "&releaseYear=" + releaseYear;
-        setMovieList();
+            if (addon.equals("RESET")) {
+                addon = "";
+            }
+            switch (source) {
+                case "genre":
+                    genre = addon;
+                    break;
+                case "title":
+                    title = addon;
+                    break;
+                case "rating":
+                    rating = addon;
+                    break;
+                case "releaseYear":
+                    releaseYear = addon;
+                    break;
+                case "query":
+                    query = addon;
+                    break;
+            }
+            URL = "https://prog2.fh-campuswien.ac.at/movies?query=" + query + "&genre=" + genre + "&title=" + title + "&ratingFrom=" + rating + "&releaseYear=" + releaseYear;
+            setMovieList();
         }
     }
 
@@ -265,7 +269,9 @@ public class HomeController implements Initializable {
         }
     }
 
-    /** Stream Methods */
+    /**
+     * Stream Methods
+     */
     public void setYearChoice() {
         if (movieList.size() != 0) {
             double endingYear, startingYear;
@@ -291,15 +297,13 @@ public class HomeController implements Initializable {
     int getLongestMovieTitle(List<Movie> movies) {
         List<String> newMovieTitleList = movies.stream().map(m -> m.title).toList(); /** fügt titel zur Liste hinzu*/
         return newMovieTitleList.stream().mapToInt(String::length).max().orElse(0); /** or Else damit es kein OptionalInt ist */
-
     }
-
 
     /**
      * Gibt die Anzahl der Filme eines bestimmten Regisseurs zurück.
      *
-     * @param movies    Liste von Filmen
-     * @param director  Regisseur, dessen Filme gezählt werden sollen
+     * @param movies   Liste von Filmen
+     * @param director Regisseur, dessen Filme gezählt werden sollen
      * @return Anzahl der Filme des Regisseurs
      */
     public long countMoviesFrom(List<Movie> movies, String director) {
@@ -311,9 +315,9 @@ public class HomeController implements Initializable {
     /**
      * Gibt die Filme zurück, die zwischen zwei gegebenen Jahren veröffentlicht wurden.
      *
-     * @param movies     Liste von Filmen
-     * @param startYear  Anfangsjahr
-     * @param endYear    Endjahr
+     * @param movies    Liste von Filmen
+     * @param startYear Anfangsjahr
+     * @param endYear   Endjahr
      * @return Liste von Filmen, die zwischen startYear und endYear veröffentlicht wurden
      */
     public List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear) {
@@ -324,9 +328,9 @@ public class HomeController implements Initializable {
 
     public static void main(String[] args) {
         HomeController controller = new HomeController();
-        System.out.println(controller.countMoviesFrom(controller.originalMovieList, "Peter Jackson"));
-        System.out.println(controller.getMoviesBetweenYears(controller.originalMovieList, 1900, 3000));
         System.out.println(controller.getMostPopularActor(controller.originalMovieList));
         System.out.println(controller.getLongestMovieTitle(controller.originalMovieList));
+        System.out.println(controller.countMoviesFrom(controller.originalMovieList, "Peter Jackson"));
+        System.out.println(controller.getMoviesBetweenYears(controller.originalMovieList, 1900, 3000));
     }
 }
