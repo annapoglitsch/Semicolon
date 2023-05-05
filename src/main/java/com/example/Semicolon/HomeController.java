@@ -12,17 +12,18 @@ import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 
 import java.net.URL;
-import java.security.Key;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-/** Variables */
-public class HomeController implements Initializable {
+/**
+ * Variables
+ */
+public class HomeController implements Initializable{
     @FXML
     GridPane HomeGrid, menu;
     @FXML
-    Button advancedOptions;
+    Button menuButton;
     @FXML
     ChoiceBox<String> genresChoice, sortingChoice, releaseYearChoice;
     @FXML
@@ -49,26 +50,27 @@ public class HomeController implements Initializable {
     private ObservableList<String> genres = FXCollections.observableList(Arrays.asList(allGenres));
     public ObservableList<String> sortingKeywords = FXCollections.observableList(Arrays.asList("---NO SORTING---", "A-Z", "Z-A", "Rating - High to Low", "Rating - Low to High", "New to Old", "Old to New"));
 
-    /** Methods */
+    public ObservableList<String> watchList;
+    /**
+     * Methods
+     */
     @FXML
     private void activateMenu(ActionEvent event) { /**make menu slide down/up */
-        if (event.getTarget() == advancedOptions || event.getTarget() == genresChoice) {
-            TranslateTransition tt = new TranslateTransition();
-            tt.setNode(menu);
-            tt.setDuration(Duration.millis(500));
-            if (menuActive) {
-                tt.setFromY(menu.getHeight());
-                tt.setToY(0);
-                menu.setDisable(true);
-                menuActive = false;
-            } else {
-                tt.setFromY(0);
-                tt.setToY(menu.getHeight());
-                menu.setDisable(false);
-                menuActive = true;
-            }
-            tt.play();
+        TranslateTransition tt = new TranslateTransition();
+        tt.setNode(menu);
+        tt.setDuration(Duration.millis(500));
+        if (menuActive) {
+            tt.setFromY(menu.getHeight());
+            tt.setToY(0);
+            menu.setDisable(true);
+            menuActive = false;
+        } else {
+            tt.setFromY(0);
+            tt.setToY(menu.getHeight());
+            menu.setDisable(false);
+            menuActive = true;
         }
+        tt.play();
     }
 
     @Override
@@ -101,9 +103,9 @@ public class HomeController implements Initializable {
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
                 filterByRatingFrom((int) ratingSlider.getValue());
                 setYearChoice();
-                if(movieList.size() == 0){
+                if (movieList.size() == 0) {
                     movieList.add(emptyMovie);
-                }else {
+                } else {
                     setYearChoice();
                 }
             }
@@ -118,7 +120,7 @@ public class HomeController implements Initializable {
         filterMoviesByGenre(event, genresChoice.getValue());
         if (movieList.size() == 0) {
             movieList.add(emptyMovie);
-        }else {
+        } else {
             setYearChoice();
         }
     }
@@ -132,36 +134,36 @@ public class HomeController implements Initializable {
         searchMovies(searchField.getText().toLowerCase()); /** so that searchField is not null */
         if (movieList.size() == 0) {
             movieList.add(emptyMovie);
-        }else {
+        } else {
             setYearChoice();
         }
     }
 
     public void changeURL(String addon, String source) {
-        if(addon != null) {
+        if (addon != null) {
             addon = addon.replaceAll(" ", "%20");
-        if (addon.equals("RESET")) {
-            addon = "";
-        }
-        switch (source) {
-            case "genre":
-                genre = addon;
-                break;
-            case "title":
-                title = addon;
-                break;
-            case "rating":
-                rating = addon;
-                break;
-            case "releaseYear":
-                releaseYear = addon;
-                break;
-            case "query":
-                query = addon;
-                break;
-        }
-        URL = "https://prog2.fh-campuswien.ac.at/movies?query=" + query + "&genre=" + genre + "&title=" + title + "&ratingFrom=" + rating + "&releaseYear=" + releaseYear;
-        setMovieList();
+            if (addon.equals("RESET")) {
+                addon = "";
+            }
+            switch (source) {
+                case "genre":
+                    genre = addon;
+                    break;
+                case "title":
+                    title = addon;
+                    break;
+                case "rating":
+                    rating = addon;
+                    break;
+                case "releaseYear":
+                    releaseYear = addon;
+                    break;
+                case "query":
+                    query = addon;
+                    break;
+            }
+            URL = "https://prog2.fh-campuswien.ac.at/movies?query=" + query + "&genre=" + genre + "&title=" + title + "&ratingFrom=" + rating + "&releaseYear=" + releaseYear;
+            setMovieList();
         }
     }
 
@@ -265,7 +267,9 @@ public class HomeController implements Initializable {
         }
     }
 
-    /** Stream Methods */
+    /**
+     * Stream Methods
+     */
     public void setYearChoice() {
         if (movieList.size() != 0) {
             double endingYear, startingYear;
@@ -298,8 +302,8 @@ public class HomeController implements Initializable {
     /**
      * Gibt die Anzahl der Filme eines bestimmten Regisseurs zurück.
      *
-     * @param movies    Liste von Filmen
-     * @param director  Regisseur, dessen Filme gezählt werden sollen
+     * @param movies   Liste von Filmen
+     * @param director Regisseur, dessen Filme gezählt werden sollen
      * @return Anzahl der Filme des Regisseurs
      */
     public long countMoviesFrom(List<Movie> movies, String director) {
@@ -311,9 +315,9 @@ public class HomeController implements Initializable {
     /**
      * Gibt die Filme zurück, die zwischen zwei gegebenen Jahren veröffentlicht wurden.
      *
-     * @param movies     Liste von Filmen
-     * @param startYear  Anfangsjahr
-     * @param endYear    Endjahr
+     * @param movies    Liste von Filmen
+     * @param startYear Anfangsjahr
+     * @param endYear   Endjahr
      * @return Liste von Filmen, die zwischen startYear und endYear veröffentlicht wurden
      */
     public List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear) {
@@ -321,6 +325,10 @@ public class HomeController implements Initializable {
                 .filter(movie -> movie.releaseYear >= startYear && movie.releaseYear <= endYear)
                 .toList();
     }
+/**                                     Business Logic Layer*/
+private final ClickEventHandler onAddToWatchlistClicked = (clickedItem) -> {
+
+};
 
     public static void main(String[] args) {
         HomeController controller = new HomeController();

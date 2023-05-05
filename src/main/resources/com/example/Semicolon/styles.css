@@ -70,6 +70,9 @@
 #releaseYearChoice{
     -fx-font-weight: bold;
 }
-#raingtext{
+#ratingtext{
  -fx-text-fill: #da8e32;
+}
+#ratingSlider{
+-fx-pref-width: 100;
 }

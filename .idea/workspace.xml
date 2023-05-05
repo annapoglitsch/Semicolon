@@ -4,8 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="632c3f87-378d-459f-993b-b51a9090f282" name="Changes" comment="Anna - small fix">
+    <list default="true" id="632c3f87-378d-459f-993b-b51a9090f282" name="Changes" comment="Anna - Layout done so far">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/ClickEventHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/MovieCell.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/MovieCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/MovieCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/HomeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/Semicolon/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/Semicolon/styles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/Semicolon/test.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/Semicolon/test.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -17,8 +22,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -267,6 +272,7 @@
       <item itemvalue="Application.HomeController" />
       <item itemvalue="Application.SendEmail" />
       <item itemvalue="Application.FhmdbApplication" />
+      <item itemvalue="JUnit.MovieTest.empty_movie_list_after_sorted_by_genre" />
       <item itemvalue="JUnit.MovieTest" />
     </list>
     <recent_temporary>
@@ -422,7 +428,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681143772330</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Anna Layout stage 1">
+      <created>1683155144380</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1683155144380</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -490,7 +503,9 @@
     <MESSAGE value="Anna - second method is done - started first method to be shorter" />
     <MESSAGE value="Anna - made first method shorter and simpler" />
     <MESSAGE value="Anna - small fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="Anna - small fix" />
+    <MESSAGE value="Anna Layout stage 1" />
+    <MESSAGE value="Anna - Layout done so far" />
+    <option name="LAST_COMMIT_MESSAGE" value="Anna - Layout done so far" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
