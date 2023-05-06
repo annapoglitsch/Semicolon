@@ -8,7 +8,7 @@ public class WatchlistEntity {
     @DatabaseField(generatedId = true)
     public long id;
     @DatabaseField()
-    public String apild, title, description, genres, imgURL;
+    public String apiId, title, description, genres, imgURL;
     @DatabaseField()
     public int releaseYear, lenInMin;
     @DatabaseField()
@@ -16,7 +16,7 @@ public class WatchlistEntity {
     public WatchlistEntity(){}
 
     public WatchlistEntity(String apild, String title, String description, String[] genres, String imgURL,int releaseYear, int lenInMin, double rating){
-        this.apild = apild;
+        this.apiId = apild;
         this.title = title;
         this.description = description;
         this.genres = genresToString(genres);

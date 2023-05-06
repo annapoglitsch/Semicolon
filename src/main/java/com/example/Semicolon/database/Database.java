@@ -12,7 +12,7 @@ import java.sql.SQLException;
 public class Database {
     public static final String DB_URL = "jdbc:h2:file: ./db/watchlistdb", username = "user", password = "password";
     public static ConnectionSource connectionSource;
-    Dao<WatchlistEntity, Long> dao;
+    public static Dao<WatchlistEntity, Long> dao;
     private static Database instance;
     public void testDB() throws SQLException {
         WatchlistEntity entity = new WatchlistEntity("test", "test", "test", new String[]{"test", "test", "test"}, "test", 1, 2,3);
@@ -36,7 +36,12 @@ public class Database {
     private static void createTables() throws SQLException {
         TableUtils.createTableIfNotExists(connectionSource, WatchlistEntity.class);
     }
-    private static void createConneectionSource() throws SQLException {
-       connectionSource = new JdbcConnectionSource(DB_URL, username, password);
+    private static void createConneectionSource() {
+        try {
+            connectionSource = new JdbcConnectionSource(DB_URL, username, password);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

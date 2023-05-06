@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="632c3f87-378d-459f-993b-b51a9090f282" name="Changes" comment="Anna - made first method shorter and simpler"/>
+    <list default="true" id="632c3f87-378d-459f-993b-b51a9090f282" name="Changes" comment="Moritz - started Database">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    <list default="true" id="632c3f87-378d-459f-993b-b51a9090f282" name="Changes" comment="Anna - second method is done - started first method to be shorter">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/HomeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Movie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Movie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/WatchlistEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/WatchlistEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/WatchlistRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/WatchlistRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/database/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/database/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +40,11 @@
         </map>
       </branch-storage>
     </favorite-branches>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -67,17 +75,24 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;full.screen.before.presentation.mode&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;database__test&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;19&quot;,
     &quot;last_opened_file_path&quot;: &quot;S:/FH/Programieren/Java/Semicolon&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.23242188&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.37834394&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;h2&quot;
+    ]
   }
 }</component>
   <component name="RecentsManager">
@@ -85,7 +100,7 @@
       <recent name="com.example.Semicolon" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.HomeController">
+  <component name="RunManager" selected="Application.WatchlistRepository">
     <configuration default="true" type="DjangoTestsConfigurationType">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -170,20 +185,7 @@
       <module name="Semicolon" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.example.Semicolon.Back.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="HomeController" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.example.Semicolon.HomeController" />
-      <module name="Semicolon" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.Semicolon.*" />
+          <option name="PATTERN" value="com.example.Semicolon.database.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -194,6 +196,19 @@
     <configuration name="SendEmail" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.Semicolon.Back.SendEmail" />
       <module name="semicolon" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.Semicolon.database.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WatchlistRepository" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.Semicolon.Back.WatchlistRepository" />
+      <module name="Semicolon" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.example.Semicolon.Back.*" />
@@ -267,7 +282,7 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.HomeController" />
+      <item itemvalue="Application.WatchlistRepository" />
       <item itemvalue="Application.SendEmail" />
       <item itemvalue="Application.FhmdbApplication" />
       <item itemvalue="JUnit.MovieTest.empty_movie_list_after_sorted_by_genre" />
@@ -275,11 +290,11 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.HomeController" />
+        <item itemvalue="Application.WatchlistRepository" />
         <item itemvalue="Application.FhmdbApplication" />
-        <item itemvalue="Application.SendEmail" />
+        <item itemvalue="JUnit.MovieTest.empty_movie_list_after_sorted_by_genre" />
         <item itemvalue="JUnit.MovieTest" />
-        <item itemvalue="Application.FhmdbApplication" />
+        <item itemvalue="Application.SendEmail" />
       </list>
     </recent_temporary>
   </component>
@@ -327,6 +342,7 @@
       <workItem from="1680544733173" duration="735000" />
       <workItem from="1680604214538" duration="3384000" />
       <workItem from="1680708337489" duration="17829000" />
+      <workItem from="1683211631043" duration="4550000" />
     </task>
     <task id="LOCAL-00001" summary="Moritz - rough draft of main page, added Movie Objects">
       <created>1677798635847</created>
@@ -419,34 +435,20 @@
       <option name="project" value="LOCAL" />
       <updated>1681038905530</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Moritz - started Database">
+      <created>1683188500774</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1683188500774</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="origin/main" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
     <option name="RECENT_FILTERS">
       <map>
         <entry key="Branch">
@@ -473,6 +475,27 @@
         </entry>
       </map>
     </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Moritz - rough draft of main page, added Movie Objects" />
@@ -486,7 +509,8 @@
     <MESSAGE value="Anna - so close to finish second method, letting my colleagues look through it" />
     <MESSAGE value="Anna - second method is done - started first method to be shorter" />
     <MESSAGE value="Anna - made first method shorter and simpler" />
-    <option name="LAST_COMMIT_MESSAGE" value="Anna - made first method shorter and simpler" />
+    <MESSAGE value="Moritz - started Database" />
+    <option name="LAST_COMMIT_MESSAGE" value="Moritz - started Database" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
