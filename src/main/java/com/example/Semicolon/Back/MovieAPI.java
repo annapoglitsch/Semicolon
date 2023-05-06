@@ -15,6 +15,7 @@ public class MovieAPI {
             "CRIME", "DRAMA", "DOCUMENTARY", "FAMILY", "FANTASY", "HISTORY", "HORROR",
             "MUSICAL", "MYSTERY", "ROMANCE", "SCIENCE_FICTION", "SPORT", "THRILLER", "WAR",
             "WESTERN"};
+
     public List<Movie> initializeMoviesNew(String path) {
         List<Movie> movieList = new ArrayList<>();
         URL url;
@@ -23,7 +24,8 @@ public class MovieAPI {
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             String temp = new BufferedReader(new InputStreamReader(connection.getInputStream(), Charset.defaultCharset())).lines().collect(Collectors.joining("\n"));
-            movieList = new Gson().fromJson(temp, new TypeToken<List<Movie>>(){}.getType());
+            movieList = new Gson().fromJson(temp, new TypeToken<List<Movie>>() {
+            }.getType());
         } catch (MalformedURLException f) { // url not valid
             movieList.add(new Movie("error", " ", allGenres, 0, " ", "Error-404", 0, null, null, null, 0));
             return movieList;
@@ -38,5 +40,22 @@ public class MovieAPI {
 
     public static void main(String[] args) {
         new MovieAPI().initializeMoviesNew("https://prog2.fh-campuswien.ac.at/movies");
+    }
+
+
+    public Movie getMovie(String title) throws MovieApiException {
+        try {
+            // Code to retrieve movie from API
+        } catch (Exception e) {
+            throw new MovieApiException("Error retrieving movie from API.");
+        }
+
+        public List<Movie> searchMovies (String searchTerm) throws MovieApiException {
+            try {
+                // Code to search movies in API
+            } catch (Exception e) {
+                throw new MovieApiException("Error searching movies in API.");
+            }
+        }
     }
 }

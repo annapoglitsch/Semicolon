@@ -401,4 +401,37 @@ public class HomeController implements Initializable {
         System.out.println(controller.countMoviesFrom(controller.originalMovieList, "Peter Jackson"));
         System.out.println(controller.getMoviesBetweenYears(controller.originalMovieList, 1900, 3000));
     }
+
+    public class Controller {
+        private MovieAPI movieAPI;
+        private Database database;
+
+        public Controller() {
+            this.movieAPI = new MovieAPI();
+            this.database = new Database();
+        }
+
+        public void saveMovie(Movie movie) {
+            try {
+                database.saveMovie(movie);
+            } catch (DatabaseException e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+        public List<Movie> getAllMovies() {
+            try {
+                return database.getAllMovies();
+            } catch (DatabaseException e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                return new ArrayList<Movie>();
+            }
+        }
+
+        public Movie getMovie(String title) {
+            try {
+                return movieAPI.getMovie(title);
+            } catch
+        }
+    }
 }
