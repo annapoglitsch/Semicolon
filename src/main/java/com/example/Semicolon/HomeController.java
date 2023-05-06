@@ -430,4 +430,6 @@ public class HomeController implements Initializable {
             try {
                 return movieAPI.getMovie(title);
             } catch
+        }
+    }
 }

@@ -41,7 +41,7 @@ public class MovieAPI {
     public static void main(String[] args) {
         new MovieAPI().initializeMoviesNew("https://prog2.fh-campuswien.ac.at/movies");
     }
-}
+
 
     public Movie getMovie(String title) throws MovieApiException {
         try {
@@ -49,14 +49,13 @@ public class MovieAPI {
         } catch (Exception e) {
             throw new MovieApiException("Error retrieving movie from API.");
         }
-    }
 
-    public List<Movie> searchMovies(String searchTerm) throws MovieApiException {
-        try {
-            // Code to search movies in API
-        } catch (Exception e) {
-            throw new MovieApiException("Error searching movies in API.");
+        public List<Movie> searchMovies (String searchTerm) throws MovieApiException {
+            try {
+                // Code to search movies in API
+            } catch (Exception e) {
+                throw new MovieApiException("Error searching movies in API.");
+            }
         }
     }
-}
 }
