@@ -94,7 +94,6 @@ public class MovieCard extends ListCell<Movie> {
                     } else {
                         watchListButton.setText("Watchlist");
                     }
-
                 }
             }else{
                 watchListButton.setText("Watchlist");
