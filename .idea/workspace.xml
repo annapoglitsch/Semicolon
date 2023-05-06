@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="632c3f87-378d-459f-993b-b51a9090f282" name="Changes" comment="Anna - lamda expression done">
+    <list default="true" id="632c3f87-378d-459f-993b-b51a9090f282" name="Changes" comment="Anna - button functions done">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/MovieCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/MovieCard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/HomeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/Semicolon/test.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/Semicolon/test.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -439,7 +438,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683376932982</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Anna - button functions done">
+      <created>1683378700101</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1683378700103</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -510,7 +516,8 @@
     <MESSAGE value="Anna Layout stage 1" />
     <MESSAGE value="Anna - Layout done so far" />
     <MESSAGE value="Anna - lamda expression done" />
-    <option name="LAST_COMMIT_MESSAGE" value="Anna - lamda expression done" />
+    <MESSAGE value="Anna - button functions done" />
+    <option name="LAST_COMMIT_MESSAGE" value="Anna - button functions done" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

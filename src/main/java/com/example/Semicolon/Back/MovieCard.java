@@ -81,6 +81,10 @@ public class MovieCard extends ListCell<Movie> {
                 watchListButton.setText("Watchlist");
             }
             showDetails.setText("Show Details");
+            watchListButton.setOpacity(1);
+            watchListButton.setDisable(false);
+            showDetails.setOpacity(1);
+            showDetails.setDisable(false);
             setGraphic(card);
         }
     }

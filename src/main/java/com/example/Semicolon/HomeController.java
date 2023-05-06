@@ -42,10 +42,10 @@ public class HomeController implements Initializable {
             "MUSICAL", "MYSTERY", "ROMANCE", "SCIENCE_FICTION", "SPORT", "THRILLER", "WAR",
             "WESTERN"};
     private ObservableList<String> allYears = FXCollections.observableArrayList();
-    public boolean menuActive = false, sortedByGenre = false, sortedByTitle = false, checkedOthers = false;
+    public boolean menuActive = false, sortedByTitle = false, watchlistActive = false;
     private String URL = "https://prog2.fh-campuswien.ac.at/movies", query = "", genre = "", title = "", rating = "", releaseYear = "";
     //                                  ******Lists******
-    private Movie movie = new Movie(), emptyMovie = new Movie("Movie-list-is-empty", "zzzzzzzzzzzzzzzzzzzzz", allGenres, 0, "", "No Movies", 0, null, null, null, 0);
+    private Movie emptyMovie = new Movie("Movie-list-is-empty", "zzzzzzzzzzzzzzzzzzzzz", allGenres, 0, "", "No Movies", 0, null, null, null, 0);
     private MovieAPI api = new MovieAPI();
     private static WatchlistRepository repo = new WatchlistRepository();
     public List<Movie> originalMovieList = api.initializeMoviesNew("https://prog2.fh-campuswien.ac.at/movies");
@@ -89,17 +89,21 @@ public class HomeController implements Initializable {
 
 
     @FXML
-    private void switchWatchlist(){
+    private void switchWatchlist() {
+        watchlistActive = true;
         activateMenu();
         movieList.clear();
         movieList.addAll(watchlist);
     }
+
     @FXML
-    private void switchHome(){
+    private void switchHome() {
+        watchlistActive = false;
         activateMenu();
         movieList.clear();
         movieList.addAll(originalMovieList);
     }
+
     @FXML
     private void activateMenu() { /**make menu slide down/up */
         TranslateTransition tt = new TranslateTransition();
@@ -215,8 +219,23 @@ public class HomeController implements Initializable {
     }
 
     private void setMovieList() {
+        List<Movie> movies = api.initializeMoviesNew(URL);
         movieList.clear();
-        movieList.addAll(api.initializeMoviesNew(URL));
+        if (watchlistActive) {
+            for (Movie movie : movies) {
+                for (Movie m : watchlist) {
+                    if (Objects.equals(movie.id, m.id)) {
+                        movieList.add(movie);
+                        break;
+                    }
+                }
+            }
+            if (movieList.isEmpty()) {
+                movieList.add(emptyMovie);
+            }
+        } else {
+            movieList.addAll(movies);
+        }
         if (sortedByTitle) {
             sortMoviesByTitle(new ActionEvent(), sortingChoice.getValue());
         }
