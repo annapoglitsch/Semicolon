@@ -1,15 +1,10 @@
 package com.example.Semicolon.Back;
 
-import com.example.Semicolon.FhmdbApplication;
-import com.example.Semicolon.HomeController;
-import com.example.Semicolon.database.WatchlistRepository;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.*;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
@@ -17,17 +12,15 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
-import java.sql.SQLException;
 import java.util.Objects;
 
 public class MovieCard extends ListCell<Movie> {
 
     private final Label title = new Label(), genres = new Label(), description = new Label(), rating = new Label();
 
-    private final Button watchListButton = new Button(), showDetails = new Button();
+    private final Button watchListButton = new Button();
     private final ImageView cover = new ImageView();
-    private final VBox card = new VBox(cover, title, rating, description, genres, watchListButton, showDetails);
+    private final VBox card = new VBox(cover, title, rating, description, genres, watchListButton);
 
     @Override
     protected void updateItem(Movie movie, boolean empty) {
@@ -101,17 +94,14 @@ public class MovieCard extends ListCell<Movie> {
                     }
                 }
             });
-            showDetails.setText("Show Details");
             watchListButton.setOpacity(1);
             watchListButton.setDisable(false);
-            showDetails.setOpacity(1);
-            showDetails.setDisable(false);
             setGraphic(card);
         }
     }
 
-    private void switchScene(Event event) throws IOException {                                              //Sets the new representation for the scene as main/parent scene overwriting the primaryStage Scene
-        Scene scene = ((Node) event.getSource()).getScene();                                          //Gets the current scene from the HomeStage upcasting it as a Node to the main Stage
+    private void switchScene(Event event) throws IOException {
+        Scene scene = ((Node) event.getSource()).getScene();
         scene.setRoot(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Details.fxml"))));
         scene.getStylesheets().add(Objects.requireNonNull(FhmdbApplication.class.getResource("styles.css")).toExternalForm());
     }
@@ -133,8 +123,6 @@ public class MovieCard extends ListCell<Movie> {
         card.alignmentProperty().set(Pos.CENTER);
         watchListButton.setOpacity(0);
         watchListButton.setDisable(true);
-        showDetails.setOpacity(0);
-        showDetails.setDisable(true);
         setGraphic(card);
     }
 

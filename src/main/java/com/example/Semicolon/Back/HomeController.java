@@ -1,6 +1,5 @@
-package com.example.Semicolon;
+package com.example.Semicolon.Back;
 
-import com.example.Semicolon.Back.*;
 import com.example.Semicolon.database.WatchlistRepository;
 import javafx.animation.TranslateTransition;
 import javafx.beans.value.ChangeListener;
@@ -12,9 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 
-import java.lang.reflect.Type;
 import java.net.URL;
-import java.security.Key;
 import java.sql.SQLException;
 import java.util.*;
 import java.util.function.Function;
@@ -43,7 +40,8 @@ public class HomeController implements Initializable {
             "MUSICAL", "MYSTERY", "ROMANCE", "SCIENCE_FICTION", "SPORT", "THRILLER", "WAR",
             "WESTERN"};
     private ObservableList<String> allYears = FXCollections.observableArrayList();
-    public boolean menuActive = false, sortedByTitle = false, watchlistActive = false;
+    public boolean menuActive = false, sortedByTitle = false;
+    public static boolean watchlistActive = false;
     private String URL = "https://prog2.fh-campuswien.ac.at/movies", query = "", genre = "", title = "", rating = "", releaseYear = "";
     //                                  ******Lists******
     private Movie emptyMovie = new Movie("Movie-list-is-empty", "zzzzzzzzzzzzzzzzzzzzz", allGenres, 0, "", "No Movies", 0, null, null, null, 0);
@@ -126,7 +124,11 @@ public class HomeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        movieList.addAll(originalMovieList);
+        if(watchlistActive){
+            movieList.addAll(watchlist);
+        }else {
+            movieList.addAll(originalMovieList);
+        }
         movieDisplay.setItems(movieList);
         movieDisplay.setCellFactory(movieDisplay -> new MovieCard(onAddToWatchlistClicked));
         if (originalMovieList.size() > 1) {

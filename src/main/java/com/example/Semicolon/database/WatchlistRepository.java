@@ -1,7 +1,7 @@
 package com.example.Semicolon.database;
 
 import com.example.Semicolon.Back.Movie;
-import com.example.Semicolon.HomeController;
+import com.example.Semicolon.Back.HomeController;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
@@ -56,7 +56,7 @@ public class WatchlistRepository {
         }
     }
     public WatchlistEntity movieToWatchlist(Movie movie) {
-        return new WatchlistEntity(movie.id, movie.title, movie.description, movie.genres, movie.imgUrl, (int) movie.releaseYear, (int) movie.length, movie.rating);
+        return new WatchlistEntity(movie.id, movie.title, movie.description, movie.genres, movie.imgUrl, (int) movie.releaseYear, (int) movie.lengthInMinutes, movie.rating);
     }
     private static ConnectionSource createConneectionSource() throws SQLException {
         return new JdbcConnectionSource(Database.DB_URL, Database.username, Database.password);

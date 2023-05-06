@@ -1,16 +1,12 @@
-package com.example.Semicolon;
+package com.example.Semicolon.Back;
 
 import com.example.Semicolon.database.Database;
-import com.example.Semicolon.database.User;
-import com.example.Semicolon.database.UserDatabase;
-import com.example.Semicolon.database.UserRepo;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.*;
 
 public class FhmdbApplication extends Application {

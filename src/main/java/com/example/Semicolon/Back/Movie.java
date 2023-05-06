@@ -10,7 +10,7 @@ import java.util.*;
 public class Movie {
     public String id, title, description, imgUrl;
     public String[] genres, directors, writers, mainCast;
-    public double rating, releaseYear, length;
+    public double rating, releaseYear, lengthInMinutes;
 
     public Movie(String id, String title, String[] genres, double releaseYear, String description, String imgUrl, double length, String[] directors, String[] writers, String[] mainCast, double rating) {
         this.id = id; //apiId
@@ -19,7 +19,7 @@ public class Movie {
         this.releaseYear = releaseYear;
         this.description = description;
         this.imgUrl = imgUrl;
-        this.length = length;
+        this.lengthInMinutes = length;
         this.directors = directors;
         this.writers = writers;
         this.mainCast = mainCast;

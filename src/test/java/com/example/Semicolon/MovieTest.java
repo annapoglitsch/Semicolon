@@ -1,5 +1,6 @@
 package com.example.Semicolon;
 
+import com.example.Semicolon.Back.HomeController;
 import com.example.Semicolon.Back.Movie;
 import javafx.collections.*;
 import javafx.event.ActionEvent;
