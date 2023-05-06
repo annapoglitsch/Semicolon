@@ -1,14 +1,22 @@
 package com.example.Semicolon.Back;
 
+import com.example.Semicolon.FhmdbApplication;
 import com.example.Semicolon.HomeController;
 import com.example.Semicolon.database.WatchlistRepository;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.*;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.sql.SQLException;
 import java.util.Objects;
@@ -81,6 +89,18 @@ public class MovieCard extends ListCell<Movie> {
             } else {
                 watchListButton.setText("Watchlist");
             }
+            card.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    DetailsController.movie = movie;
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("com/example/Semicolon/Details.fxml"));
+                    try {
+                        switchScene(mouseEvent);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            });
             showDetails.setText("Show Details");
             watchListButton.setOpacity(1);
             watchListButton.setDisable(false);
@@ -90,6 +110,11 @@ public class MovieCard extends ListCell<Movie> {
         }
     }
 
+    private void switchScene(Event event) throws IOException {                                              //Sets the new representation for the scene as main/parent scene overwriting the primaryStage Scene
+        Scene scene = ((Node) event.getSource()).getScene();                                          //Gets the current scene from the HomeStage upcasting it as a Node to the main Stage
+        scene.setRoot(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Details.fxml"))));
+        scene.getStylesheets().add(Objects.requireNonNull(FhmdbApplication.class.getResource("styles.css")).toExternalForm());
+    }
     private void setErrorMessage(Movie movie) {
         this.getStyleClass().add("movie-cell");
         title.setText(movie.imgUrl);
