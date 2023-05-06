@@ -12,7 +12,10 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 
+import java.lang.reflect.Type;
 import java.net.URL;
+import java.security.Key;
+import java.sql.SQLException;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -20,11 +23,11 @@ import java.util.stream.Collectors;
 /**
  * Variables
  */
-public class HomeController implements Initializable{
+public class HomeController implements Initializable {
     @FXML
     GridPane HomeGrid, menu;
     @FXML
-    Button menuButton;
+    Button menuButton, watchlistButton, homeButton;
     @FXML
     ChoiceBox<String> genresChoice, sortingChoice, releaseYearChoice;
     @FXML
@@ -40,28 +43,70 @@ public class HomeController implements Initializable{
             "MUSICAL", "MYSTERY", "ROMANCE", "SCIENCE_FICTION", "SPORT", "THRILLER", "WAR",
             "WESTERN"};
     private ObservableList<String> allYears = FXCollections.observableArrayList();
-    public boolean menuActive = false, sortedByGenre = false, sortedByTitle = false, checkedOthers = false;
+    public boolean menuActive = false, sortedByTitle = false, watchlistActive = false;
     private String URL = "https://prog2.fh-campuswien.ac.at/movies", query = "", genre = "", title = "", rating = "", releaseYear = "";
     //                                  ******Lists******
-    private Movie movie = new Movie(), emptyMovie = new Movie("Movie-list-is-empty", "zzzzzzzzzzzzzzzzzzzzz", allGenres, 0, "", "No Movies", 0, null, null, null, 0);
+    private Movie emptyMovie = new Movie("Movie-list-is-empty", "zzzzzzzzzzzzzzzzzzzzz", allGenres, 0, "", "No Movies", 0, null, null, null, 0);
     private MovieAPI api = new MovieAPI();
     private static WatchlistRepository repo = new WatchlistRepository();
     public List<Movie> originalMovieList = api.initializeMoviesNew("https://prog2.fh-campuswien.ac.at/movies");
     public static List<Movie> watchlist = new ArrayList<>();
-    public static void setWatchlist(){
+
+    public static void setWatchlist() {
         watchlist = repo.getWatchlistAsMovies();
     }
+
     //public List<Movie> originalMovieList = movie.staticMovieList();
     public ObservableList<Movie> movieList = FXCollections.observableArrayList();
     private ObservableList<String> genres = FXCollections.observableList(Arrays.asList(allGenres));
     public ObservableList<String> sortingKeywords = FXCollections.observableList(Arrays.asList("---NO SORTING---", "A-Z", "Z-A", "Rating - High to Low", "Rating - Low to High", "New to Old", "Old to New"));
 
-    public ObservableList<String> watchList;
+    /**
+     * Business Logic Layer
+     */
+    private final ClickEventHandler onAddToWatchlistClicked = (clickedItem) -> {
+        WatchlistRepository repo = new WatchlistRepository();
+        if (clickedItem instanceof Movie) {
+            Movie movieWatch = (Movie) clickedItem;
+            try {
+
+                if (HomeController.watchlist.contains(movieWatch)) {
+                    repo.removeFromWatchlist(repo.movieToWatchlist(movieWatch));
+                    HomeController.watchlist.remove(movieWatch);
+                } else {
+                    repo.addToWatchlist(repo.movieToWatchlist(movieWatch));
+                    HomeController.watchlist.add(movieWatch);
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    };
+
+
     /**
      * Methods
      */
+
+
     @FXML
-    private void activateMenu(ActionEvent event) { /**make menu slide down/up */
+    private void switchWatchlist() {
+        watchlistActive = true;
+        activateMenu();
+        movieList.clear();
+        movieList.addAll(watchlist);
+    }
+
+    @FXML
+    private void switchHome() {
+        watchlistActive = false;
+        activateMenu();
+        movieList.clear();
+        movieList.addAll(originalMovieList);
+    }
+
+    @FXML
+    private void activateMenu() { /**make menu slide down/up */
         TranslateTransition tt = new TranslateTransition();
         tt.setNode(menu);
         tt.setDuration(Duration.millis(500));
@@ -83,7 +128,7 @@ public class HomeController implements Initializable{
     public void initialize(URL url, ResourceBundle resourceBundle) {
         movieList.addAll(originalMovieList);
         movieDisplay.setItems(movieList);
-        movieDisplay.setCellFactory(movieDisplay -> new MovieCard());
+        movieDisplay.setCellFactory(movieDisplay -> new MovieCard(onAddToWatchlistClicked));
         if (originalMovieList.size() > 1) {
             searchField.setPromptText(originalMovieList.get(new Random().nextInt(originalMovieList.size() - 1)).title);
             setYearChoice();
@@ -176,9 +221,22 @@ public class HomeController implements Initializable{
 
     private void setMovieList() {
         List<Movie> movies = api.initializeMoviesNew(URL);
-        movies.removeIf(movie -> !watchlist.contains(movie));
         movieList.clear();
-        movieList.addAll(api.initializeMoviesNew(URL));
+        if (watchlistActive) {
+            for (Movie movie : movies) {
+                for (Movie m : watchlist) {
+                    if (Objects.equals(movie.id, m.id)) {
+                        movieList.add(movie);
+                        break;
+                    }
+                }
+            }
+            if (movieList.isEmpty()) {
+                movieList.add(emptyMovie);
+            }
+        } else {
+            movieList.addAll(movies);
+        }
         if (sortedByTitle) {
             sortMoviesByTitle(new ActionEvent(), sortingChoice.getValue());
         }
@@ -332,10 +390,7 @@ public class HomeController implements Initializable{
                 .filter(movie -> movie.releaseYear >= startYear && movie.releaseYear <= endYear)
                 .toList();
     }
-/**                                     Business Logic Layer*/
-private final ClickEventHandler onAddToWatchlistClicked = (clickedItem) -> {
 
-};
 
     public static void main(String[] args) {
         HomeController controller = new HomeController();
