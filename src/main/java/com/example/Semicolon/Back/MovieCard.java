@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
+import java.lang.reflect.Type;
 import java.sql.SQLException;
 import java.util.Objects;
 
@@ -64,7 +65,7 @@ public class MovieCard extends ListCell<Movie> {
             card.spacingProperty().set(10);
             card.setPadding(new Insets(5,30,5,10));
             card.alignmentProperty().set(javafx.geometry.Pos.CENTER_LEFT);
-            watchListButton.setOnAction(new EventHandler<ActionEvent>() {
+            /*watchListButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
                     WatchlistRepository repo = new WatchlistRepository();
@@ -83,7 +84,7 @@ public class MovieCard extends ListCell<Movie> {
                         throw new RuntimeException(e);
                     }
                 }
-            });
+            });*/
             if(!HomeController.watchlist.isEmpty()) {
                 System.out.println(HomeController.watchlist);
                 for (Movie m : HomeController.watchlist) {
@@ -123,5 +124,27 @@ public class MovieCard extends ListCell<Movie> {
         showDetails.setOpacity(0);
         showDetails.setDisable(true);
         setGraphic(card);
+    }
+    public MovieCard(){}
+    public MovieCard (ClickEventHandler addToWatchListClicked){
+        super();
+        watchListButton.setOnMouseClicked(mouseEvent -> {
+        addToWatchListClicked.onClick(getItem());
+            if(!HomeController.watchlist.isEmpty()) {
+                System.out.println(HomeController.watchlist);
+                for (Movie m : HomeController.watchlist) {
+                    System.out.println(m.id + " " + getItem().id);
+                    if (Objects.equals(m.id, getItem().id)) {
+                        watchListButton.setText("remove from Watchlist");
+                        break;
+                    } else {
+                        watchListButton.setText("Watchlist");
+                    }
+                }
+            }else{
+                watchListButton.setText("Watchlist");
+            }
+        });
+
     }
 }

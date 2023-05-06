@@ -1,7 +1,6 @@
 package com.example.Semicolon.Back;
 
-import java.lang.reflect.Type;
 
-public interface ClickEventHandler {
-    void onClick(Type t);
+public interface ClickEventHandler<T> {
+    void onClick(T t);
 }

@@ -11,8 +11,10 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 
+import java.lang.reflect.Type;
 import java.net.URL;
 import java.security.Key;
+import java.sql.SQLException;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -83,7 +85,7 @@ public class HomeController implements Initializable{
     public void initialize(URL url, ResourceBundle resourceBundle) {
         movieList.addAll(originalMovieList);
         movieDisplay.setItems(movieList);
-        movieDisplay.setCellFactory(movieDisplay -> new MovieCard());
+        movieDisplay.setCellFactory(movieDisplay -> new MovieCard(onAddToWatchlistClicked));
         if (originalMovieList.size() > 1) {
             searchField.setPromptText(originalMovieList.get(new Random().nextInt(originalMovieList.size() - 1)).title);
             setYearChoice();
@@ -332,7 +334,25 @@ public class HomeController implements Initializable{
     }
 /**                                     Business Logic Layer*/
 private final ClickEventHandler onAddToWatchlistClicked = (clickedItem) -> {
+    WatchlistRepository repo = new WatchlistRepository();
+    HomeController test = new HomeController();
+  if (clickedItem instanceof Movie){
+      Movie smth = (Movie) clickedItem;
+      try {
 
+          if(HomeController.watchlist.contains(smth)) {
+              repo.removeFromWatchlist(repo.movieToWatchlist(smth));
+              HomeController.watchlist.remove(smth);
+              //watchListButton.setText("Watchlist");
+          }else{
+              repo.addToWatchlist(repo.movieToWatchlist(smth));
+              HomeController.watchlist.add(smth);
+              // watchListButton.setText("remove from Watchlist");
+          }
+      } catch (SQLException e) {
+          throw new RuntimeException(e);
+      }
+  }
 };
 
     public static void main(String[] args) {
