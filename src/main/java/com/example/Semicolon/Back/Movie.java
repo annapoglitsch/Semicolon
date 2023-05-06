@@ -13,7 +13,7 @@ public class Movie {
     public double rating, releaseYear, length;
 
     public Movie(String id, String title, String[] genres, double releaseYear, String description, String imgUrl, double length, String[] directors, String[] writers, String[] mainCast, double rating) {
-        this.id = id;
+        this.id = id; //apiId
         this.title = title;
         this.genres = genres;
         this.releaseYear = releaseYear;
