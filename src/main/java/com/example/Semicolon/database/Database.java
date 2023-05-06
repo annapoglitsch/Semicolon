@@ -44,5 +44,22 @@ public class Database {
         catch (SQLException e) {
             e.printStackTrace();
         }
+
+        public void saveMovie(Movie movie) throws DatabaseException {
+            try {
+                // Code to save movie to database
+            } catch (Exception e) {
+                throw new DatabaseException("Error saving movie to database.");
+            }
+        }
+
+        public List<Movie> getAllMovies() throws DatabaseException {
+            try {
+                // Code to retrieve all movies from database
+            } catch (Exception e) {
+                throw new DatabaseException("Error retrieving movies from database.");
+            }
+        }
+
     }
 }
