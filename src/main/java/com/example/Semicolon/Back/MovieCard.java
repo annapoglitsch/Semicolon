@@ -1,6 +1,7 @@
 package com.example.Semicolon.Back;
 
 import com.example.Semicolon.HomeController;
+import com.example.Semicolon.database.WatchlistRepository;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.*;

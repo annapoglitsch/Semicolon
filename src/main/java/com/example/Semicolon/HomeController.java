@@ -1,6 +1,7 @@
 package com.example.Semicolon;
 
 import com.example.Semicolon.Back.*;
+import com.example.Semicolon.database.WatchlistRepository;
 import javafx.animation.TranslateTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -12,7 +13,6 @@ import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 
 import java.net.URL;
-import java.security.Key;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -175,6 +175,8 @@ public class HomeController implements Initializable{
     }
 
     private void setMovieList() {
+        List<Movie> movies = api.initializeMoviesNew(URL);
+        movies.removeIf(movie -> !watchlist.contains(movie));
         movieList.clear();
         movieList.addAll(api.initializeMoviesNew(URL));
         if (sortedByTitle) {

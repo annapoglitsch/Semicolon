@@ -1,7 +1,7 @@
-package com.example.Semicolon.Back;
+package com.example.Semicolon.database;
 
+import com.example.Semicolon.Back.Movie;
 import com.example.Semicolon.HomeController;
-import com.example.Semicolon.database.Database;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
