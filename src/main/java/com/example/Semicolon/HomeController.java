@@ -45,7 +45,12 @@ public class HomeController implements Initializable{
     //                                  ******Lists******
     private Movie movie = new Movie(), emptyMovie = new Movie("Movie-list-is-empty", "zzzzzzzzzzzzzzzzzzzzz", allGenres, 0, "", "No Movies", 0, null, null, null, 0);
     private MovieAPI api = new MovieAPI();
+    private static WatchlistRepository repo = new WatchlistRepository();
     public List<Movie> originalMovieList = api.initializeMoviesNew("https://prog2.fh-campuswien.ac.at/movies");
+    public static List<Movie> watchlist = new ArrayList<>();
+    public static void setWatchlist(){
+        watchlist = repo.getWatchlistAsMovies();
+    }
     //public List<Movie> originalMovieList = movie.staticMovieList();
     public ObservableList<Movie> movieList = FXCollections.observableArrayList();
     private ObservableList<String> genres = FXCollections.observableList(Arrays.asList(allGenres));
@@ -98,6 +103,7 @@ public class HomeController implements Initializable{
         searchField.setOnKeyTyped(event -> {
             searchMoviePrep();
         });
+
         releaseYearChoice.setOnAction(this::filterByReleaseYearPrep);
         ratingSlider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override

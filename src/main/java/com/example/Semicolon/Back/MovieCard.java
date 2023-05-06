@@ -2,10 +2,14 @@ package com.example.Semicolon.Back;
 
 import com.example.Semicolon.HomeController;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.*;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+
+import java.sql.SQLException;
+import java.util.Objects;
 
 public class MovieCard extends ListCell<Movie> {
 
@@ -14,7 +18,6 @@ public class MovieCard extends ListCell<Movie> {
     private final Button watchListButton = new Button(), showDetails = new Button();
     private final ImageView cover = new ImageView();
     private final VBox card = new VBox(cover, title, rating, description, genres, watchListButton, showDetails);
-    HomeController action = new HomeController();
 
     @Override
     protected void updateItem(Movie movie, boolean empty) {
@@ -61,7 +64,41 @@ public class MovieCard extends ListCell<Movie> {
             card.spacingProperty().set(10);
             card.setPadding(new Insets(5,30,5,10));
             card.alignmentProperty().set(javafx.geometry.Pos.CENTER_LEFT);
-            watchListButton.setText("Watchlist");
+            watchListButton.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    WatchlistRepository repo = new WatchlistRepository();
+                    try {
+
+                        if(HomeController.watchlist.contains(movie)) {
+                            repo.removeFromWatchlist(repo.movieToWatchlist(movie));
+                            HomeController.watchlist.remove(movie);
+                            watchListButton.setText("Watchlist");
+                        }else{
+                            repo.addToWatchlist(repo.movieToWatchlist(movie));
+                            HomeController.watchlist.add(movie);
+                            watchListButton.setText("remove from Watchlist");
+                        }
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            });
+            if(!HomeController.watchlist.isEmpty()) {
+                System.out.println(HomeController.watchlist);
+                for (Movie m : HomeController.watchlist) {
+                    System.out.println(m.id + " " + movie.id);
+                    if (Objects.equals(m.id, movie.id)) {
+                        watchListButton.setText("remove from Watchlist");
+                        break;
+                    } else {
+                        watchListButton.setText("Watchlist");
+                    }
+
+                }
+            }else{
+                watchListButton.setText("Watchlist");
+            }
             showDetails.setText("Show Details");
             setGraphic(card);
         }
@@ -82,8 +119,10 @@ public class MovieCard extends ListCell<Movie> {
         card.getStyleClass().clear();
         card.getStyleClass().add("background-black");
         card.alignmentProperty().set(Pos.CENTER);
-        watchListButton.setText("Watchlist");
-        showDetails.setText("Show Details");
+        watchListButton.setOpacity(0);
+        watchListButton.setDisable(true);
+        showDetails.setOpacity(0);
+        showDetails.setDisable(true);
         setGraphic(card);
     }
 }
