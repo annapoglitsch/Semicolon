@@ -1,5 +1,7 @@
 package com.example.Semicolon.Back;
 
+import com.example.Semicolon.HomeController;
+import javafx.event.ActionEvent;
 import javafx.geometry.*;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
@@ -8,8 +10,11 @@ import javafx.scene.layout.*;
 public class MovieCard extends ListCell<Movie> {
 
     private final Label title = new Label(), genres = new Label(), description = new Label(), rating = new Label();
+
+    private final Button watchListButton = new Button(), showDetails = new Button();
     private final ImageView cover = new ImageView();
-    private final VBox card = new VBox(cover, title, rating, description, genres);
+    private final VBox card = new VBox(cover, title, rating, description, genres, watchListButton, showDetails);
+    HomeController action = new HomeController();
 
     @Override
     protected void updateItem(Movie movie, boolean empty) {
@@ -56,6 +61,8 @@ public class MovieCard extends ListCell<Movie> {
             card.spacingProperty().set(10);
             card.setPadding(new Insets(5,30,5,10));
             card.alignmentProperty().set(javafx.geometry.Pos.CENTER_LEFT);
+            watchListButton.setText("Watchlist");
+            showDetails.setText("Show Details");
             setGraphic(card);
         }
     }
@@ -75,6 +82,8 @@ public class MovieCard extends ListCell<Movie> {
         card.getStyleClass().clear();
         card.getStyleClass().add("background-black");
         card.alignmentProperty().set(Pos.CENTER);
+        watchListButton.setText("Watchlist");
+        showDetails.setText("Show Details");
         setGraphic(card);
     }
 }

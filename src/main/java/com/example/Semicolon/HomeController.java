@@ -20,11 +20,11 @@ import java.util.stream.Collectors;
 /**
  * Variables
  */
-public class HomeController implements Initializable {
+public class HomeController implements Initializable{
     @FXML
     GridPane HomeGrid, menu;
     @FXML
-    Button advancedOptions;
+    Button menuButton;
     @FXML
     ChoiceBox<String> genresChoice, sortingChoice, releaseYearChoice;
     @FXML
@@ -51,28 +51,27 @@ public class HomeController implements Initializable {
     private ObservableList<String> genres = FXCollections.observableList(Arrays.asList(allGenres));
     public ObservableList<String> sortingKeywords = FXCollections.observableList(Arrays.asList("---NO SORTING---", "A-Z", "Z-A", "Rating - High to Low", "Rating - Low to High", "New to Old", "Old to New"));
 
+    public ObservableList<String> watchList;
     /**
      * Methods
      */
     @FXML
     private void activateMenu(ActionEvent event) { /**make menu slide down/up */
-        if (event.getTarget() == advancedOptions || event.getTarget() == genresChoice) {
-            TranslateTransition tt = new TranslateTransition();
-            tt.setNode(menu);
-            tt.setDuration(Duration.millis(500));
-            if (menuActive) {
-                tt.setFromY(menu.getHeight());
-                tt.setToY(0);
-                menu.setDisable(true);
-                menuActive = false;
-            } else {
-                tt.setFromY(0);
-                tt.setToY(menu.getHeight());
-                menu.setDisable(false);
-                menuActive = true;
-            }
-            tt.play();
+        TranslateTransition tt = new TranslateTransition();
+        tt.setNode(menu);
+        tt.setDuration(Duration.millis(500));
+        if (menuActive) {
+            tt.setFromY(menu.getHeight());
+            tt.setToY(0);
+            menu.setDisable(true);
+            menuActive = false;
+        } else {
+            tt.setFromY(0);
+            tt.setToY(menu.getHeight());
+            menu.setDisable(false);
+            menuActive = true;
         }
+        tt.play();
     }
 
     @Override
@@ -325,6 +324,10 @@ public class HomeController implements Initializable {
                 .filter(movie -> movie.releaseYear >= startYear && movie.releaseYear <= endYear)
                 .toList();
     }
+/**                                     Business Logic Layer*/
+private final ClickEventHandler onAddToWatchlistClicked = (clickedItem) -> {
+
+};
 
     public static void main(String[] args) {
         HomeController controller = new HomeController();
