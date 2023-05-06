@@ -23,7 +23,7 @@ public class MovieCard extends ListCell<Movie> {
     @Override
     protected void updateItem(Movie movie, boolean empty) {
         super.updateItem(movie, empty);
-        if(movie != null) {
+        if (movie != null) {
             if (movie.id.equals("error") || movie.id.equals("Movie-list-is-empty")) {
                 setErrorMessage(movie);
                 return;
@@ -35,16 +35,16 @@ public class MovieCard extends ListCell<Movie> {
         } else {
             this.getStyleClass().add("movie-cell");
             title.setText(movie.title + " (" + (int) movie.releaseYear + ")");
-            if(movie.description != null){
+            if (movie.description != null) {
                 description.setText(movie.description);
-            }else{
+            } else {
                 description.setText("No description available");
             }
             String genreList = "";
-            for (int i = 0; i < movie.genres.length; i++){
-                if(i == 0){
+            for (int i = 0; i < movie.genres.length; i++) {
+                if (i == 0) {
                     genreList = movie.genres[i];
-                }else{
+                } else {
                     genreList += (", " + movie.genres[i]);
                 }
             }
@@ -63,29 +63,10 @@ public class MovieCard extends ListCell<Movie> {
             card.getStyleClass().clear();
             card.getStyleClass().add("cell-border");
             card.spacingProperty().set(10);
-            card.setPadding(new Insets(5,30,5,10));
+            card.setPadding(new Insets(5, 30, 5, 10));
             card.alignmentProperty().set(javafx.geometry.Pos.CENTER_LEFT);
-            /*watchListButton.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    WatchlistRepository repo = new WatchlistRepository();
-                    try {
 
-                        if(HomeController.watchlist.contains(movie)) {
-                            repo.removeFromWatchlist(repo.movieToWatchlist(movie));
-                            HomeController.watchlist.remove(movie);
-                            watchListButton.setText("Watchlist");
-                        }else{
-                            repo.addToWatchlist(repo.movieToWatchlist(movie));
-                            HomeController.watchlist.add(movie);
-                            watchListButton.setText("remove from Watchlist");
-                        }
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-            });*/
-            if(!HomeController.watchlist.isEmpty()) {
+            if (!HomeController.watchlist.isEmpty()) {
                 System.out.println(HomeController.watchlist);
                 for (Movie m : HomeController.watchlist) {
                     System.out.println(m.id + " " + movie.id);
@@ -96,14 +77,15 @@ public class MovieCard extends ListCell<Movie> {
                         watchListButton.setText("Watchlist");
                     }
                 }
-            }else{
+            } else {
                 watchListButton.setText("Watchlist");
             }
             showDetails.setText("Show Details");
             setGraphic(card);
         }
     }
-    private void setErrorMessage(Movie movie){
+
+    private void setErrorMessage(Movie movie) {
         this.getStyleClass().add("movie-cell");
         title.setText(movie.imgUrl);
         title.alignmentProperty().set(Pos.TOP_CENTER);
@@ -115,7 +97,7 @@ public class MovieCard extends ListCell<Movie> {
         rating.setText("");
         card.alignmentProperty().set(javafx.geometry.Pos.CENTER_LEFT);
         card.spacingProperty().set(10);
-        card.setPadding(new Insets(5,30,5,10));
+        card.setPadding(new Insets(5, 30, 5, 10));
         card.getStyleClass().clear();
         card.getStyleClass().add("background-black");
         card.alignmentProperty().set(Pos.CENTER);
@@ -125,15 +107,16 @@ public class MovieCard extends ListCell<Movie> {
         showDetails.setDisable(true);
         setGraphic(card);
     }
-    public MovieCard(){}
-    public MovieCard (ClickEventHandler addToWatchListClicked){
+
+    public MovieCard() {
+    }
+
+    public MovieCard(ClickEventHandler addToWatchListClicked) {
         super();
         watchListButton.setOnMouseClicked(mouseEvent -> {
-        addToWatchListClicked.onClick(getItem());
-            if(!HomeController.watchlist.isEmpty()) {
-                System.out.println(HomeController.watchlist);
+            addToWatchListClicked.onClick(getItem());
+            if (!HomeController.watchlist.isEmpty())
                 for (Movie m : HomeController.watchlist) {
-                    System.out.println(m.id + " " + getItem().id);
                     if (Objects.equals(m.id, getItem().id)) {
                         watchListButton.setText("remove from Watchlist");
                         break;
@@ -141,7 +124,7 @@ public class MovieCard extends ListCell<Movie> {
                         watchListButton.setText("Watchlist");
                     }
                 }
-            }else{
+            else {
                 watchListButton.setText("Watchlist");
             }
         });

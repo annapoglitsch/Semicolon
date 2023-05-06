@@ -22,11 +22,11 @@ import java.util.stream.Collectors;
 /**
  * Variables
  */
-public class HomeController implements Initializable{
+public class HomeController implements Initializable {
     @FXML
     GridPane HomeGrid, menu;
     @FXML
-    Button menuButton;
+    Button menuButton, watchlistButton, homeButton;
     @FXML
     ChoiceBox<String> genresChoice, sortingChoice, releaseYearChoice;
     @FXML
@@ -50,20 +50,58 @@ public class HomeController implements Initializable{
     private static WatchlistRepository repo = new WatchlistRepository();
     public List<Movie> originalMovieList = api.initializeMoviesNew("https://prog2.fh-campuswien.ac.at/movies");
     public static List<Movie> watchlist = new ArrayList<>();
-    public static void setWatchlist(){
+
+    public static void setWatchlist() {
         watchlist = repo.getWatchlistAsMovies();
     }
+
     //public List<Movie> originalMovieList = movie.staticMovieList();
     public ObservableList<Movie> movieList = FXCollections.observableArrayList();
     private ObservableList<String> genres = FXCollections.observableList(Arrays.asList(allGenres));
     public ObservableList<String> sortingKeywords = FXCollections.observableList(Arrays.asList("---NO SORTING---", "A-Z", "Z-A", "Rating - High to Low", "Rating - Low to High", "New to Old", "Old to New"));
 
-    public ObservableList<String> watchList;
+    /**
+     * Business Logic Layer
+     */
+    private final ClickEventHandler onAddToWatchlistClicked = (clickedItem) -> {
+        WatchlistRepository repo = new WatchlistRepository();
+        if (clickedItem instanceof Movie) {
+            Movie movieWatch = (Movie) clickedItem;
+            try {
+
+                if (HomeController.watchlist.contains(movieWatch)) {
+                    repo.removeFromWatchlist(repo.movieToWatchlist(movieWatch));
+                    HomeController.watchlist.remove(movieWatch);
+                } else {
+                    repo.addToWatchlist(repo.movieToWatchlist(movieWatch));
+                    HomeController.watchlist.add(movieWatch);
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    };
+
+
     /**
      * Methods
      */
+
+
     @FXML
-    private void activateMenu(ActionEvent event) { /**make menu slide down/up */
+    private void switchWatchlist(){
+        activateMenu();
+        movieList.clear();
+        movieList.addAll(watchlist);
+    }
+    @FXML
+    private void switchHome(){
+        activateMenu();
+        movieList.clear();
+        movieList.addAll(originalMovieList);
+    }
+    @FXML
+    private void activateMenu() { /**make menu slide down/up */
         TranslateTransition tt = new TranslateTransition();
         tt.setNode(menu);
         tt.setDuration(Duration.millis(500));
@@ -332,28 +370,7 @@ public class HomeController implements Initializable{
                 .filter(movie -> movie.releaseYear >= startYear && movie.releaseYear <= endYear)
                 .toList();
     }
-/**                                     Business Logic Layer*/
-private final ClickEventHandler onAddToWatchlistClicked = (clickedItem) -> {
-    WatchlistRepository repo = new WatchlistRepository();
-    HomeController test = new HomeController();
-  if (clickedItem instanceof Movie){
-      Movie smth = (Movie) clickedItem;
-      try {
 
-          if(HomeController.watchlist.contains(smth)) {
-              repo.removeFromWatchlist(repo.movieToWatchlist(smth));
-              HomeController.watchlist.remove(smth);
-              //watchListButton.setText("Watchlist");
-          }else{
-              repo.addToWatchlist(repo.movieToWatchlist(smth));
-              HomeController.watchlist.add(smth);
-              // watchListButton.setText("remove from Watchlist");
-          }
-      } catch (SQLException e) {
-          throw new RuntimeException(e);
-      }
-  }
-};
 
     public static void main(String[] args) {
         HomeController controller = new HomeController();
