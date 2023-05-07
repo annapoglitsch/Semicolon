@@ -1,5 +1,8 @@
-package com.example.Semicolon.Back;
+package com.example.Semicolon.Back.Controller;
 
+import com.example.Semicolon.Back.ClickEventHandler;
+import com.example.Semicolon.Back.Movie;
+import com.example.Semicolon.Back.MovieAPI;
 import com.example.Semicolon.Exceptions.MovieApiException;
 import com.example.Semicolon.database.WatchlistRepository;
 import javafx.animation.TranslateTransition;

@@ -13,4 +13,6 @@ module com.example.demo2 {
     opens com.example.Semicolon.Back to javafx.fxml;
     exports com.example.Semicolon.database;
     opens com.example.Semicolon.database to javafx.fxml;
+    opens com.example.Semicolon.Back.Controller to javafx.fxml;
+    exports com.example.Semicolon.Back.Controller;
 }

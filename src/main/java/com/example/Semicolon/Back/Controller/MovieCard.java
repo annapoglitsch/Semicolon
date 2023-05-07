@@ -1,5 +1,10 @@
-package com.example.Semicolon.Back;
+package com.example.Semicolon.Back.Controller;
 
+import com.example.Semicolon.Back.ClickEventHandler;
+import com.example.Semicolon.Back.Controller.DetailsController;
+import com.example.Semicolon.Back.Controller.FhmdbApplication;
+import com.example.Semicolon.Back.Controller.HomeController;
+import com.example.Semicolon.Back.Movie;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;

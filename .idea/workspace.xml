@@ -4,20 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="632c3f87-378d-459f-993b-b51a9090f282" name="Changes" comment="Moritz - Database works (hopfully), add and remove from watchlist">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Exceptions/DatabaseException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Exceptions/MovieApiException.java" afterDir="false" />
+    <list default="true" id="632c3f87-378d-459f-993b-b51a9090f282" name="Changes" comment="All - Exceptions and stuff">
+      <change afterPath="$PROJECT_DIR$/db/watchlistdb.trace.db" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/LoginController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/Semicolon/Back/Login.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/DatabaseException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/FhmdbApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/FhmdbApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/HomeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Movie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Movie.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/MovieAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/MovieAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/MovieApiException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/MovieCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/MovieCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/database/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/database/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/database/WatchlistEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/database/WatchlistEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/database/WatchlistRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/database/WatchlistRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/Semicolon/Back/test.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/Semicolon/Back/test.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/Semicolon/MovieTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/Semicolon/MovieTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,8 +21,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="FxmlFile" />
         <option value="Enum" />
+        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
@@ -94,9 +88,12 @@
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="S:\FH\Programieren\Java\Semicolon\src\main\resources\com\example\Semicolon\Back" />
+      <recent name="S:\FH\Programieren\Java\Semicolon\src\main\resources" />
+      <recent name="S:\FH\Programieren\Java\Semicolon\src\main\resources\com\example\Semicolon\Back\Controller" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.example.Semicolon.Back" />
+      <recent name="com.example.Semicolon.Back.Controller" />
       <recent name="com.example.Semicolon" />
     </key>
   </component>
@@ -181,11 +178,11 @@
       <method v="2" />
     </configuration>
     <configuration name="FhmdbApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.example.Semicolon.Back.FhmdbApplication" />
+      <option name="MAIN_CLASS_NAME" value="com.example.Semicolon.Back.Controller.FhmdbApplication" />
       <module name="Semicolon" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.example.Semicolon.Back.*" />
+          <option name="PATTERN" value="com.example.Semicolon.Back.Controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -194,11 +191,11 @@
       </method>
     </configuration>
     <configuration name="HomeController" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.example.Semicolon.Back.HomeController" />
+      <option name="MAIN_CLASS_NAME" value="com.example.Semicolon.Back.Controller.HomeController" />
       <module name="Semicolon" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.example.Semicolon.Back.*" />
+          <option name="PATTERN" value="com.example.Semicolon.Back.Controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -211,7 +208,7 @@
       <module name="Semicolon" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.example.Semicolon.Back.*" />
+          <option name="PATTERN" value="com.example.Semicolon.Back.Controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -224,7 +221,7 @@
       <module name="semicolon" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.example.Semicolon.Back.*" />
+          <option name="PATTERN" value="com.example.Semicolon.Back.Controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -236,7 +233,7 @@
       <module name="semicolon" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.example.Semicolon.Back.*" />
+          <option name="PATTERN" value="com.example.Semicolon.Back.Controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -266,7 +263,7 @@
       <module name="Semicolon" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.example.Semicolon.Back.*" />
+          <option name="PATTERN" value="com.example.Semicolon.Back.Controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -340,7 +337,7 @@
       <workItem from="1680544733173" duration="735000" />
       <workItem from="1680604214538" duration="3384000" />
       <workItem from="1680708337489" duration="17829000" />
-      <workItem from="1683456518537" duration="11111000" />
+      <workItem from="1683456518537" duration="19164000" />
     </task>
     <task id="LOCAL-00001" summary="Moritz - rough draft of main page, added Movie Objects">
       <created>1677798635847</created>
@@ -496,7 +493,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683413032668</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="All - Exceptions and stuff">
+      <created>1683480622207</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1683480622207</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -569,7 +573,8 @@
     <MESSAGE value="Anna - lamda expression done" />
     <MESSAGE value="Anna - button functions done" />
     <MESSAGE value="Moritz - Database works (hopfully), add and remove from watchlist" />
-    <option name="LAST_COMMIT_MESSAGE" value="Moritz - Database works (hopfully), add and remove from watchlist" />
+    <MESSAGE value="All - Exceptions and stuff" />
+    <option name="LAST_COMMIT_MESSAGE" value="All - Exceptions and stuff" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

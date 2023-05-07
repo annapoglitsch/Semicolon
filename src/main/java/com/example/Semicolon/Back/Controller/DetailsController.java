@@ -1,5 +1,6 @@
-package com.example.Semicolon.Back;
+package com.example.Semicolon.Back.Controller;
 
+import com.example.Semicolon.Back.Movie;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;

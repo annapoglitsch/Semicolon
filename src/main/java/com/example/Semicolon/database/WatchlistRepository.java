@@ -1,7 +1,7 @@
 package com.example.Semicolon.database;
 
 import com.example.Semicolon.Back.Movie;
-import com.example.Semicolon.Back.HomeController;
+import com.example.Semicolon.Back.Controller.HomeController;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
@@ -11,8 +11,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import static com.example.Semicolon.Back.HomeController.allGenres;
 
 public class WatchlistRepository {
     Dao<WatchlistEntity, Long> dao = setDao();
@@ -62,7 +60,6 @@ public class WatchlistRepository {
     }
     public Movie WatchlistToMovie(WatchlistEntity entity){
         HomeController hc = new HomeController();
-        hc.setOriginalMovieList();
         if(!Objects.equals(hc.originalMovieList.get(0).id, "error")) {
             for (Movie movie : hc.originalMovieList) {
                 if (Objects.equals(entity.apiId, movie.id)) {

@@ -1,5 +1,6 @@
-package com.example.Semicolon.Back;
+package com.example.Semicolon.Back.Controller;
 
+import com.example.Semicolon.Back.Movie;
 import com.example.Semicolon.Exceptions.DatabaseException;
 import com.example.Semicolon.database.Database;
 import javafx.application.Application;
@@ -11,7 +12,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.*;
 
-import static com.example.Semicolon.Back.HomeController.allGenres;
+import static com.example.Semicolon.Back.Controller.HomeController.allGenres;
 
 public class FhmdbApplication extends Application {
     @Override
