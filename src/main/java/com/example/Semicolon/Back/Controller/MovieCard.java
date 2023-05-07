@@ -24,8 +24,8 @@ public class MovieCard extends ListCell<Movie> {
     private final Label title = new Label(), genres = new Label(), description = new Label(), rating = new Label();
 
     private final Button watchListButton = new Button();
-    private final ImageView cover = new ImageView();
-    private final VBox card = new VBox(cover, title, rating, description, genres, watchListButton);
+    private final HBox box = new HBox(title, watchListButton);
+    private final VBox card = new VBox(box, rating, description, genres);
 
     @Override
     protected void updateItem(Movie movie, boolean empty) {
@@ -73,18 +73,16 @@ public class MovieCard extends ListCell<Movie> {
             card.setPadding(new Insets(5, 30, 5, 10));
             card.alignmentProperty().set(javafx.geometry.Pos.CENTER_LEFT);
             if (!HomeController.watchlist.isEmpty()) {
-                System.out.println(HomeController.watchlist);
                 for (Movie m : HomeController.watchlist) {
-                    System.out.println(m.id + " " + movie.id);
                     if (Objects.equals(m.id, movie.id)) {
-                        watchListButton.setText("remove from Watchlist");
+                        watchListButton.setText("Remove from Watchlist");
                         break;
                     } else {
-                        watchListButton.setText("Watchlist");
+                        watchListButton.setText("Add to Watchlist");
                     }
                 }
             } else {
-                watchListButton.setText("Watchlist");
+                watchListButton.setText("Add to Watchlist");
             }
             card.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
@@ -100,6 +98,8 @@ public class MovieCard extends ListCell<Movie> {
             });
             watchListButton.setOpacity(1);
             watchListButton.setDisable(false);
+            box.setSpacing(20);
+            watchListButton.setAlignment(Pos.CENTER_RIGHT);
             setGraphic(card);
         }
     }
@@ -140,14 +140,14 @@ public class MovieCard extends ListCell<Movie> {
             if (!HomeController.watchlist.isEmpty())
                 for (Movie m : HomeController.watchlist) {
                     if (Objects.equals(m.id, getItem().id)) {
-                        watchListButton.setText("remove from Watchlist");
+                        watchListButton.setText("Remove from Watchlist");
                         break;
                     } else {
-                        watchListButton.setText("Watchlist");
+                        watchListButton.setText("Add to Watchlist");
                     }
                 }
             else {
-                watchListButton.setText("Watchlist");
+                watchListButton.setText("Add to Watchlist");
             }
         });
 

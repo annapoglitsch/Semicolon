@@ -9,23 +9,22 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class UserRepo {
-    Dao<User, Long> dao = setDao();
+    static Dao<UserEntity, Long> dao;
 
-    private static Dao<User, Long> setDao(){
+    public static void setDao(){
         try {
-            return DaoManager.createDao(createConnectionSource(), User.class);
+            dao = DaoManager.createDao(createConnectionSource(), UserEntity.class);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
     }
     private static ConnectionSource createConnectionSource() throws SQLException {
         return new JdbcConnectionSource(UserDatabase.DB_NAME, UserDatabase.username, UserDatabase.password);
     }
-    public void addUser(User user) throws SQLException{
+    public static void addUser(UserEntity user) throws SQLException{
         dao.create(user);
     }
-    public List<User> getUsers() throws SQLException{
+    public static List<UserEntity> getUsers() throws SQLException{
         return dao.queryForAll();
     }
 }

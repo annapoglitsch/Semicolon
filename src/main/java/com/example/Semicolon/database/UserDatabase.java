@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public class UserDatabase {
     public static final String DB_NAME = "jdbc:h2:file: ./Users/users", username = "admin", password = "admin";
     public static ConnectionSource connectionSource;
-    public static Dao<User, Long> dao;
+    public static Dao<UserEntity, Long> dao;
     private static UserDatabase instance;
     public static UserDatabase getUserDatabase(){
         if(instance == null){
@@ -22,14 +22,14 @@ public class UserDatabase {
     private UserDatabase(){
         try {
             createConnectionSource();
-            dao = DaoManager.createDao(connectionSource, User.class);
+            dao = DaoManager.createDao(connectionSource, UserEntity.class);
             createTables();
         }catch (SQLException e){
             System.out.println(e.getMessage());
         }
     }
     private static void createTables() throws SQLException {
-        TableUtils.createTableIfNotExists(connectionSource, User.class);
+        TableUtils.createTableIfNotExists(connectionSource, UserEntity.class);
     }
     private static void createConnectionSource() {
         try {

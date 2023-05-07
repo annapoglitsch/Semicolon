@@ -3,6 +3,8 @@ package com.example.Semicolon.Back.Controller;
 import com.example.Semicolon.Back.Movie;
 import com.example.Semicolon.Exceptions.DatabaseException;
 import com.example.Semicolon.database.Database;
+import com.example.Semicolon.database.UserDatabase;
+import com.example.Semicolon.database.UserRepo;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -55,7 +57,7 @@ public class FhmdbApplication extends Application {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-        }*/
+        }
         Database.username = "user";
         Database.password = "password";
         try {
@@ -66,8 +68,10 @@ public class FhmdbApplication extends Application {
             HomeController.watchlist.add(new Movie("error", " ", allGenres, 0, " ", "Error \n Could not connect to database!", 0, null, null, null, 0));
         }catch (SQLException e) {
             throw new RuntimeException(e);
-        }
-        FXMLLoader fxmlLoader = new FXMLLoader(FhmdbApplication.class.getResource("test.fxml"));
+        }*/
+        UserDatabase.getUserDatabase();
+        UserRepo.setDao();
+        FXMLLoader fxmlLoader = new FXMLLoader(FhmdbApplication.class.getResource("Login.fxml"));
         Scene scene = new Scene(fxmlLoader.load(),  1000, 1000);
         scene.getStylesheets().add(Objects.requireNonNull(FhmdbApplication.class.getResource("styles.css")).toExternalForm());
         stage.setTitle("FHMDb");

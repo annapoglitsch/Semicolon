@@ -12,7 +12,7 @@ import java.sql.SQLException;
 public class Database {
     public static String username;
     public static String password;
-    public static final String DB_URL = "jdbc:h2:file: ./db/watchlistdb";// + username;
+    public static String DB_URL = "jdbc:h2:file: ./db/watchlistdb" + username;
     public static ConnectionSource connectionSource;
     public static Dao<WatchlistEntity, Long> dao;
     private static Database instance;
@@ -26,6 +26,7 @@ public class Database {
         createTables();
     }
     public static Database getDatabase() throws SQLException, DatabaseException {
+        DB_URL = "jdbc:h2:file: ./db/watchlistdb" + username;
         if(instance == null){
             instance = new Database();
         }

@@ -4,14 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="632c3f87-378d-459f-993b-b51a9090f282" name="Changes" comment="All - Exceptions and stuff">
-      <change afterPath="$PROJECT_DIR$/db/watchlistdb.trace.db" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/LoginController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/Semicolon/Back/Login.fxml" afterDir="false" />
+    <list default="true" id="632c3f87-378d-459f-993b-b51a9090f282" name="Changes" comment="Moritz - some bug fixes">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/database/UserEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/FhmdbApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/FhmdbApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/HomeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/MovieCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/MovieCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/SendEmail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/SendEmail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/database/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/database/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/database/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/database/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/database/UserDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/database/UserDatabase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/database/UserRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/database/UserRepo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/database/WatchlistRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/database/WatchlistRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/Semicolon/Back/test.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/Semicolon/Back/test.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/Semicolon/MovieTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/Semicolon/MovieTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/Semicolon/Back/Controller/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/Semicolon/Back/Controller/Login.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,13 +93,13 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="S:\FH\Programieren\Java\Semicolon\src\main\resources\com\example\Semicolon\Back\Controller" />
       <recent name="S:\FH\Programieren\Java\Semicolon\src\main\resources\com\example\Semicolon\Back" />
       <recent name="S:\FH\Programieren\Java\Semicolon\src\main\resources" />
-      <recent name="S:\FH\Programieren\Java\Semicolon\src\main\resources\com\example\Semicolon\Back\Controller" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="com.example.Semicolon.Back" />
       <recent name="com.example.Semicolon.Back.Controller" />
+      <recent name="com.example.Semicolon.Back" />
       <recent name="com.example.Semicolon" />
     </key>
   </component>
@@ -218,7 +224,7 @@
     </configuration>
     <configuration name="SendEmail" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.Semicolon.Back.SendEmail" />
-      <module name="semicolon" />
+      <module name="Semicolon" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.example.Semicolon.Back.Controller.*" />
@@ -286,9 +292,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.FhmdbApplication" />
+        <item itemvalue="Application.SendEmail" />
         <item itemvalue="Application.MovieAPI" />
         <item itemvalue="Application.HomeController" />
-        <item itemvalue="Application.SendEmail" />
         <item itemvalue="JUnit.MovieTest" />
       </list>
     </recent_temporary>
@@ -337,7 +343,7 @@
       <workItem from="1680544733173" duration="735000" />
       <workItem from="1680604214538" duration="3384000" />
       <workItem from="1680708337489" duration="17829000" />
-      <workItem from="1683456518537" duration="19164000" />
+      <workItem from="1683456518537" duration="32625000" />
     </task>
     <task id="LOCAL-00001" summary="Moritz - rough draft of main page, added Movie Objects">
       <created>1677798635847</created>
@@ -500,7 +506,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683480622207</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Moritz - some bug fixes">
+      <created>1683489066499</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1683489066499</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -574,13 +587,14 @@
     <MESSAGE value="Anna - button functions done" />
     <MESSAGE value="Moritz - Database works (hopfully), add and remove from watchlist" />
     <MESSAGE value="All - Exceptions and stuff" />
-    <option name="LAST_COMMIT_MESSAGE" value="All - Exceptions and stuff" />
+    <MESSAGE value="Moritz - some bug fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Moritz - some bug fixes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/HomeController.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/HomeController.java</url>
           <line>252</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
@@ -588,6 +602,36 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/MovieAPI.java</url>
           <line>20</line>
           <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/LoginController.java</url>
+          <line>144</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/Semicolon/database/WatchlistRepository.java</url>
+          <line>71</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/HomeController.java</url>
+          <line>126</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/LoginController.java</url>
+          <line>92</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/LoginController.java</url>
+          <line>128</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/Semicolon/database/UserRepo.java</url>
+          <line>24</line>
+          <option name="timeStamp" value="12" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

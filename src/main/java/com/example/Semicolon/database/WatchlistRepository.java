@@ -13,18 +13,17 @@ import java.util.List;
 import java.util.Objects;
 
 public class WatchlistRepository {
-    Dao<WatchlistEntity, Long> dao = setDao();
+    static Dao<WatchlistEntity, Long> dao;
 
-    private static Dao<WatchlistEntity, Long> setDao(){
+    public static void setDao(){
         try {
-            return DaoManager.createDao(createConneectionSource(), WatchlistEntity.class);
+            dao = DaoManager.createDao(createConneectionSource(), WatchlistEntity.class);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
     }
 
-    public void removeFromWatchlist(WatchlistEntity movie) throws SQLException {
+    public static void removeFromWatchlist(WatchlistEntity movie) throws SQLException {
         List<WatchlistEntity> list = getAll();
         for (WatchlistEntity entity : list){
             if (Objects.equals(entity.apiId, movie.apiId)){
@@ -34,11 +33,11 @@ public class WatchlistRepository {
         }
     }
 
-    public List<WatchlistEntity> getAll() throws SQLException {
+    public static List<WatchlistEntity> getAll() throws SQLException {
         return dao.queryForAll();
     }
 
-    public void addToWatchlist(WatchlistEntity movie) throws SQLException {
+    public static void addToWatchlist(WatchlistEntity movie) throws SQLException {
         dao.create(movie);
     }
 
@@ -55,10 +54,10 @@ public class WatchlistRepository {
             System.out.println(movie.id);
         }*/
     }
-    public WatchlistEntity movieToWatchlist(Movie movie) {
+    public static WatchlistEntity movieToWatchlist(Movie movie) {
         return new WatchlistEntity(movie.id, movie.title, movie.description, movie.genres, movie.imgUrl, (int) movie.releaseYear, (int) movie.lengthInMinutes, movie.rating);
     }
-    public Movie WatchlistToMovie(WatchlistEntity entity){
+    public static Movie WatchlistToMovie(WatchlistEntity entity){
         HomeController hc = new HomeController();
         if(!Objects.equals(hc.originalMovieList.get(0).id, "error")) {
             for (Movie movie : hc.originalMovieList) {
@@ -70,10 +69,11 @@ public class WatchlistRepository {
         return null;
     }
     private static ConnectionSource createConneectionSource() throws SQLException {
-        return new JdbcConnectionSource(Database.DB_URL, Database.username, Database.password);
+        String url = "jdbc:h2:file: ./db/watchlistdb" + Database.username;
+        return new JdbcConnectionSource(url, Database.username, Database.password);
     }
 
-    public List<Movie> getWatchlistAsMovies(){
+    public static List<Movie> getWatchlistAsMovies(){
         List<Movie> watchlistMovie = new ArrayList<>();
         try {
             List<WatchlistEntity> WatchList = getAll();

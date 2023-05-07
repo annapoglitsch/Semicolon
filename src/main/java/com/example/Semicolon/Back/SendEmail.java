@@ -10,12 +10,13 @@ public class SendEmail {
     private static Session session = Session.getInstance(setProps(), new javax.mail.Authenticator() {
         @Override
         protected PasswordAuthentication getPasswordAuthentication() {
-            return new PasswordAuthentication("redditmenews@gmail.com", "******");
+            return new PasswordAuthentication("semicolonFHmbd@gmail.com", "woftajclpwgayoqt");
         }
     });
 
     public static Properties setProps(){
         Properties prop = System.getProperties();
+        prop.put("mail.transport.protocol", "smtp");
         prop.put("mail.smtp.host", "smtp.gmail.com");
         prop.put("mail.smtp.port", "465");
         prop.put("mail.smtp.auth", "true");
@@ -29,13 +30,13 @@ public class SendEmail {
         try{
             MimeMessage message = new MimeMessage(session);
 
-            message.setFrom(new InternetAddress("redditmenews@gmail.com"));
+            message.setFrom(new InternetAddress("semicolonFHmbd@gmail.com"));
             message.setRecipients(
                     Message.RecipientType.TO,
                     InternetAddress.parse("ignis.hd@gmx.at")
             );
-            message.setSubject("Subject Line");
-            message.setText("testing");
+            message.setSubject("Thanks!");
+            message.setText("Thank you for using Semicolons FHmdb!\nYour Semicolon Team!");
 
             System.out.println("sending");
             Transport.send(message);

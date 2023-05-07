@@ -54,7 +54,6 @@ public class HomeController implements Initializable {
     /******Lists******/
     private static Movie emptyMovie = new Movie("Movie-list-is-empty", "zzzzzzzzzzzzzzzzzzzzz", allGenres, 0, "", "No Movies", 0, null, null, null, 0);
     private static MovieAPI api = new MovieAPI();
-    private static WatchlistRepository repo = new WatchlistRepository();
     public static List<Movie> originalMovieList = new ArrayList<>();
 
     public static void setOriginalMovieList() {
@@ -74,7 +73,7 @@ public class HomeController implements Initializable {
     public static List<Movie> watchlist = new ArrayList<>();
 
     public static void setWatchlist() {
-        watchlist = repo.getWatchlistAsMovies();
+        watchlist = WatchlistRepository.getWatchlistAsMovies();
         if (watchlist.isEmpty()) {
             if (originalMovieList.get(0).id == "error") {
                 Movie error = new Movie(originalMovieList.get(0));
@@ -95,16 +94,21 @@ public class HomeController implements Initializable {
      * Business Logic Layer
      */
     private final ClickEventHandler onAddToWatchlistClicked = (clickedItem) -> {
-        WatchlistRepository repo = new WatchlistRepository();
         if (clickedItem instanceof Movie) {
             Movie movieWatch = (Movie) clickedItem;
             try {
+                if(watchlist.get(0).id == "Movie-list-is-empty"){
+                    watchlist.clear();
+                }
                 if (HomeController.watchlist.contains(movieWatch)) {
-                    repo.removeFromWatchlist(repo.movieToWatchlist(movieWatch));
+                    WatchlistRepository.removeFromWatchlist(WatchlistRepository.movieToWatchlist(movieWatch));
                     HomeController.watchlist.remove(movieWatch);
                 } else {
-                    repo.addToWatchlist(repo.movieToWatchlist(movieWatch));
+                    WatchlistRepository.addToWatchlist(WatchlistRepository.movieToWatchlist(movieWatch));
                     HomeController.watchlist.add(movieWatch);
+                }
+                if(watchlist.isEmpty()){
+                    watchlist.add(emptyMovie);
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
