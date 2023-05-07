@@ -25,6 +25,19 @@ public class Movie {
         this.mainCast = mainCast;
         this.rating = rating;
     }
+    public Movie(Movie movie){
+        this.id = movie.id; //apiId
+        this.title = movie.title;
+        this.genres = movie.genres;
+        this.releaseYear = movie.releaseYear;
+        this.description = movie.description;
+        this.imgUrl = movie.imgUrl;
+        this.lengthInMinutes = movie.lengthInMinutes;
+        this.directors = movie.directors;
+        this.writers = movie.writers;
+        this.mainCast = movie.mainCast;
+        this.rating = movie.rating;
+    }
 
     public Movie() {
     }

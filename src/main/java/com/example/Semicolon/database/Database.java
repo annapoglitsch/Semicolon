@@ -1,5 +1,6 @@
 package com.example.Semicolon.database;
 
+import com.example.Semicolon.Exceptions.DatabaseException;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
@@ -19,47 +20,29 @@ public class Database {
         WatchlistEntity entity = new WatchlistEntity("test", "test", "test", new String[]{"test", "test", "test"}, "test", 1, 2,3);
         dao.create(entity);
     }
-    private Database(){
-        try {
-            createConnectionSource();
-            dao = DaoManager.createDao(connectionSource, WatchlistEntity.class);
-            createTables();
-        }catch (SQLException e){
-            System.out.println(e.getMessage());
-        }
+    private Database() throws DatabaseException, SQLException {
+        createConnectionSource();
+        dao = DaoManager.createDao(connectionSource, WatchlistEntity.class);
+        createTables();
     }
-    public static Database getDatabase(){
+    public static Database getDatabase() throws SQLException, DatabaseException {
         if(instance == null){
             instance = new Database();
         }
         return instance;
     }
-    private static void createTables() throws SQLException {
-        TableUtils.createTableIfNotExists(connectionSource, WatchlistEntity.class);
+    private static void createTables() throws DatabaseException {
+        try {
+            TableUtils.createTableIfNotExists(connectionSource, WatchlistEntity.class);
+        } catch (SQLException e) {
+            throw new DatabaseException("Could not create Table");
+        }
     }
-    private static void createConnectionSource() {
+    private static void createConnectionSource() throws DatabaseException {
         try {
             connectionSource = new JdbcConnectionSource(DB_URL, username, password);
+        } catch (SQLException e) {
+            throw new DatabaseException("Could not connect");
         }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        public void saveMovie(Movie movie) throws DatabaseException {
-            try {
-                // Code to save movie to database
-            } catch (Exception e) {
-                throw new DatabaseException("Error saving movie to database.");
-            }
-        }
-
-        public List<Movie> getAllMovies() throws DatabaseException {
-            try {
-                // Code to retrieve all movies from database
-            } catch (Exception e) {
-                throw new DatabaseException("Error retrieving movies from database.");
-            }
-        }
-
     }
 }

@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static com.example.Semicolon.Back.HomeController.allGenres;
+
 public class WatchlistRepository {
     Dao<WatchlistEntity, Long> dao = setDao();
 
@@ -29,13 +31,13 @@ public class WatchlistRepository {
         for (WatchlistEntity entity : list){
             if (Objects.equals(entity.apiId, movie.apiId)){
                 dao.deleteById(entity.id);
+                //dao.delete(entity);
             }
         }
     }
 
     public List<WatchlistEntity> getAll() throws SQLException {
-        List<WatchlistEntity> list = dao.queryForAll();
-        return list;
+        return dao.queryForAll();
     }
 
     public void addToWatchlist(WatchlistEntity movie) throws SQLException {
@@ -43,7 +45,7 @@ public class WatchlistRepository {
     }
 
     public static void main(String[] args) throws SQLException {
-        Database.getDatabase();
+        /*Database.getDatabase();
         WatchlistRepository test = new WatchlistRepository();
         WatchlistEntity temp = new WatchlistEntity("movie", "movie", "movie", new String[] { "movie", "movie"}, "movie", 1,2,3);
         test.addToWatchlist(temp);
@@ -53,24 +55,27 @@ public class WatchlistRepository {
         //test.removeFromWatchlist(temp);
         for (WatchlistEntity movie : test.getAll()){
             System.out.println(movie.id);
-        }
+        }*/
     }
     public WatchlistEntity movieToWatchlist(Movie movie) {
         return new WatchlistEntity(movie.id, movie.title, movie.description, movie.genres, movie.imgUrl, (int) movie.releaseYear, (int) movie.lengthInMinutes, movie.rating);
+    }
+    public Movie WatchlistToMovie(WatchlistEntity entity){
+        HomeController hc = new HomeController();
+        hc.setOriginalMovieList();
+        if(!Objects.equals(hc.originalMovieList.get(0).id, "error")) {
+            for (Movie movie : hc.originalMovieList) {
+                if (Objects.equals(entity.apiId, movie.id)) {
+                    return movie;
+                }
+            }
+        }
+        return null;
     }
     private static ConnectionSource createConneectionSource() throws SQLException {
         return new JdbcConnectionSource(Database.DB_URL, Database.username, Database.password);
     }
 
-    public Movie WatchlistToMovie(WatchlistEntity entity){
-        HomeController hc = new HomeController();
-        for(Movie movie : hc.originalMovieList){
-            if(Objects.equals(entity.apiId, movie.id)){
-                return movie;
-            }
-        }
-        return null;
-    }
     public List<Movie> getWatchlistAsMovies(){
         List<Movie> watchlistMovie = new ArrayList<>();
         try {
@@ -83,7 +88,13 @@ public class WatchlistRepository {
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }
+        }/*
+        if(watchlistMovie.isEmpty()){
+            HomeController hc = new HomeController();
+            if(Objects.equals(hc.originalMovieList.get(0).id, "error")){
+                watchlistMovie.add(hc.originalMovieList.get(0));
+            }
+        }*/
         return watchlistMovie;
     }
 }

@@ -15,8 +15,8 @@ public class WatchlistEntity {
     public double rating;
     public WatchlistEntity(){}
 
-    public WatchlistEntity(String apild, String title, String description, String[] genres, String imgURL,int releaseYear, int lenInMin, double rating){
-        this.apiId = apild;
+    public WatchlistEntity(String apiId, String title, String description, String[] genres, String imgURL,int releaseYear, int lenInMin, double rating){
+        this.apiId = apiId;
         this.title = title;
         this.description = description;
         this.genres = genresToString(genres);

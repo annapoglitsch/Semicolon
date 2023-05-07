@@ -1,5 +1,6 @@
 package com.example.Semicolon.Back;
 
+import com.example.Semicolon.Exceptions.MovieApiException;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -16,46 +17,27 @@ public class MovieAPI {
             "MUSICAL", "MYSTERY", "ROMANCE", "SCIENCE_FICTION", "SPORT", "THRILLER", "WAR",
             "WESTERN"};
 
-    public List<Movie> initializeMoviesNew(String path) {
+    public List<Movie> initializeMoviesNew(String path) throws MovieApiException {
         List<Movie> movieList = new ArrayList<>();
         URL url;
         try {
             url = new URL(path);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
+            if(connection.getResponseCode() != 200){
+                throw new MovieApiException("Malformed URL");
+            }
             String temp = new BufferedReader(new InputStreamReader(connection.getInputStream(), Charset.defaultCharset())).lines().collect(Collectors.joining("\n"));
-            movieList = new Gson().fromJson(temp, new TypeToken<List<Movie>>() {
-            }.getType());
-        } catch (MalformedURLException f) { // url not valid
-            movieList.add(new Movie("error", " ", allGenres, 0, " ", "Error-404", 0, null, null, null, 0));
-            return movieList;
+            movieList = new Gson().fromJson(temp, new TypeToken<List<Movie>>() {}.getType());
         } catch (UnknownHostException o) { //no internet
-            movieList.add(new Movie("error", " ", allGenres, 0, " ", "Error-502", 0, null, null, null, 0));
-            return movieList;
+            throw new MovieApiException("No Internet connection");
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new MovieApiException("Unexpected Error");
         }
         return movieList;
     }
 
     public static void main(String[] args) {
-        new MovieAPI().initializeMoviesNew("https://prog2.fh-campuswien.ac.at/movies");
-    }
-
-
-    public Movie getMovie(String title) throws MovieApiException {
-        try {
-            // Code to retrieve movie from API
-        } catch (Exception e) {
-            throw new MovieApiException("Error retrieving movie from API.");
-        }
-
-        public List<Movie> searchMovies (String searchTerm) throws MovieApiException {
-            try {
-                // Code to search movies in API
-            } catch (Exception e) {
-                throw new MovieApiException("Error searching movies in API.");
-            }
-        }
+        //new MovieAPI().initializeMoviesNew("https://prog2.fh-campuswien.ac.at/movies");
     }
 }

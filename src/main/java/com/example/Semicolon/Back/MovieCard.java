@@ -67,7 +67,6 @@ public class MovieCard extends ListCell<Movie> {
             card.spacingProperty().set(10);
             card.setPadding(new Insets(5, 30, 5, 10));
             card.alignmentProperty().set(javafx.geometry.Pos.CENTER_LEFT);
-
             if (!HomeController.watchlist.isEmpty()) {
                 System.out.println(HomeController.watchlist);
                 for (Movie m : HomeController.watchlist) {

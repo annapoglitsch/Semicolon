@@ -1,9 +1,9 @@
 package com.example.Semicolon.Back;
 
+import com.example.Semicolon.Exceptions.MovieApiException;
 import com.example.Semicolon.database.WatchlistRepository;
 import javafx.animation.TranslateTransition;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import javafx.beans.value.*;
 import javafx.collections.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
@@ -35,23 +35,52 @@ public class HomeController implements Initializable {
     Slider ratingSlider;
     @FXML
     Label ratingLabel;
-    private String[] allGenres = new String[]{"---ALL GENRES---", "ACTION", "ADVENTURE", "ANIMATION", "BIOGRAPHY", "COMEDY",
+    public static final String[] allGenres = new String[]{"---ALL GENRES---", "ACTION", "ADVENTURE", "ANIMATION", "BIOGRAPHY", "COMEDY",
             "CRIME", "DRAMA", "DOCUMENTARY", "FAMILY", "FANTASY", "HISTORY", "HORROR",
             "MUSICAL", "MYSTERY", "ROMANCE", "SCIENCE_FICTION", "SPORT", "THRILLER", "WAR",
             "WESTERN"};
     private ObservableList<String> allYears = FXCollections.observableArrayList();
     public boolean menuActive = false, sortedByTitle = false;
     public static boolean watchlistActive = false;
-    private String URL = "https://prog2.fh-campuswien.ac.at/movies", query = "", genre = "", title = "", rating = "", releaseYear = "";
-    //                                  ******Lists******
-    private Movie emptyMovie = new Movie("Movie-list-is-empty", "zzzzzzzzzzzzzzzzzzzzz", allGenres, 0, "", "No Movies", 0, null, null, null, 0);
-    private MovieAPI api = new MovieAPI();
+    private static String URL = "https://prog2.fh-campuswien.ac.at/movies";
+    private String query = "";
+    private String genre = "";
+    private String title = "";
+    private String rating = "";
+    private String releaseYear = "";
+    /******Lists******/
+    private static Movie emptyMovie = new Movie("Movie-list-is-empty", "zzzzzzzzzzzzzzzzzzzzz", allGenres, 0, "", "No Movies", 0, null, null, null, 0);
+    private static MovieAPI api = new MovieAPI();
     private static WatchlistRepository repo = new WatchlistRepository();
-    public List<Movie> originalMovieList = api.initializeMoviesNew("https://prog2.fh-campuswien.ac.at/movies");
+    public static List<Movie> originalMovieList = new ArrayList<>();
+
+    public static void setOriginalMovieList() {
+        try {
+            originalMovieList = api.initializeMoviesNew(URL);
+        } catch (MovieApiException e) {
+            if (Objects.equals(e.getMessage(), "Malformed URL")) {
+                originalMovieList.add(new Movie("error", " ", allGenres, 0, " ", "Error-404 \n Could not find movies on external site!", 0, null, null, null, 0));
+            } else if (Objects.equals(e.getMessage(), "No Internet connection")) {
+                originalMovieList.add(new Movie("error", " ", allGenres, 0, " ", "Error-502 \n Check your internet connection!", 0, null, null, null, 0));
+            } else if (Objects.equals(e.getMessage(), "Unexpected Error")) {
+                originalMovieList.add(new Movie("error", " ", allGenres, 0, " ", "An unexpected Error accrued", 0, null, null, null, 0));
+            }
+        }
+    }
+
     public static List<Movie> watchlist = new ArrayList<>();
 
     public static void setWatchlist() {
         watchlist = repo.getWatchlistAsMovies();
+        if (watchlist.isEmpty()) {
+            if (originalMovieList.get(0).id == "error") {
+                Movie error = new Movie(originalMovieList.get(0));
+                error.imgUrl += "\nTherefor displaying watchlist isn't possible!";
+                watchlist.add(error);
+            } else {
+                watchlist.add(emptyMovie);
+            }
+        }
     }
 
     //public List<Movie> originalMovieList = movie.staticMovieList();
@@ -67,7 +96,6 @@ public class HomeController implements Initializable {
         if (clickedItem instanceof Movie) {
             Movie movieWatch = (Movie) clickedItem;
             try {
-
                 if (HomeController.watchlist.contains(movieWatch)) {
                     repo.removeFromWatchlist(repo.movieToWatchlist(movieWatch));
                     HomeController.watchlist.remove(movieWatch);
@@ -124,9 +152,9 @@ public class HomeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if(watchlistActive){
+        if (watchlistActive) {
             movieList.addAll(watchlist);
-        }else {
+        } else {
             movieList.addAll(originalMovieList);
         }
         movieDisplay.setItems(movieList);
@@ -221,8 +249,24 @@ public class HomeController implements Initializable {
         }
     }
 
+    private List<Movie> getMovieList() {
+        List<Movie> list = new ArrayList<>();
+        try {
+            list = api.initializeMoviesNew(URL);
+        } catch (MovieApiException e) {
+            if (Objects.equals(e.getMessage(), "Malformed URL")) {
+                list.add(new Movie("error", " ", allGenres, 0, " ", "Error-404 \n Could not find movies on external site!", 0, null, null, null, 0));
+            } else if (Objects.equals(e.getMessage(), "No Internet connection")) {
+                list.add(new Movie("error", " ", allGenres, 0, " ", "Error-502 \n Check your Internetconnection", 0, null, null, null, 0));
+            } else if (Objects.equals(e.getMessage(), "Unexpected Error")) {
+                list.add(new Movie("error", " ", allGenres, 0, " ", "An unexpected Error accrued", 0, null, null, null, 0));
+            }
+        }
+        return list;
+    }
+
     private void setMovieList() {
-        List<Movie> movies = api.initializeMoviesNew(URL);
+        List<Movie> movies = getMovieList();
         movieList.clear();
         if (watchlistActive) {
             for (Movie movie : movies) {
@@ -400,38 +444,5 @@ public class HomeController implements Initializable {
         System.out.println(controller.getLongestMovieTitle(controller.originalMovieList));
         System.out.println(controller.countMoviesFrom(controller.originalMovieList, "Peter Jackson"));
         System.out.println(controller.getMoviesBetweenYears(controller.originalMovieList, 1900, 3000));
-    }
-
-    public class Controller {
-        private MovieAPI movieAPI;
-        private Database database;
-
-        public Controller() {
-            this.movieAPI = new MovieAPI();
-            this.database = new Database();
-        }
-
-        public void saveMovie(Movie movie) {
-            try {
-                database.saveMovie(movie);
-            } catch (DatabaseException e) {
-                JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        }
-
-        public List<Movie> getAllMovies() {
-            try {
-                return database.getAllMovies();
-            } catch (DatabaseException e) {
-                JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                return new ArrayList<Movie>();
-            }
-        }
-
-        public Movie getMovie(String title) {
-            try {
-                return movieAPI.getMovie(title);
-            } catch
-        }
     }
 }
