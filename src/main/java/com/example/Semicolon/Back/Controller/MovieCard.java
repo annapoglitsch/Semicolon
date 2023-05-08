@@ -84,11 +84,10 @@ public class MovieCard extends ListCell<Movie> {
             } else {
                 watchListButton.setText("Add to Watchlist");
             }
-            card.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            card.setOnMouseClicked(new EventHandler<>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
                     DetailsController.movie = movie;
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("com/example/Semicolon/Details.fxml"));
                     try {
                         switchScene(mouseEvent);
                     } catch (IOException e) {
@@ -111,12 +110,12 @@ public class MovieCard extends ListCell<Movie> {
     }
     private void setErrorMessage(Movie movie) {
         this.getStyleClass().add("movie-cell");
-        title.setText(movie.imgUrl);
-        title.alignmentProperty().set(Pos.TOP_CENTER);
-        title.getStyleClass().clear();
-        title.getStyleClass().add("text-color");
-        title.fontProperty().set(title.getFont().font(20));
-        description.setText("");
+        description.setText(movie.imgUrl);
+        description.alignmentProperty().set(Pos.TOP_CENTER);
+        description.getStyleClass().clear();
+        description.getStyleClass().add("text-color");
+        description.fontProperty().set(title.getFont().font(20));
+        title.setText("");
         genres.setText("");
         rating.setText("");
         card.alignmentProperty().set(javafx.geometry.Pos.CENTER_LEFT);
@@ -150,6 +149,5 @@ public class MovieCard extends ListCell<Movie> {
                 watchListButton.setText("Add to Watchlist");
             }
         });
-
     }
 }

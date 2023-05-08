@@ -61,7 +61,7 @@ class MovieTest extends ActionEvent {
             }
             controller = new HomeController();
             controller.movieList.addAll(movieList);
-            assertEquals(rightOrder, controller.sortMoviesByTitle(this, "A-Z"));
+            assertEquals(rightOrder, controller.sortMovies(this, "A-Z"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -84,7 +84,7 @@ class MovieTest extends ActionEvent {
             }
             controller = new HomeController();
             controller.movieList.addAll(movieList);
-            assertEquals(rightOrder, controller.sortMoviesByTitle(this, "Z-A"));
+            assertEquals(rightOrder, controller.sortMovies(this, "Z-A"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -108,7 +108,7 @@ class MovieTest extends ActionEvent {
             controller = new HomeController();
             controller.movieList.addAll(rightOrder);
             controller.originalMovieList = rightOrder;
-            assertEquals(rightOrder, controller.sortMoviesByTitle(this, "---NO SORTING---"));
+            assertEquals(rightOrder, controller.sortMovies(this, "---NO SORTING---"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -254,7 +254,7 @@ class MovieTest extends ActionEvent {
             }
 
             controller.movieList.addAll(movieList);
-            controller.sortMoviesByTitle(this, "A-Z");
+            controller.sortMovies(this, "A-Z");
             controller.filterMoviesByGenre(this, "ACTION");
             assertEquals(movieList2, controller.movieList);
         } catch (Exception e) {

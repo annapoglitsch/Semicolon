@@ -144,7 +144,7 @@ public class LoginController {
         try {
             Database.getDatabase();
             HomeController.setOriginalMovieList();
-            WatchlistRepository.setDao();
+            WatchlistRepository.getWatchlistRepository();
             HomeController.setWatchlist();
             Scene scene = ((Node) event.getSource()).getScene();
             scene.setRoot(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("test.fxml"))));

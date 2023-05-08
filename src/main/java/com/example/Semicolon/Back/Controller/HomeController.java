@@ -48,7 +48,6 @@ public class HomeController implements Initializable {
     private static String URL = "https://prog2.fh-campuswien.ac.at/movies";
     private String query = "";
     private String genre = "";
-    private String title = "";
     private String rating = "";
     private String releaseYear = "";
     /******Lists******/
@@ -124,6 +123,8 @@ public class HomeController implements Initializable {
 
     @FXML
     private void switchWatchlist() {
+        resetSearchParameters();
+
         watchlistActive = true;
         activateMenu();
         movieList.clear();
@@ -132,10 +133,24 @@ public class HomeController implements Initializable {
 
     @FXML
     private void switchHome() {
+        resetSearchParameters();
+
         watchlistActive = false;
         activateMenu();
         movieList.clear();
         movieList.addAll(originalMovieList);
+    }
+    private void resetSearchParameters(){
+        ratingSlider.setValue(0);
+        ratingLabel.setText("0");
+        genresChoice.setValue("---ALL GENRES---");
+        sortingChoice.setValue("---NO SORTING---");
+        releaseYearChoice.setValue("---All YEARS---");
+
+        query = "";
+        genre = "";
+        rating = "";
+        releaseYear = "";
     }
 
     @FXML
@@ -202,7 +217,7 @@ public class HomeController implements Initializable {
     }
 
     public void sortMoviesByTitlePreparation(ActionEvent event) {   //prep so that choiceBox sorting is not null
-        sortMoviesByTitle(event, sortingChoice.getValue());
+        sortMovies(event, sortingChoice.getValue());
     }
 
     public void filterMoviesByGenrePrep(ActionEvent event) {      /** prep so that choiceBox genre is not null */
@@ -238,9 +253,6 @@ public class HomeController implements Initializable {
                 case "genre":
                     genre = addon;
                     break;
-                case "title":
-                    title = addon;
-                    break;
                 case "rating":
                     rating = addon;
                     break;
@@ -251,7 +263,7 @@ public class HomeController implements Initializable {
                     query = addon;
                     break;
             }
-            URL = "https://prog2.fh-campuswien.ac.at/movies?query=" + query + "&genre=" + genre + "&title=" + title + "&ratingFrom=" + rating + "&releaseYear=" + releaseYear;
+            URL = "https://prog2.fh-campuswien.ac.at/movies?query=" + query + "&genre=" + genre + "&ratingFrom=" + rating + "&releaseYear=" + releaseYear;
             setMovieList();
         }
     }
@@ -291,7 +303,7 @@ public class HomeController implements Initializable {
             movieList.addAll(movies);
         }
         if (sortedByTitle) {
-            sortMoviesByTitle(new ActionEvent(), sortingChoice.getValue());
+            sortMovies(new ActionEvent(), sortingChoice.getValue());
         }
     }
 
@@ -327,7 +339,7 @@ public class HomeController implements Initializable {
         changeURL(keyWord, "query");
     }
 
-    public ObservableList<Movie> sortMoviesByTitle(ActionEvent event, String keyWord) {
+    public ObservableList<Movie> sortMovies(ActionEvent event, String keyWord) {
         sortedByTitle = true;
         if (Objects.equals(keyWord, "---NO SORTING---")) {
             sortedByTitle = false;

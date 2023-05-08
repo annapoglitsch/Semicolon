@@ -10,7 +10,7 @@ public class SendEmail {
     private static Session session = Session.getInstance(setProps(), new javax.mail.Authenticator() {
         @Override
         protected PasswordAuthentication getPasswordAuthentication() {
-            return new PasswordAuthentication("semicolonFHmbd@gmail.com", "woftajclpwgayoqt");
+            return new PasswordAuthentication("semicolonFHmbd@gmail.com", "******");
         }
     });
 

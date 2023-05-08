@@ -14,7 +14,16 @@ import java.util.Objects;
 
 public class WatchlistRepository {
     static Dao<WatchlistEntity, Long> dao;
-
+    private static WatchlistRepository instance =  getWatchlistRepository();
+    private WatchlistRepository(){
+        setDao();
+    }
+    public static WatchlistRepository getWatchlistRepository(){
+        if(instance==null){
+            instance = new WatchlistRepository();
+        }
+        return instance;
+    }
     public static void setDao(){
         try {
             dao = DaoManager.createDao(createConneectionSource(), WatchlistEntity.class);
@@ -22,7 +31,6 @@ public class WatchlistRepository {
             e.printStackTrace();
         }
     }
-
     public static void removeFromWatchlist(WatchlistEntity movie) throws SQLException {
         List<WatchlistEntity> list = getAll();
         for (WatchlistEntity entity : list){

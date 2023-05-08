@@ -4,20 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="632c3f87-378d-459f-993b-b51a9090f282" name="Changes" comment="Moritz - some bug fixes">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/database/UserEntity.java" afterDir="false" />
+    <list default="true" id="632c3f87-378d-459f-993b-b51a9090f282" name="Changes" comment="Moritz - Added login">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/FhmdbApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/FhmdbApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/HomeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/LoginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/MovieCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/MovieCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/SendEmail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/SendEmail.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/database/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/database/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/database/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/database/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/database/UserDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/database/UserDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/database/UserRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/database/UserRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/database/WatchlistEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/database/WatchlistEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/database/WatchlistRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/database/WatchlistRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/Semicolon/Back/Controller/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/Semicolon/Back/Controller/Login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/Semicolon/MovieTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/Semicolon/MovieTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -343,7 +338,8 @@
       <workItem from="1680544733173" duration="735000" />
       <workItem from="1680604214538" duration="3384000" />
       <workItem from="1680708337489" duration="17829000" />
-      <workItem from="1683456518537" duration="32625000" />
+      <workItem from="1683456518537" duration="32906000" />
+      <workItem from="1683529017140" duration="8321000" />
     </task>
     <task id="LOCAL-00001" summary="Moritz - rough draft of main page, added Movie Objects">
       <created>1677798635847</created>
@@ -513,7 +509,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683489066499</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Moritz - Added login">
+      <created>1683503722294</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1683503722294</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -588,16 +591,12 @@
     <MESSAGE value="Moritz - Database works (hopfully), add and remove from watchlist" />
     <MESSAGE value="All - Exceptions and stuff" />
     <MESSAGE value="Moritz - some bug fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Moritz - some bug fixes" />
+    <MESSAGE value="Moritz - Added login" />
+    <option name="LAST_COMMIT_MESSAGE" value="Moritz - Added login" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/HomeController.java</url>
-          <line>252</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/MovieAPI.java</url>
           <line>20</line>
@@ -610,12 +609,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/Semicolon/database/WatchlistRepository.java</url>
-          <line>71</line>
+          <line>79</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/HomeController.java</url>
-          <line>126</line>
+          <line>127</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -627,11 +626,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/LoginController.java</url>
           <line>128</line>
           <option name="timeStamp" value="11" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/Semicolon/database/UserRepo.java</url>
-          <line>24</line>
-          <option name="timeStamp" value="12" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

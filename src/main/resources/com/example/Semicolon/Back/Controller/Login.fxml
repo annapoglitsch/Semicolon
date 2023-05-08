@@ -34,12 +34,12 @@
       </Label>
       <Button fx:id="switchLogin" disable="true" mnemonicParsing="false" onAction="#switchToLogin" text="Login" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <Button fx:id="switchRegister" mnemonicParsing="false" onAction="#switchToRegister" text="Register" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <TextField fx:id="loginUsername" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3" GridPane.valignment="TOP">
+      <TextField fx:id="loginUsername" promptText="Username" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3" GridPane.valignment="TOP">
          <GridPane.margin>
             <Insets top="20.0" />
          </GridPane.margin>
       </TextField>
-      <PasswordField fx:id="loginPassword" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3" GridPane.valignment="TOP">
+      <PasswordField fx:id="loginPassword" promptText="Password" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3" GridPane.valignment="TOP">
          <GridPane.margin>
             <Insets top="100.0" />
          </GridPane.margin>
