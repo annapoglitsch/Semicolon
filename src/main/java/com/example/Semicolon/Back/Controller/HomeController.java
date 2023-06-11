@@ -27,7 +27,20 @@ import java.util.stream.Collectors;
 /**
  * Variables
  */
-public class HomeController implements Initializable {
+
+public class HomeController implements Initializable, State, Observer {
+    private static HomeController instance;
+
+    private HomeController() {
+    }
+
+    public static HomeController getInstance() {
+        if (instance == null) {
+            instance = new HomeController();
+        }
+        return instance;
+    }
+
     @FXML
     GridPane HomeGrid, menu;
     @FXML
