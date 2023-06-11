@@ -84,17 +84,7 @@ public class MovieCard extends ListCell<Movie> {
             } else {
                 watchListButton.setText("Add to Watchlist");
             }
-            card.setOnMouseClicked(new EventHandler<>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                    DetailsController.movie = movie;
-                    try {
-                        switchScene(mouseEvent);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-            });
+
             watchListButton.setOpacity(1);
             watchListButton.setDisable(false);
             box.setSpacing(20);

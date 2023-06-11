@@ -1,6 +1,7 @@
 package com.example.Semicolon.Back.Controller;
 
 import com.example.Semicolon.Back.ClickEventHandler;
+import com.example.Semicolon.Back.Controller.Pattern.*;
 import com.example.Semicolon.Back.Movie;
 import com.example.Semicolon.Back.MovieAPI;
 import com.example.Semicolon.Exceptions.MovieApiException;
@@ -13,7 +14,10 @@ import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
+import java.io.File;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.*;
@@ -38,6 +42,7 @@ public class HomeController implements Initializable {
     Slider ratingSlider;
     @FXML
     Label ratingLabel;
+    private MediaPlayer mediaPlayer;
     public static final String[] allGenres = new String[]{"---ALL GENRES---", "ACTION", "ADVENTURE", "ANIMATION", "BIOGRAPHY", "COMEDY",
             "CRIME", "DRAMA", "DOCUMENTARY", "FAMILY", "FANTASY", "HISTORY", "HORROR",
             "MUSICAL", "MYSTERY", "ROMANCE", "SCIENCE_FICTION", "SPORT", "THRILLER", "WAR",
@@ -45,6 +50,7 @@ public class HomeController implements Initializable {
     private ObservableList<String> allYears = FXCollections.observableArrayList();
     public boolean menuActive = false, sortedByTitle = false;
     public static boolean watchlistActive = false;
+    private static String baseURL = "https://prog2.fh-campuswien.ac.at/movies?";
     private static String URL = "https://prog2.fh-campuswien.ac.at/movies";
     private String query = "";
     private String genre = "";
@@ -96,17 +102,17 @@ public class HomeController implements Initializable {
         if (clickedItem instanceof Movie) {
             Movie movieWatch = (Movie) clickedItem;
             try {
-                if(watchlist.get(0).id == "Movie-list-is-empty"){
+                if (Objects.equals(watchlist.get(0).id, "Movie-list-is-empty")) {
                     watchlist.clear();
                 }
                 if (HomeController.watchlist.contains(movieWatch)) {
-                    WatchlistRepository.removeFromWatchlist(WatchlistRepository.movieToWatchlist(movieWatch));
+                    WatchlistRepository.getWatchlistRepository().removeFromWatchlist(WatchlistRepository.movieToWatchlist(movieWatch));
                     HomeController.watchlist.remove(movieWatch);
                 } else {
-                    WatchlistRepository.addToWatchlist(WatchlistRepository.movieToWatchlist(movieWatch));
+                    WatchlistRepository.getWatchlistRepository().addToWatchlist(WatchlistRepository.movieToWatchlist(movieWatch));
                     HomeController.watchlist.add(movieWatch);
                 }
-                if(watchlist.isEmpty()){
+                if (watchlist.isEmpty()) {
                     watchlist.add(emptyMovie);
                 }
             } catch (SQLException e) {
@@ -140,7 +146,8 @@ public class HomeController implements Initializable {
         movieList.clear();
         movieList.addAll(originalMovieList);
     }
-    private void resetSearchParameters(){
+
+    private void resetSearchParameters() {
         ratingSlider.setValue(0);
         ratingLabel.setText("0");
         genresChoice.setValue("---ALL GENRES---");
@@ -174,6 +181,7 @@ public class HomeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         if (watchlistActive) {
             movieList.addAll(watchlist);
         } else {
@@ -243,29 +251,10 @@ public class HomeController implements Initializable {
         }
     }
 
-    public void changeURL(String addon, String source) {
-        if (addon != null) {
-            addon = addon.replaceAll(" ", "%20");
-            if (addon.equals("RESET")) {
-                addon = "";
-            }
-            switch (source) {
-                case "genre":
-                    genre = addon;
-                    break;
-                case "rating":
-                    rating = addon;
-                    break;
-                case "releaseYear":
-                    releaseYear = addon;
-                    break;
-                case "query":
-                    query = addon;
-                    break;
-            }
-            URL = "https://prog2.fh-campuswien.ac.at/movies?query=" + query + "&genre=" + genre + "&ratingFrom=" + rating + "&releaseYear=" + releaseYear;
-            setMovieList();
-        }
+    public void changeURL() {
+        URL = new APIRequestBuilder(baseURL).query(query).genre(genre).releaseYear(releaseYear).ratingFrom(rating).build();
+        System.out.println(URL);
+        setMovieList();
     }
 
     private List<Movie> getMovieList() {
@@ -309,95 +298,81 @@ public class HomeController implements Initializable {
 
     public void filterMoviesByGenre(ActionEvent event, String keyWord) {
         if (Objects.equals(keyWord, "---ALL GENRES---")) {
-            keyWord = "RESET";
+            genre = "";
+        } else {
+            genre = keyWord;
         }
-        changeURL(keyWord, "genre");
+        changeURL();
     }
 
     public void filterByRatingFrom(int value) {
         ratingLabel.setText(String.valueOf(value / 10.));
         String keyWord;
         if (value / 10. <= 0) {
-            keyWord = "RESET";
+            rating = "";
         } else {
-            keyWord = String.valueOf(value / 10.);
+            rating = String.valueOf(value / 10.);
         }
-        changeURL(keyWord, "rating");
+        changeURL();
     }
 
     public void filterByReleaseYear(ActionEvent event, String keyWord) {
         if (Objects.equals(keyWord, "---All Years---")) {
-            keyWord = "RESET";
+            releaseYear = "";
+        } else {
+            releaseYear = keyWord;
         }
-        changeURL(keyWord, "releaseYear");
+        changeURL();
     }
 
     public void searchMovies(String keyWord) {
         if (keyWord == null) {
-            keyWord = "RESET";
+            query = "";
+        } else {
+            query = keyWord;
         }
-        changeURL(keyWord, "query");
+        changeURL();
     }
 
     public ObservableList<Movie> sortMovies(ActionEvent event, String keyWord) {
-        sortedByTitle = true;
-        if (Objects.equals(keyWord, "---NO SORTING---")) {
-            sortedByTitle = false;
-            setMovieList();
-            return movieList;
-        }
-        if (sortingKeywords.contains(keyWord)) {
-            Collections.sort(movieList, new Comparator<Movie>() {
-                @Override
-                public int compare(Movie o1, Movie o2) {
-                    return HomeController.this.compare(o1, o2, keyWord);
-                }
-            });
-        }
-        return movieList;
-    }
+        StateContext context = new StateContext();
+        RatingHL highLowRating = new RatingHL();
+        RatingLH lowHighRating = new RatingLH();
+        TitleAZ azTitle = new TitleAZ();
+        TitleZA zaTitle = new TitleZA();
+        YearNO noYear = new YearNO();
+        YearON onYear = new YearON();
 
-    private int compare(Movie m1, Movie m2, String keyWord) {
-        int value = 0;
-        String type = null;
         switch (keyWord) {
+            case "---NO SORTING---":
+                setMovieList();
+                return movieList;
             case "Rating - Low to High":
-                value = -1;
-                type = "Rating";
+                context.setState(lowHighRating);
                 break;
             case "Rating - High to Low":
-                value = 1;
-                type = "Rating";
+                context.setState(highLowRating);
                 break;
             case "Old to New":
-                value = -1;
-                type = "Year";
+                System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+                context.setState(onYear);
                 break;
             case "New to Old":
-                value = 1;
-                type = "Year";
+                System.out.println("nnnnnnnnnnoooooooooooooooooooooooooooo");
+                context.setState(noYear);
                 break;
             case "A-Z":
-                value = 1;
-                type = "Alphabetical";
+                context.setState(azTitle);
                 break;
             case "Z-A":
-                value = -1;
-                type = "Alphabetical";
+                context.setState(zaTitle);
                 break;
         }
-        if ((m1.rating > m2.rating && Objects.equals(type, "Rating")) || (m1.releaseYear > m2.releaseYear && Objects.equals(type, "Year"))) {
-            return -value;
-        } else if ((m1.rating < m2.rating && Objects.equals(type, "Rating")) || (m1.releaseYear < m2.releaseYear && Objects.equals(type, "Year"))) {
-            return value;
-        } else if (value == 1 && Objects.equals(type, "Alphabetical")) {
-            return m1.title.compareTo(m2.title);
-        } else if (value == -1 && Objects.equals(type, "Alphabetical")) {
-            return m2.title.compareTo(m1.title);
-        } else {
-            return 0;
-        }
+        System.out.println(context.getState());
+        return context.doAction(movieList);
     }
+
+
 
     /**
      * Stream Methods
@@ -463,5 +438,23 @@ public class HomeController implements Initializable {
         System.out.println(controller.getLongestMovieTitle(controller.originalMovieList));
         System.out.println(controller.countMoviesFrom(controller.originalMovieList, "Peter Jackson"));
         System.out.println(controller.getMoviesBetweenYears(controller.originalMovieList, 1900, 3000));
+    }
+
+    @Override
+    public ObservableList<Movie> doAction(ObservableList movieList) {
+        return movieList;
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        File directory = new File("src/main/resources/com/example/Semicolon/Back/Controller/Music"); //path to file
+        File[] files = directory.listFiles();
+        List<File> songs = Arrays.asList(files);
+        if(arg == "add"){
+            mediaPlayer = new MediaPlayer(new Media(songs.get(0).toURI().toString()));
+        }else{
+            mediaPlayer = new MediaPlayer(new Media(songs.get(1).toURI().toString()));
+        }
+        mediaPlayer.play();    //music play
     }
 }

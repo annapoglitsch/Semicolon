@@ -2,11 +2,10 @@ module com.example.demo2 {
     requires javafx.controls;
     requires javafx.fxml;
     requires com.google.gson;
-    requires java.mail;
-    requires okhttp3;
     requires java.sql;
     requires htmlunit;
     requires ormlite.jdbc;
+    requires javafx.media;
 
 
     exports com.example.Semicolon.Back;
