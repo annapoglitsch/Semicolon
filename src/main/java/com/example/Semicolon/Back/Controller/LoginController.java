@@ -1,7 +1,7 @@
 package com.example.Semicolon.Back.Controller;
 
+import com.example.Semicolon.Back.Controller.Pattern.Factory;
 import com.example.Semicolon.Back.Movie;
-import com.example.Semicolon.Back.SendEmail;
 import com.example.Semicolon.Exceptions.DatabaseException;
 import com.example.Semicolon.database.*;
 import javafx.event.ActionEvent;
@@ -25,6 +25,14 @@ import java.util.Objects;
 import static com.example.Semicolon.Back.Controller.HomeController.allGenres;
 
 public class LoginController {
+    private static LoginController instance;
+    private LoginController(){}
+    public static LoginController getInstance(){
+        if(instance == null){
+            instance = new LoginController();
+        }
+        return instance;
+    }
     @FXML
     public GridPane HomeGrid;
     @FXML
@@ -139,6 +147,7 @@ public class LoginController {
         registerRepeatPassword.setText("");
     }
     private void switchScene(String username, String password, Event event){
+        Factory factory = new Factory();
         Database.username = username;
         Database.password = password;
         try {
@@ -146,8 +155,10 @@ public class LoginController {
             HomeController.setOriginalMovieList();
             WatchlistRepository.getWatchlistRepository();
             HomeController.setWatchlist();
+            FXMLLoader fxmlLoader = new FXMLLoader(FhmdbApplication.class.getResource("test.fxml"));
+            fxmlLoader.setControllerFactory(factory);
             Scene scene = ((Node) event.getSource()).getScene();
-            scene.setRoot(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("test.fxml"))));
+            scene.setRoot(fxmlLoader.load());
             scene.getStylesheets().add(Objects.requireNonNull(FhmdbApplication.class.getResource("styles.css")).toExternalForm());
         } catch (DatabaseException e) {
             HomeController.watchlist.add(new Movie("error", " ", allGenres, 0, " ", "Error \n Could not connect to database!", 0, null, null, null, 0));

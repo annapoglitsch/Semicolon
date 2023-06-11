@@ -1,6 +1,6 @@
 package com.example.Semicolon.Back;
 
-import java.io.IOException;
+/*import java.io.IOException;
 import java.util.Properties;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -50,3 +50,4 @@ public class SendEmail {
         send("ignis.hd@gmx.at");
     }
 }
+*/
