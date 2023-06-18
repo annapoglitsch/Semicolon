@@ -3,7 +3,6 @@ module com.example.demo2 {
     requires javafx.fxml;
     requires com.google.gson;
     requires java.sql;
-    requires htmlunit;
     requires ormlite.jdbc;
     requires javafx.media;
 

@@ -17,8 +17,8 @@ public class MovieAPI {
             "MUSICAL", "MYSTERY", "ROMANCE", "SCIENCE_FICTION", "SPORT", "THRILLER", "WAR",
             "WESTERN"};
 
-    public List<Movie> initializeMoviesNew(String path) throws MovieApiException {
-        List<Movie> movieList = new ArrayList<>();
+    public static List<Movie> initializeMoviesNew(String path) throws MovieApiException {
+        List<Movie> movieList;
         URL url;
         try {
             url = new URL(path);

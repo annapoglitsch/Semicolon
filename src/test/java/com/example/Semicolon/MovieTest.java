@@ -1,18 +1,50 @@
 package com.example.Semicolon;
 
 import com.example.Semicolon.Back.Controller.HomeController;
+import com.example.Semicolon.Back.Controller.Pattern.StateContext;
+import com.example.Semicolon.Back.Controller.Pattern.TitleAZ;
 import com.example.Semicolon.Back.Movie;
+import com.example.Semicolon.Back.MovieAPI;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
 import javafx.collections.*;
 import javafx.event.ActionEvent;
 import org.junit.jupiter.api.*;
+import com.google.gson.Gson;
 
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-/*class MovieTest extends ActionEvent {
+class MovieTest extends ActionEvent {
+    /* HomeController controller = HomeController.getInstance();
+    static Gson gson = new Gson();
+    ObservableList<Movie> movieList = FXCollections.observableArrayList();
 
-    HomeController controller;
+    private void set() {
+        try {
+            String temp = Files.readString(Path.of("S:\\FH\\Programieren\\Java\\Semicolon\\src\\test\\java\\com\\example\\Semicolon\\list.json"));
+            List<Movie> test = new Gson().fromJson(temp, new TypeToken<List<Movie>>() {}.getType());
+            movieList.addAll(test);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @Test
+    @Order(1)
+    void sorted_a_to_z(){
+        set();
+        controller.movieList.addAll(MovieAPI.initializeMoviesNew("https://prog2.fh-campuswien.ac.at/movies"));
+        assertEquals(movieList, controller.sortMovies("A-Z"));
+
+    }
+
+   HomeController controller;
     Movie movie = new Movie();
 
     @Test
@@ -260,7 +292,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }
-*/
+
 

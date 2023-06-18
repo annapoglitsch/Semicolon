@@ -238,7 +238,7 @@ public class HomeController implements Initializable, State, Observer {
     }
 
     public void sortMoviesByTitlePreparation(ActionEvent event) {   //prep so that choiceBox sorting is not null
-        sortMovies(event, sortingChoice.getValue());
+        sortMovies(sortingChoice.getValue());
     }
 
     public void filterMoviesByGenrePrep(ActionEvent event) {      /** prep so that choiceBox genre is not null */
@@ -265,8 +265,12 @@ public class HomeController implements Initializable, State, Observer {
     }
 
     public void changeURL() {
-        URL = new APIRequestBuilder(baseURL).query(query).genre(genre).releaseYear(releaseYear).ratingFrom(rating).build();
-        System.out.println(URL);
+        URL = new APIRequestBuilder(baseURL)
+                .query(query)
+                .genre(genre)
+                .releaseYear(releaseYear)
+                .ratingFrom(rating)
+                .build();
         setMovieList();
     }
 
@@ -305,7 +309,7 @@ public class HomeController implements Initializable, State, Observer {
             movieList.addAll(movies);
         }
         if (sortedByTitle) {
-            sortMovies(new ActionEvent(), sortingChoice.getValue());
+            sortMovies(sortingChoice.getValue());
         }
     }
 
@@ -342,12 +346,12 @@ public class HomeController implements Initializable, State, Observer {
         if (keyWord == null) {
             query = "";
         } else {
-            query = keyWord;
+            query = keyWord.replaceAll(" ", "%20");
         }
         changeURL();
     }
 
-    public ObservableList<Movie> sortMovies(ActionEvent event, String keyWord) {
+    public ObservableList<Movie> sortMovies(String keyWord) {
         StateContext context = new StateContext();
         RatingHL highLowRating = new RatingHL();
         RatingLH lowHighRating = new RatingLH();
@@ -367,11 +371,9 @@ public class HomeController implements Initializable, State, Observer {
                 context.setState(highLowRating);
                 break;
             case "Old to New":
-                System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
                 context.setState(onYear);
                 break;
             case "New to Old":
-                System.out.println("nnnnnnnnnnoooooooooooooooooooooooooooo");
                 context.setState(noYear);
                 break;
             case "A-Z":
@@ -381,7 +383,6 @@ public class HomeController implements Initializable, State, Observer {
                 context.setState(zaTitle);
                 break;
         }
-        System.out.println(context.getState());
         return context.doAction(movieList);
     }
 
@@ -446,11 +447,12 @@ public class HomeController implements Initializable, State, Observer {
 
 
     public static void main(String[] args) {
-        HomeController controller = new HomeController();
-        System.out.println(controller.getMostPopularActor(controller.originalMovieList));
-        System.out.println(controller.getLongestMovieTitle(controller.originalMovieList));
-        System.out.println(controller.countMoviesFrom(controller.originalMovieList, "Peter Jackson"));
-        System.out.println(controller.getMoviesBetweenYears(controller.originalMovieList, 1900, 3000));
+        HomeController controller = HomeController.getInstance();
+        List<Movie> movies = MovieAPI.initializeMoviesNew("https://prog2.fh-campuswien.ac.at/movies");
+        System.out.println(controller.getMostPopularActor(movies));
+        System.out.println(controller.getLongestMovieTitle(movies));
+        System.out.println(controller.countMoviesFrom(movies, "Peter Jackson"));
+        System.out.println(controller.getMoviesBetweenYears(movies, 1900, 3000));
     }
 
     @Override
@@ -468,6 +470,6 @@ public class HomeController implements Initializable, State, Observer {
         }else{
             mediaPlayer = new MediaPlayer(new Media(songs.get(1).toURI().toString()));
         }
-        mediaPlayer.play();    //music play
+        mediaPlayer.play();
     }
 }
