@@ -4,33 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="632c3f87-378d-459f-993b-b51a9090f282" name="Changes" comment="Code with me: Moritz, Anna, Zerda - ALLES!!!!!!!!!!!!">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/Pattern/APIRequestBuilder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/Pattern/Factory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/Pattern/RatingLH.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/Pattern/StateContext.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/Pattern/YearNO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/Pattern/YearON.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/Semicolon/Back/Controller/Music/add.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/Semicolon/Back/Controller/Music/remove.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="a7389888-1d7e-4cb9-a5ea-e166479eaa4e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/FhmdbApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/FhmdbApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/DetailsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/DetailsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/HomeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/MovieCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/MovieCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/SendEmail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/SendEmail.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/database/WatchlistRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/database/WatchlistRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/Semicolon/MovieTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/Semicolon/MovieTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Movie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Movie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/writeOut.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/writeOut.java" afterDir="false" />
     </list>
-    <list id="22048e55-1624-45f7-a71f-07e95ec25341" name="Changes by Anna" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/Pattern/RatingHL.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/Pattern/State.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/Pattern/TitleAZ.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/Pattern/TitleZA.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/HomeController.java" afterDir="false" />
+    <list id="4d5f2ae9-5b5d-4f60-a280-79a62040eeae" name="Changes by Moritz" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/MovieAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/MovieAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/database/WatchlistRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Semicolon/database/WatchlistRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,10 +23,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Enum" />
         <option value="FxmlFile" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -63,11 +46,11 @@
     </favorite-branches>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
   }
-}]]></component>
+}</component>
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
@@ -75,38 +58,6 @@
         <option name="url" value="https://github.com/annapoglitsch/Semicolon.git" />
       </UrlAndAccount>
     </option>
-  </component>
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/HomeController.java">
-      <ranges>
-        <range start1="3" end1="3" start2="3" end2="4" changelist="632c3f87-378d-459f-993b-b51a9090f282" />
-        <range start1="15" end1="15" start2="16" end2="18" changelist="632c3f87-378d-459f-993b-b51a9090f282" />
-        <range start1="16" end1="16" start2="19" end2="20" changelist="632c3f87-378d-459f-993b-b51a9090f282" />
-        <range start1="25" end1="26" start2="29" end2="43" changelist="22048e55-1624-45f7-a71f-07e95ec25341" />
-        <range start1="40" end1="40" start2="57" end2="58" changelist="632c3f87-378d-459f-993b-b51a9090f282" />
-        <range start1="47" end1="47" start2="65" end2="66" changelist="632c3f87-378d-459f-993b-b51a9090f282" />
-        <range start1="98" end1="99" start2="117" end2="118" changelist="632c3f87-378d-459f-993b-b51a9090f282" />
-        <range start1="102" end1="103" start2="121" end2="122" changelist="632c3f87-378d-459f-993b-b51a9090f282" />
-        <range start1="105" end1="106" start2="124" end2="125" changelist="632c3f87-378d-459f-993b-b51a9090f282" />
-        <range start1="108" end1="109" start2="127" end2="128" changelist="632c3f87-378d-459f-993b-b51a9090f282" />
-        <range start1="142" end1="143" start2="161" end2="163" changelist="632c3f87-378d-459f-993b-b51a9090f282" />
-        <range start1="176" end1="176" start2="196" end2="197" changelist="632c3f87-378d-459f-993b-b51a9090f282" />
-        <range start1="245" end1="268" start2="266" end2="270" changelist="632c3f87-378d-459f-993b-b51a9090f282" />
-        <range start1="311" end1="312" start2="313" end2="316" changelist="632c3f87-378d-459f-993b-b51a9090f282" />
-        <range start1="313" end1="314" start2="317" end2="318" changelist="632c3f87-378d-459f-993b-b51a9090f282" />
-        <range start1="320" end1="321" start2="324" end2="325" changelist="632c3f87-378d-459f-993b-b51a9090f282" />
-        <range start1="322" end1="323" start2="326" end2="327" changelist="632c3f87-378d-459f-993b-b51a9090f282" />
-        <range start1="324" end1="325" start2="328" end2="329" changelist="632c3f87-378d-459f-993b-b51a9090f282" />
-        <range start1="329" end1="330" start2="333" end2="336" changelist="632c3f87-378d-459f-993b-b51a9090f282" />
-        <range start1="331" end1="332" start2="337" end2="338" changelist="632c3f87-378d-459f-993b-b51a9090f282" />
-        <range start1="336" end1="337" start2="342" end2="345" changelist="632c3f87-378d-459f-993b-b51a9090f282" />
-        <range start1="338" end1="339" start2="346" end2="347" changelist="632c3f87-378d-459f-993b-b51a9090f282" />
-        <range start1="342" end1="357" start2="350" end2="385" changelist="632c3f87-378d-459f-993b-b51a9090f282" />
-        <range start1="359" end1="400" start2="387" end2="388" changelist="632c3f87-378d-459f-993b-b51a9090f282" />
-        <range start1="466" end1="466" start2="454" end2="472" changelist="632c3f87-378d-459f-993b-b51a9090f282" />
-        <range start1="467" end1="467" start2="473" end2="474" changelist="22048e55-1624-45f7-a71f-07e95ec25341" />
-      </ranges>
-    </file>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -125,31 +76,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "full.screen.before.presentation.mode": "false",
-    "git-widget-placeholder": "database__test",
-    "jdk.selected.JAVA_MODULE": "19",
-    "last_opened_file_path": "S:/FH/Programieren/Java/Semicolon/src/main/resources/com/example/Semicolon/Back/Controller/Music",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.23242188",
-    "project.structure.side.proportion": "0.37834394",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;full.screen.before.presentation.mode&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;database__test&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;19&quot;,
+    &quot;last_opened_file_path&quot;: &quot;S:/FH/Programieren/Java/Semicolon/src/main/resources/com/example/Semicolon/Back/Controller/Music&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.23242188&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.37834394&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.example.Semicolon.Back.Controller" />
@@ -168,7 +119,7 @@
       <recent name="com.example.Semicolon" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.FhmdbApplication">
+  <component name="RunManager" selected="Application.HomeController">
     <configuration default="true" type="DjangoTestsConfigurationType">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -356,10 +307,10 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.HomeController" />
         <item itemvalue="Application.FhmdbApplication" />
         <item itemvalue="Application.SendEmail" />
         <item itemvalue="Application.MovieAPI" />
-        <item itemvalue="Application.HomeController" />
         <item itemvalue="JUnit.MovieTest" />
       </list>
     </recent_temporary>
@@ -370,7 +321,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="632c3f87-378d-459f-993b-b51a9090f282" name="Changes" comment="" />
+      <changelist id="a7389888-1d7e-4cb9-a5ea-e166479eaa4e" name="Changes" comment="" />
       <created>1677789926911</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -602,6 +553,27 @@
     <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="RECENT_FILTERS">
       <map>
         <entry key="Branch">
@@ -624,27 +596,6 @@
                 </option>
               </RecentGroup>
             </list>
-          </value>
-        </entry>
-      </map>
-    </option>
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="origin/main" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
           </value>
         </entry>
       </map>
@@ -678,24 +629,9 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/MovieAPI.java</url>
-          <line>20</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/LoginController.java</url>
           <line>153</line>
           <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/Semicolon/database/WatchlistRepository.java</url>
-          <line>70</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/HomeController.java</url>
-          <line>146</line>
-          <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/Semicolon/Back/Controller/LoginController.java</url>

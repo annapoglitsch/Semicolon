@@ -266,7 +266,7 @@ public class HomeController implements Initializable, State, Observer {
 
     public void changeURL() {
         URL = new APIRequestBuilder(baseURL).query(query).genre(genre).releaseYear(releaseYear).ratingFrom(rating).build();
-        System.out.println(URL);
+
         setMovieList();
     }
 
@@ -367,11 +367,9 @@ public class HomeController implements Initializable, State, Observer {
                 context.setState(highLowRating);
                 break;
             case "Old to New":
-                System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
                 context.setState(onYear);
                 break;
             case "New to Old":
-                System.out.println("nnnnnnnnnnoooooooooooooooooooooooooooo");
                 context.setState(noYear);
                 break;
             case "A-Z":
@@ -381,10 +379,8 @@ public class HomeController implements Initializable, State, Observer {
                 context.setState(zaTitle);
                 break;
         }
-        System.out.println(context.getState());
         return context.doAction(movieList);
     }
-
 
 
     /**
@@ -417,27 +413,14 @@ public class HomeController implements Initializable, State, Observer {
         return newMovieTitleList.stream().mapToInt(String::length).max().orElse(0); /** or Else damit es kein OptionalInt ist */
     }
 
-    /**
-     * Gibt die Anzahl der Filme eines bestimmten Regisseurs zurück.
-     *
-     * @param movies   Liste von Filmen
-     * @param director Regisseur, dessen Filme gezählt werden sollen
-     * @return Anzahl der Filme des Regisseurs
-     */
+
     public long countMoviesFrom(List<Movie> movies, String director) {
         return movies.stream()
                 .filter(movie -> movie.directors != null && Arrays.asList(movie.directors).contains(director))
                 .count();
     }
 
-    /**
-     * Gibt die Filme zurück, die zwischen zwei gegebenen Jahren veröffentlicht wurden.
-     *
-     * @param movies    Liste von Filmen
-     * @param startYear Anfangsjahr
-     * @param endYear   Endjahr
-     * @return Liste von Filmen, die zwischen startYear und endYear veröffentlicht wurden
-     */
+
     public List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear) {
         return movies.stream()
                 .filter(movie -> movie.releaseYear >= startYear && movie.releaseYear <= endYear)
@@ -447,10 +430,12 @@ public class HomeController implements Initializable, State, Observer {
 
     public static void main(String[] args) {
         HomeController controller = new HomeController();
-        System.out.println(controller.getMostPopularActor(controller.originalMovieList));
-        System.out.println(controller.getLongestMovieTitle(controller.originalMovieList));
-        System.out.println(controller.countMoviesFrom(controller.originalMovieList, "Peter Jackson"));
-        System.out.println(controller.getMoviesBetweenYears(controller.originalMovieList, 1900, 3000));
+        List<Movie> movieList1 = MovieAPI.initializeMoviesNew("https://prog2.fh-campuswien.ac.at/movies");
+
+        System.out.println(controller.getMostPopularActor(movieList1));
+        System.out.println(controller.getLongestMovieTitle(movieList1));
+        System.out.println(controller.countMoviesFrom(movieList1, "Peter Jackson"));
+        System.out.println(controller.getMoviesBetweenYears(movieList1, 1900, 3000));
     }
 
     @Override
@@ -463,9 +448,9 @@ public class HomeController implements Initializable, State, Observer {
         File directory = new File("src/main/resources/com/example/Semicolon/Back/Controller/Music"); //path to file
         File[] files = directory.listFiles();
         List<File> songs = Arrays.asList(files);
-        if(arg == "add"){
+        if (arg == "add") {
             mediaPlayer = new MediaPlayer(new Media(songs.get(0).toURI().toString()));
-        }else{
+        } else {
             mediaPlayer = new MediaPlayer(new Media(songs.get(1).toURI().toString()));
         }
         mediaPlayer.play();    //music play

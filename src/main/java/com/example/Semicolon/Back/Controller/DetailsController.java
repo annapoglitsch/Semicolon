@@ -24,8 +24,8 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class DetailsController implements Initializable {
-    @FXML
+public class DetailsController/* implements Initializable*/ {
+    /*@FXML
     public GridPane menu, ArticleGrid, HomeGrid;
     @FXML
     public Button menuButton;
@@ -37,7 +37,7 @@ public class DetailsController implements Initializable {
     public static Movie movie;
 
     @FXML
-    private void activateMenu() { /**make menu slide down/up */
+    private void activateMenu() {
         TranslateTransition tt = new TranslateTransition();
         tt.setNode(menu);
         tt.setDuration(Duration.millis(500));
@@ -124,5 +124,5 @@ public class DetailsController implements Initializable {
     }
     public void goBack(ActionEvent actionEvent) {
         switchScene(actionEvent);
-    }
+    }*/
 }

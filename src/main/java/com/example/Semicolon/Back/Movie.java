@@ -39,38 +39,13 @@ public class Movie {
         this.rating = movie.rating;
     }
 
-    public Movie() {
-    }
+    public Movie() {}
 
     public double getReleaseYear() {
         return releaseYear;
     }
 
-    public List<Movie> initializeMovies(String path) {
-        List<Movie> movieList = new ArrayList<>();
-        String[] allGenres = new String[]{"---ALL GENRES---", "ACTION", "ADVENTURE", "ANIMATION", "BIOGRAPHY", "COMEDY",
-                "CRIME", "DRAMA", "DOCUMENTARY", "FAMILY", "FANTASY", "HISTORY", "HORROR",
-                "MUSICAL", "MYSTERY", "ROMANCE", "SCIENCE_FICTION", "SPORT", "THRILLER", "WAR",
-                "WESTERN"};
-        try {
-            URL url = new URL(path);
-            Scanner scanner = new Scanner(url.openStream());
-            String temp = "";
-            while (scanner.hasNext()) { //scan the webpage and save it as a string
-                temp += scanner.nextLine();
-            }
-            movieList = new Gson().fromJson(temp, new TypeToken<List<Movie>>() {}.getType()); // get json from string
-            return movieList;
-        } catch (FileNotFoundException | MalformedURLException f) { // url not valid
-            movieList.add(new Movie("error", " ", allGenres, 0, " ", "Error-404", 0, null, null, null, 0));
-            return movieList;
-        } catch (UnknownHostException o) { //no internet
-            movieList.add(new Movie("error", " ", allGenres, 0, " ", "Error-502", 0, null, null, null, 0));
-            return movieList;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
+
 
     public List<Movie> staticMovieList() {
         List<Movie> movieList = new ArrayList<>();
